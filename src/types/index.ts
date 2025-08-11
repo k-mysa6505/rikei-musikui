@@ -1,6 +1,5 @@
 //  src/types/index.ts
 
-
 //  Game states
 export enum GameState {
   TITLE = 0,
@@ -9,3 +8,9 @@ export enum GameState {
   PLAYING = 3,
   RESULTS = 4
 };
+
+// Game questions
+export interface Question {
+  formula: string;
+  answer: number;   // Correct answer
+}
