@@ -10,7 +10,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
   const [currentStage, setCurrentStage] = useState(1);
   const [startTime] = useState(() => Date.now());
   const [elapsedTime, setElapsedTime] = useState(startTime);
-  const [question] = useState<Question>(() => generateQuestion(currentStage));
+  const [question, setQuestion] = useState<Question>(() => generateQuestion(currentStage));
   const [userAnswer, setUserAnswer] = useState("");
 
   //  タイマー
@@ -58,8 +58,13 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
 
   //  結果表示
   const handleAnswerButtonClick = () => {
+    if (userAnswer === question.answer.toString()) {
+    }
     setCurrentStage((prevStage) => prevStage + 1);
-    setUserAnswer("");
+    if (currentStage < 7) {
+      setQuestion(generateQuestion(currentStage + 1));
+      setUserAnswer("");
+    }
   }
 
   //  回答数チェック

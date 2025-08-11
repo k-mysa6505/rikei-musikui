@@ -18,8 +18,8 @@ const questionGenerators = [
 ];
 
 export const generateQuestion = (questionNo: number): Question => {
-  if (questionNo < 0 || questionNo >= questionGenerators.length) {
+  if (questionNo < 1 || questionGenerators.length < questionNo) {
     throw new Error(`Invalid question no: ${questionNo}`);
   }
-  return questionGenerators[questionNo]();
+  return questionGenerators[questionNo - 1]();
 };
