@@ -1,15 +1,14 @@
 import React from "react";
 
 type TitleScreenProps = {
-  onStart: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onPlay: () => void;
 }
 
-const TitleScreen: React.FC<TitleScreenProps> = ({ onStart }) => {
+const TitleScreen: React.FC<TitleScreenProps> = ({ onPlay }) => {
   return (
     <div className="title-screen">
-      <h1>Welcome to Rikei Musikui</h1>
-      <p>Click the button below to start the game!</p>
-      <button onClick={onStart}>Start Game</button>
+      <h1>理系虫食い算</h1>
+      <button onClick={onPlay}>あそぶ</button>
     </div>
   );
 };

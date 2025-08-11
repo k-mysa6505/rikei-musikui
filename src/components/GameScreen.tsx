@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const GameScreen: React.FC = () => {
-  return null;
+type GameScreenProps ={
+  onComplete: () => void;
+}
+
+const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
+  useEffect(() => {
+    //  仮
+    const timer = setTimeout(() => {
+      onComplete();
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
+  return (
+    <div className="game-screen">
+      <h1>プレイ中</h1>
+    </div>
+  );
 };
 
 export default GameScreen;

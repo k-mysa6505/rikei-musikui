@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { GameState } from './types/index'
+import { GameState } from './types/index';
 import TitleScreen from './components/TitleScreen';
 import HowToPlayScreen from './components/HowToPlayScreen';
-import CountdownScreen from './components/Countdown';
+import CountdownScreen from './components/CountdownScreen';
 import GameScreen from './components/GameScreen';
 import ResultScreen from './components/ResultScreen';
 
@@ -12,15 +12,27 @@ const App: React.FC = () => {
   const renderScreen = () => {
     switch (currentScreen) {
     case GameState.TITLE:
-      return <TitleScreen onStart={() => setCurrentScreen(GameState.HOW_TO_PLAY)} />;
+      return <TitleScreen
+        onPlay={() => setCurrentScreen(GameState.HOW_TO_PLAY)}
+      />;
     case GameState.HOW_TO_PLAY:
-      return <HowToPlayScreen />;
+      return <HowToPlayScreen
+        onOK={() => setCurrentScreen(GameState.COUNT_DOWN)}
+        onBack={() => setCurrentScreen(GameState.TITLE)}
+      />;
     case GameState.COUNT_DOWN:
-      return <CountdownScreen />;
+      return <CountdownScreen
+        onCountdownEnd={() => setCurrentScreen(GameState.PLAYING)}
+      />;
     case GameState.PLAYING:
-      return <GameScreen />;
+      return <GameScreen
+        onComplete={() => setCurrentScreen(GameState.RESULTS)}
+      />;
     case GameState.RESULTS:
-      return <ResultScreen />;
+      return <ResultScreen
+        onTitle={() => setCurrentScreen(GameState.TITLE)}
+        onReplay={() => setCurrentScreen(GameState.COUNT_DOWN)}
+      />;
     default:
       return null;
     }
