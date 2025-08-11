@@ -29,14 +29,12 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
     //  BackSpace
     if (value === "←") {
       setUserAnswer((prev) => prev.slice(0, -1));
-      return;
     }
     //  Minus（未入力のみ有効，0の後ろは0を上書き）
     if (value === "-") {
       if (userAnswer === "" || userAnswer === "0") {
         setUserAnswer("-");
       }
-      return;
     }
     //  0（0, -の後ろは無効）
     if (value === "0") {
@@ -44,7 +42,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
         return;
       }
       setUserAnswer((prev) => prev + value);
-      return;
     }
     //  1～9（0の後ろは0を上書き）
     if (value !== "0") {
