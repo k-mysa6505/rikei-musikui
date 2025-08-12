@@ -16,11 +16,11 @@ function generateBasicLimitQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\lim_{x \\to \\text{□}} \\frac{x^${n} - ${Math.pow(a, n)}}{x - ${a}} = ${answer}`;
+        formula = `\\[\\lim_{x \\to \\text{□}} \\frac{x^${n} - ${Math.pow(a, n)}}{x - ${a}} = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\lim_{x \\to ${a}} \\frac{x^{\\text{□}} - ${Math.pow(a, n)}}{x - ${a}} = ${answer}`;
+        formula = `\\[\\lim_{x \\to ${a}} \\frac{x^{\\text{□}} - ${Math.pow(a, n)}}{x - ${a}} = ${answer}\\]`;
       } else {
-        formula = `\\lim_{x \\to ${a}} \\frac{x^${n} - ${Math.pow(a, n)}}{x - ${a}} = \\text{□}`;
+        formula = `\\[\\lim_{x \\to ${a}} \\frac{x^${n} - ${Math.pow(a, n)}}{x - ${a}} = \\text{□}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -34,8 +34,8 @@ function generateBasicLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to 0} \\frac{\\text{□}^x - 1}{x} = \\ln ${a}`
-        : `\\lim_{x \\to 0} \\frac{${a}^x - 1}{x} = \\ln \\text{□}`;
+        ? `\\[\\lim_{x \\to 0} \\frac{\\text{□}^x - 1}{x} = \\ln ${a}\\]`
+        : `\\[\\lim_{x \\to 0} \\frac{${a}^x - 1}{x} = \\ln \\text{□}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -53,11 +53,11 @@ function generateBasicLimitQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\lim_{x \\to \\infty} \\frac{\\text{□}x + ${b}}{${c}x + ${d}} = \\frac{${a}}{${c}}`;
+        formula = `\\[\\lim_{x \\to \\infty} \\frac{\\text{□}x + ${b}}{${c}x + ${d}} = \\frac{${a}}{${c}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\lim_{x \\to \\infty} \\frac{${a}x + ${b}}{\\text{□}x + ${d}} = \\frac{${a}}{${c}}`;
+        formula = `\\[\\lim_{x \\to \\infty} \\frac{${a}x + ${b}}{\\text{□}x + ${d}} = \\frac{${a}}{${c}}\\]`;
       } else {
-        formula = `\\lim_{x \\to \\infty} \\frac{${a}x + ${b}}{${c}x + ${d}} = \\frac{\\text{□}}{${c}}`;
+        formula = `\\[\\lim_{x \\to \\infty} \\frac{${a}x + ${b}}{${c}x + ${d}} = \\frac{\\text{□}}{${c}}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -77,8 +77,8 @@ function generateTrigonometricLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to 0} \\frac{\\sin \\text{□}x}{x} = ${a}`
-        : `\\lim_{x \\to 0} \\frac{\\sin ${a}x}{x} = \\text{□}`;
+        ? `\\[\\lim_{x \\to 0} \\frac{\\sin \\text{□}x}{x} = ${a}\\]`
+        : `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{x} = \\text{□}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -94,11 +94,11 @@ function generateTrigonometricLimitQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\lim_{x \\to 0} \\frac{\\sin \\text{□}x}{${b}x} = \\frac{${a}}{${b}}`;
+        formula = `\\[\\lim_{x \\to 0} \\frac{\\sin \\text{□}x}{${b}x} = \\frac{${a}}{${b}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\text{□}x} = \\frac{${a}}{${b}}`;
+        formula = `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\text{□}x} = \\frac{${a}}{${b}}\\]`;
       } else {
-        formula = `\\lim_{x \\to 0} \\frac{\\sin ${a}x}{${b}x} = \\frac{\\text{□}}{${b}}`;
+        formula = `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{${b}x} = \\frac{\\text{□}}{${b}}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -113,8 +113,8 @@ function generateTrigonometricLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to 0} \\frac{1 - \\cos \\text{□}x}{x^2} = \\frac{${a * a}}{2}`
-        : `\\lim_{x \\to 0} \\frac{1 - \\cos ${a}x}{x^2} = \\frac{\\text{□}}{2}`;
+        ? `\\[\\lim_{x \\to 0} \\frac{1 - \\cos \\text{□}x}{x^2} = \\frac{${a * a}}{2}\\]`
+        : `\\[\\lim_{x \\to 0} \\frac{1 - \\cos ${a}x}{x^2} = \\frac{\\text{□}}{2}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -125,8 +125,8 @@ function generateTrigonometricLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to 0} \\frac{\\tan \\text{□}x}{x} = ${a}`
-        : `\\lim_{x \\to 0} \\frac{\\tan ${a}x}{x} = \\text{□}`;
+        ? `\\[\\lim_{x \\to 0} \\frac{\\tan \\text{□}x}{x} = ${a}\\]`
+        : `\\[\\lim_{x \\to 0} \\frac{\\tan ${a}x}{x} = \\text{□}\\]`;
       return { formula, answer: bitedValue };
     }
   ];
@@ -145,8 +145,8 @@ function generateExponentialLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to 0} \\frac{e^{\\text{□}x} - 1}{x} = ${a}`
-        : `\\lim_{x \\to 0} \\frac{e^{${a}x} - 1}{x} = \\text{□}`;
+        ? `\\[\\lim_{x \\to 0} \\frac{e^{\\text{□}x} - 1}{x} = ${a}\\]`
+        : `\\[\\lim_{x \\to 0} \\frac{e^{${a}x} - 1}{x} = \\text{□}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -156,7 +156,7 @@ function generateExponentialLimitQuestion(): Question {
       const bitedPosition = 0;
       const bitedValue = coeffs[bitedPosition];
 
-      const formula = `\\lim_{x \\to \\infty} \\left(1 + \\frac{\\text{□}}{x}\\right)^x = e^${a}`;
+      const formula = `\\[\\lim_{x \\to \\infty} \\left(1 + \\frac{\\text{□}}{x}\\right)^x = e^${a}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -167,8 +167,8 @@ function generateExponentialLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to 0} \\frac{\\ln(1 + \\text{□}x)}{x} = ${a}`
-        : `\\lim_{x \\to 0} \\frac{\\ln(1 + ${a}x)}{x} = \\text{□}`;
+        ? `\\[\\lim_{x \\to 0} \\frac{\\ln(1 + \\text{□}x)}{x} = ${a}\\]`
+        : `\\[\\lim_{x \\to 0} \\frac{\\ln(1 + ${a}x)}{x} = \\text{□}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -182,11 +182,11 @@ function generateExponentialLimitQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\lim_{x \\to 0} \\frac{e^{\\text{□}x} - e^{${b}x}}{x} = ${answer}`;
+        formula = `\\[\\lim_{x \\to 0} \\frac{e^{\\text{□}x} - e^{${b}x}}{x} = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\lim_{x \\to 0} \\frac{e^{${a}x} - e^{\\text{□}x}}{x} = ${answer}`;
+        formula = `\\[\\lim_{x \\to 0} \\frac{e^{${a}x} - e^{\\text{□}x}}{x} = ${answer}\\]`;
       } else {
-        formula = `\\lim_{x \\to 0} \\frac{e^{${a}x} - e^{${b}x}}{x} = \\text{□}`;
+        formula = `\\[\\lim_{x \\to 0} \\frac{e^{${a}x} - e^{${b}x}}{x} = \\text{□}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -207,8 +207,8 @@ function generateRationalLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to \\text{□}} \\frac{x^2 - ${a * a}}{x - ${a}} = ${answer}`
-        : `\\lim_{x \\to ${a}} \\frac{x^2 - ${a * a}}{x - ${a}} = \\text{□}`;
+        ? `\\[\\lim_{x \\to \\text{□}} \\frac{x^2 - ${a * a}}{x - ${a}} = ${answer}\\]`
+        : `\\[\\lim_{x \\to ${a}} \\frac{x^2 - ${a * a}}{x - ${a}} = \\text{□}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -220,8 +220,8 @@ function generateRationalLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to \\infty} (\\sqrt{x^2 + \\text{□}x} - x) = \\frac{${a}}{2}`
-        : `\\lim_{x \\to \\infty} (\\sqrt{x^2 + ${a}x} - x) = \\frac{${a}}{\\text{□}}`;
+        ? `\\[\\lim_{x \\to \\infty} (\\sqrt{x^2 + \\text{□}x} - x) = \\frac{${a}}{2}\\]`
+        : `\\[\\lim_{x \\to \\infty} (\\sqrt{x^2 + ${a}x} - x) = \\frac{${a}}{\\text{□}}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -233,8 +233,8 @@ function generateRationalLimitQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\lim_{x \\to 0} \\frac{\\sqrt{1 + \\text{□}x} - 1}{x} = \\frac{${a}}{2}`
-        : `\\lim_{x \\to 0} \\frac{\\sqrt{1 + ${a}x} - 1}{x} = \\frac{${a}}{\\text{□}}`;
+        ? `\\[\\lim_{x \\to 0} \\frac{\\sqrt{1 + \\text{□}x} - 1}{x} = \\frac{${a}}{2}\\]`
+        : `\\[\\lim_{x \\to 0} \\frac{\\sqrt{1 + ${a}x} - 1}{x} = \\frac{${a}}{\\text{□}}\\]`;
       return { formula, answer: bitedValue };
     }
   ];
@@ -260,11 +260,11 @@ function generateSequenceLimitQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\lim_{n \\to \\infty} \\frac{\\text{□}n + ${b}}{${c}n + ${d}} = \\frac{${a}}{${c}}`;
+        formula = `\\[\\lim_{n \\to \\infty} \\frac{\\text{□}n + ${b}}{${c}n + ${d}} = \\frac{${a}}{${c}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\lim_{n \\to \\infty} \\frac{${a}n + ${b}}{\\text{□}n + ${d}} = \\frac{${a}}{${c}}`;
+        formula = `\\[\\lim_{n \\to \\infty} \\frac{${a}n + ${b}}{\\text{□}n + ${d}} = \\frac{${a}}{${c}}\\]`;
       } else {
-        formula = `\\lim_{n \\to \\infty} \\frac{${a}n + ${b}}{${c}n + ${d}} = \\frac{\\text{□}}{${c}}`;
+        formula = `\\[\\lim_{n \\to \\infty} \\frac{${a}n + ${b}}{${c}n + ${d}} = \\frac{\\text{□}}{${c}}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -275,7 +275,7 @@ function generateSequenceLimitQuestion(): Question {
       const bitedPosition = 0;
       const bitedValue = coeffs[bitedPosition];
 
-      const formula = `\\lim_{n \\to \\infty} \\left(1 + \\frac{\\text{□}}{n}\\right)^n = e^${a}`;
+      const formula = `\\[\\lim_{n \\to \\infty} \\left(1 + \\frac{\\text{□}}{n}\\right)^n = e^${a}\\]`;
       return { formula, answer: bitedValue };
     }
   ];

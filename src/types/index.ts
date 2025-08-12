@@ -1,5 +1,13 @@
 //  src/types/index.ts
 
+declare global {
+    interface Window {
+        MathJax: {
+            typeset: (elements?: HTMLElement[]) => void;
+        };
+    }
+}
+
 //  Game states
 export enum GameState {
   TITLE = 0,

@@ -58,6 +58,14 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     }
   }
 
+  //  出力処理
+  if (window.MathJax) {
+    const formulaContainer = document.getElementById("question-formula-container");
+    if (formulaContainer) {
+      window.MathJax.typeset([formulaContainer]);
+    }
+  }
+
   //  解説
   const explanation = (question: Question): Question => {
     const regex = /\\text{□}/g;
@@ -104,12 +112,11 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
 
   return (
     <div className="game-screen">
-      <h1>プレイ中</h1>
       <div className="game-header-container">
         <p className="game-stage">LEVEL {currentStage}</p>
         <p className="elapsed-time">TIME {formatElapsedTime()}</p>
       </div>
-      <div className="question-formula-container">
+      <div id="question-formula-container" className="question-formula-container">
         <div className="question-formula">{question.formula}</div>
         <div className="question-sub-formula">{question.subformula}</div>
       </div>

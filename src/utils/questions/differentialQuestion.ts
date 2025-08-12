@@ -14,11 +14,11 @@ function generateBasicDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(x^{\\text{□}}) = ${n}x^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}(x^{\\text{□}}) = ${n}x^{${n-1}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(x^${n}) = \\text{□}x^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}(x^${n}) = \\text{□}x^{${n-1}}\\]`;
       } else {
-        formula = `\\frac{d}{dx}(x^${n}) = ${n}x^{\\text{□}}`;
+        formula = `\\[\\frac{d}{dx}(x^${n}) = ${n}x^{\\text{□}}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -33,13 +33,13 @@ function generateBasicDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(\\text{□}x^${n}) = ${answer}x^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}(\\text{□}x^${n}) = ${answer}x^{${n-1}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(${a}x^{\\text{□}}) = ${answer}x^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}(${a}x^{\\text{□}}) = ${answer}x^{${n-1}}\\]`;
       } else if (bitedPosition === 2) {
-        formula = `\\frac{d}{dx}(${a}x^${n}) = \\text{□}x^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}(${a}x^${n}) = \\text{□}x^{${n-1}}\\]`;
       } else {
-        formula = `\\frac{d}{dx}(${a}x^${n}) = ${answer}x^{\\text{□}}`;
+        formula = `\\[\\frac{d}{dx}(${a}x^${n}) = ${answer}x^{\\text{□}}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -52,11 +52,11 @@ function generateBasicDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(x^{-\\text{□}}) = -${n}x^{-${n+1}}`;
+        formula = `\\[\\frac{d}{dx}(x^{-\\text{□}}) = -${n}x^{-${n+1}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(x^{-${n}}) = -\\text{□}x^{-${n+1}}`;
+        formula = `\\[\\frac{d}{dx}(x^{-${n}}) = -\\text{□}x^{-${n+1}}\\]`;
       } else {
-        formula = `\\frac{d}{dx}(x^{-${n}}) = -${n}x^{-\\text{□}}`;
+        formula = `\\[\\frac{d}{dx}(x^{-${n}}) = -${n}x^{-\\text{□}}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -76,8 +76,8 @@ function generateTrigonometricDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(\\sin \\text{□}x) = ${a} \\cos ${a}x`
-        : `\\frac{d}{dx}(\\sin ${a}x) = \\text{□} \\cos ${a}x`;
+        ? `\\[\\frac{d}{dx}(\\sin \\text{□}x) = ${a} \\cos ${a}x\\]`
+        : `\\[\\frac{d}{dx}(\\sin ${a}x) = \\text{□} \\cos ${a}x\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -88,8 +88,8 @@ function generateTrigonometricDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(\\cos \\text{□}x) = -${a} \\sin ${a}x`
-        : `\\frac{d}{dx}(\\cos ${a}x) = -\\text{□} \\sin ${a}x`;
+        ? `\\[\\frac{d}{dx}(\\cos \\text{□}x) = -${a} \\sin ${a}x\\]`
+        : `\\[\\frac{d}{dx}(\\cos ${a}x) = -\\text{□} \\sin ${a}x\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -100,8 +100,8 @@ function generateTrigonometricDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(\\tan \\text{□}x) = ${a} \\sec^2 ${a}x`
-        : `\\frac{d}{dx}(\\tan ${a}x) = \\text{□} \\sec^2 ${a}x`;
+        ? `\\[\\frac{d}{dx}(\\tan \\text{□}x) = ${a} \\sec^2 ${a}x\\]`
+        : `\\[\\frac{d}{dx}(\\tan ${a}x) = \\text{□} \\sec^2 ${a}x\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -115,11 +115,11 @@ function generateTrigonometricDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(\\text{□} \\sin ${b}x) = ${answer} \\cos ${b}x`;
+        formula = `\\[\\frac{d}{dx}(\\text{□} \\sin ${b}x) = ${answer} \\cos ${b}x\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(${a} \\sin \\text{□}x) = ${answer} \\cos ${b}x`;
+        formula = `\\[\\frac{d}{dx}(${a} \\sin \\text{□}x) = ${answer} \\cos ${b}x\\]`;
       } else {
-        formula = `\\frac{d}{dx}(${a} \\sin ${b}x) = \\text{□} \\cos ${b}x`;
+        formula = `\\[\\frac{d}{dx}(${a} \\sin ${b}x) = \\text{□} \\cos ${b}x\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -134,11 +134,11 @@ function generateTrigonometricDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(\\text{□} \\cos ${b}x) = -${answer} \\sin ${b}x`;
+        formula = `\\[\\frac{d}{dx}(\\text{□} \\cos ${b}x) = -${answer} \\sin ${b}x\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(${a} \\cos \\text{□}x) = -${answer} \\sin ${b}x`;
+        formula = `\\[\\frac{d}{dx}(${a} \\cos \\text{□}x) = -${answer} \\sin ${b}x\\]`;
       } else {
-        formula = `\\frac{d}{dx}(${a} \\cos ${b}x) = -\\text{□} \\sin ${b}x`;
+        formula = `\\[\\frac{d}{dx}(${a} \\cos ${b}x) = -\\text{□} \\sin ${b}x\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -158,8 +158,8 @@ function generateExponentialDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(e^{\\text{□}x}) = ${a} e^{${a}x}`
-        : `\\frac{d}{dx}(e^{${a}x}) = \\text{□} e^{${a}x}`;
+        ? `\\[\\frac{d}{dx}(e^{\\text{□}x}) = ${a} e^{${a}x}\\]`
+        : `\\[\\frac{d}{dx}(e^{${a}x}) = \\text{□} e^{${a}x}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -173,11 +173,11 @@ function generateExponentialDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(\\text{□} e^{${b}x}) = ${answer} e^{${b}x}`;
+        formula = `\\[\\frac{d}{dx}(\\text{□} e^{${b}x}) = ${answer} e^{${b}x}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(${a} e^{\\text{□}x}) = ${answer} e^{${b}x}`;
+        formula = `\\[\\frac{d}{dx}(${a} e^{\\text{□}x}) = ${answer} e^{${b}x}\\]`;
       } else {
-        formula = `\\frac{d}{dx}(${a} e^{${b}x}) = \\text{□} e^{${b}x}`;
+        formula = `\\[\\frac{d}{dx}(${a} e^{${b}x}) = \\text{□} e^{${b}x}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -191,8 +191,8 @@ function generateExponentialDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(\\text{□}^x) = ${a}^x \\ln ${a}`
-        : `\\frac{d}{dx}(${a}^x) = ${a}^x \\ln \\text{□}`;
+        ? `\\[\\frac{d}{dx}(\\text{□}^x) = ${a}^x \\ln ${a}\\]`
+        : `\\[\\frac{d}{dx}(${a}^x) = ${a}^x \\ln \\text{□}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -204,8 +204,8 @@ function generateExponentialDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(e^{\\text{□}x^2}) = ${answer}x e^{${a}x^2}`
-        : `\\frac{d}{dx}(e^{${a}x^2}) = \\text{□}x e^{${a}x^2}`;
+        ? `\\[\\frac{d}{dx}(e^{\\text{□}x^2}) = ${answer}x e^{${a}x^2}\\]`
+        : `\\[\\frac{d}{dx}(e^{${a}x^2}) = \\text{□}x e^{${a}x^2}\\]`;
       return { formula, answer: bitedValue };
     }
   ];
@@ -223,7 +223,7 @@ function generateLogarithmicDifferentialQuestion(): Question {
       const bitedPosition = 0;
       const bitedValue = coeffs[bitedPosition];
 
-      const formula = `\\frac{d}{dx}(\\ln \\text{□}x) = \\frac{1}{x}`;
+      const formula = `\\[\\frac{d}{dx}(\\ln \\text{□}x) = \\frac{1}{x}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -234,8 +234,8 @@ function generateLogarithmicDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(\\text{□} \\ln x) = \\frac{${a}}{x}`
-        : `\\frac{d}{dx}(${a} \\ln x) = \\frac{\\text{□}}{x}`;
+        ? `\\[\\frac{d}{dx}(\\text{□} \\ln x) = \\frac{${a}}{x}\\]`
+        : `\\[\\frac{d}{dx}(${a} \\ln x) = \\frac{\\text{□}}{x}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -248,11 +248,11 @@ function generateLogarithmicDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(\\ln(\\text{□}x + ${b})) = \\frac{${a}}{${a}x + ${b}}`;
+        formula = `\\[\\frac{d}{dx}(\\ln(\\text{□}x + ${b})) = \\frac{${a}}{${a}x + ${b}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(\\ln(${a}x + \\text{□})) = \\frac{${a}}{${a}x + ${b}}`;
+        formula = `\\[\\frac{d}{dx}(\\ln(${a}x + \\text{□})) = \\frac{${a}}{${a}x + ${b}}\\]`;
       } else {
-        formula = `\\frac{d}{dx}(\\ln(${a}x + ${b})) = \\frac{\\text{□}}{${a}x + ${b}}`;
+        formula = `\\[\\frac{d}{dx}(\\ln(${a}x + ${b})) = \\frac{\\text{□}}{${a}x + ${b}}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -266,8 +266,8 @@ function generateLogarithmicDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(\\log_{\\text{□}} x) = \\frac{1}{x \\ln ${a}}`
-        : `\\frac{d}{dx}(\\log_${a} x) = \\frac{1}{x \\ln \\text{□}}`;
+        ? `\\[\\frac{d}{dx}(\\log_{\\text{□}} x) = \\frac{1}{x \\ln ${a}}\\]`
+        : `\\[\\frac{d}{dx}(\\log_${a} x) = \\frac{1}{x \\ln \\text{□}}\\]`;
       return { formula, answer: bitedValue };
     }
   ];
@@ -288,11 +288,11 @@ function generateChainRuleDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(\\sin(\\text{□}x + ${b})) = ${a} \\cos(${a}x + ${b})`;
+        formula = `\\[\\frac{d}{dx}(\\sin(\\text{□}x + ${b})) = ${a} \\cos(${a}x + ${b})\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(\\sin(${a}x + \\text{□})) = ${a} \\cos(${a}x + ${b})`;
+        formula = `\\[\\frac{d}{dx}(\\sin(${a}x + \\text{□})) = ${a} \\cos(${a}x + ${b})\\]`;
       } else {
-        formula = `\\frac{d}{dx}(\\sin(${a}x + ${b})) = \\text{□} \\cos(${a}x + ${b})`;
+        formula = `\\[\\frac{d}{dx}(\\sin(${a}x + ${b})) = \\text{□} \\cos(${a}x + ${b})\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -306,11 +306,11 @@ function generateChainRuleDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}(e^{\\text{□}x + ${b}}) = ${a} e^{${a}x + ${b}}`;
+        formula = `\\[\\frac{d}{dx}(e^{\\text{□}x + ${b}}) = ${a} e^{${a}x + ${b}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}(e^{${a}x + \\text{□}}) = ${a} e^{${a}x + ${b}}`;
+        formula = `\\[\\frac{d}{dx}(e^{${a}x + \\text{□}}) = ${a} e^{${a}x + ${b}}\\]`;
       } else {
-        formula = `\\frac{d}{dx}(e^{${a}x + ${b}}) = \\text{□} e^{${a}x + ${b}}`;
+        formula = `\\[\\frac{d}{dx}(e^{${a}x + ${b}}) = \\text{□} e^{${a}x + ${b}}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -326,15 +326,15 @@ function generateChainRuleDifferentialQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\frac{d}{dx}((\\text{□}x + ${b})^${n}) = ${answer}(${a}x + ${b})^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}((\\text{□}x + ${b})^${n}) = ${answer}(${a}x + ${b})^{${n-1}}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\frac{d}{dx}((${a}x + \\text{□})^${n}) = ${answer}(${a}x + ${b})^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}((${a}x + \\text{□})^${n}) = ${answer}(${a}x + ${b})^{${n-1}}\\]`;
       } else if (bitedPosition === 2) {
-        formula = `\\frac{d}{dx}((${a}x + ${b})^{\\text{□}}) = ${answer}(${a}x + ${b})^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}((${a}x + ${b})^{\\text{□}}) = ${answer}(${a}x + ${b})^{${n-1}}\\]`;
       } else if (bitedPosition === 3) {
-        formula = `\\frac{d}{dx}((${a}x + ${b})^${n}) = \\text{□}(${a}x + ${b})^{${n-1}}`;
+        formula = `\\[\\frac{d}{dx}((${a}x + ${b})^${n}) = \\text{□}(${a}x + ${b})^{${n-1}}\\]`;
       } else {
-        formula = `\\frac{d}{dx}((${a}x + ${b})^${n}) = ${answer}(${a}x + ${b})^{\\text{□}}`;
+        formula = `\\[\\frac{d}{dx}((${a}x + ${b})^${n}) = ${answer}(${a}x + ${b})^{\\text{□}}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -353,7 +353,7 @@ function generateProductRuleDifferentialQuestion(): Question {
       const bitedPosition = 0;
       const bitedValue = coeffs[bitedPosition];
 
-      const formula = `\\frac{d}{dx}(x e^{\\text{□}x}) = (1 + ${a}x) e^{${a}x}`;
+      const formula = `\\[\\frac{d}{dx}(x e^{\\text{□}x}) = (1 + ${a}x) e^{${a}x}\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -364,8 +364,8 @@ function generateProductRuleDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(x \\sin \\text{□}x) = \\sin ${a}x + ${a}x \\cos ${a}x`
-        : `\\frac{d}{dx}(x \\sin ${a}x) = \\sin ${a}x + \\text{□}x \\cos ${a}x`;
+        ? `\\[\\frac{d}{dx}(x \\sin \\text{□}x) = \\sin ${a}x + ${a}x \\cos ${a}x\\]`
+        : `\\[\\frac{d}{dx}(x \\sin ${a}x) = \\sin ${a}x + \\text{□}x \\cos ${a}x\\]`;
       return { formula, answer: bitedValue };
     },
     () => {
@@ -376,8 +376,8 @@ function generateProductRuleDifferentialQuestion(): Question {
       const bitedValue = coeffs[bitedPosition];
 
       const formula = bitedPosition === 0
-        ? `\\frac{d}{dx}(x \\cos \\text{□}x) = \\cos ${a}x - ${a}x \\sin ${a}x`
-        : `\\frac{d}{dx}(x \\cos ${a}x) = \\cos ${a}x - \\text{□}x \\sin ${a}x`;
+        ? `\\[\\frac{d}{dx}(x \\cos \\text{□}x) = \\cos ${a}x - ${a}x \\sin ${a}x\\]`
+        : `\\[\\frac{d}{dx}(x \\cos ${a}x) = \\cos ${a}x - \\text{□}x \\sin ${a}x\\]`;
       return { formula, answer: bitedValue };
     }
   ];

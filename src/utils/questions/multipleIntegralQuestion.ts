@@ -19,13 +19,13 @@ function generateConstantTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{${x2}} \\text{□} \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{${x2}} \\text{□} \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} ${c} \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} ${c} \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 2) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} ${c} \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} ${c} \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} ${c} \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} ${c} \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -43,11 +43,11 @@ function generateConstantTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_{${x1}}^{${x2}} \\text{□} \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_{${x1}}^{${x2}} \\text{□} \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_{\\text{□}}^{${x2}} ${c} \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_{\\text{□}}^{${x2}} ${c} \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_{${x1}}^{\\text{□}} ${c} \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_{${x1}}^{\\text{□}} ${c} \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -75,11 +75,11 @@ function generateLinearTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} x \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} x \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} x \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} x \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} x \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} x \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -96,11 +96,11 @@ function generateLinearTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} y \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} y \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} y \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} y \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} y \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} y \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -117,11 +117,11 @@ function generateLinearTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} z \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} z \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} z \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} z \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} z \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} z \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -146,11 +146,11 @@ function generateQuadraticTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} x^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} x^2 \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} x^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} x^2 \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} x^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} x^2 \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -167,11 +167,11 @@ function generateQuadraticTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} y^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} y^2 \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} y^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} y^2 \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} y^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} y^2 \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -196,11 +196,11 @@ function generateProductTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} xy \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} xy \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} xy \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} xy \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} xy \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} xy \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -217,11 +217,11 @@ function generateProductTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} xz \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} xz \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} xz \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} xz \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} xz \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} xz \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -238,11 +238,11 @@ function generateProductTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} xyz \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} xyz \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} xyz \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} xyz \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} xyz \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} xyz \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     }
@@ -268,13 +268,13 @@ function generateCoefficientTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{${x2}} \\text{□}x \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{${x2}} \\text{□}x \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} ${a}x \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} ${a}x \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 2) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} ${a}x \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} ${a}x \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} ${a}x \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} ${a}x \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     },
@@ -292,13 +292,13 @@ function generateCoefficientTripleIntegralQuestion(): Question {
 
       let formula;
       if (bitedPosition === 0) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{${x2}} \\text{□}x^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{${x2}} \\text{□}x^2 \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 1) {
-        formula = `\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} ${a}x^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{${y2}} \\int_0^{\\text{□}} ${a}x^2 \\, dx dy dz = ${answer}\\]`;
       } else if (bitedPosition === 2) {
-        formula = `\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} ${a}x^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{${z2}} \\int_0^{\\text{□}} \\int_0^{${x2}} ${a}x^2 \\, dx dy dz = ${answer}\\]`;
       } else {
-        formula = `\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} ${a}x^2 \\, dx dy dz = ${answer}`;
+        formula = `\\[\\int_0^{\\text{□}} \\int_0^{${y2}} \\int_0^{${x2}} ${a}x^2 \\, dx dy dz = ${answer}\\]`;
       }
       return { formula, answer: bitedValue };
     }
