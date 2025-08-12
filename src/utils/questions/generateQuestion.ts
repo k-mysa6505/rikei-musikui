@@ -1,6 +1,6 @@
 import { Question } from '../../types';
 import { generateLimitQuestion } from './limitQuestion';
-import { generateDerivativeQuestion } from './derivativeQuestion';
+import { generateDifferentialQuestion } from './differentialQuestion';
 import { generateIntegralQuestion } from './integralQuestion';
 import { generateDeterminantQuestion } from './determinantQuestion';
 import { generateEigenvalueQuestion } from './eigenvalueQuestion';
@@ -9,7 +9,7 @@ import { generateDifferentialEquationQuestion } from './differentialEquationQues
 
 const questionGenerators = [
   generateLimitQuestion,
-  generateDerivativeQuestion,
+  generateDifferentialQuestion,
   generateIntegralQuestion,
   generateDeterminantQuestion,
   generateEigenvalueQuestion,
@@ -18,8 +18,8 @@ const questionGenerators = [
 ];
 
 export const generateQuestion = (questionNo: number): Question => {
-  if (questionNo < 0 || questionNo >= questionGenerators.length) {
+  if (questionNo < 1 || questionGenerators.length < questionNo) {
     throw new Error(`Invalid question no: ${questionNo}`);
   }
-  return questionGenerators[questionNo]();
+  return questionGenerators[questionNo - 1]();
 };
