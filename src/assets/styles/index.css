@@ -1,15 +1,107 @@
-@import url('destyle.css');
+/* Main stylesheet that imports all CSS modules */
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Base styles - load first */
+@import './base/variables.css';
+@import './base/destyle.css';
+@import './base/typography.css';
+
+/* Component styles */
+@import './components/buttons.css';
+@import './components/modals.css';
+@import './components/forms.css';
+@import './components/math.css';
+
+/* Page-specific styles */
+@import './pages/title-screen.css';
+@import './pages/game-screen.css';
+@import './pages/result-screen.css';
+@import './pages/howto-screen.css';
+@import './pages/countdown-screen.css';
+
+/* Utility styles - load last */
+@import './utils/animations.css';
+@import './utils/responsive.css';
+@import './utils/mixins.css';
+
+/* Global app styles */
+.app {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-primary);
+  line-height: var(--line-height-base);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Theme switching support */
+.app.theme-dark {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
+  --border-color: #404040;
+}
+
+.app.theme-light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #868e96;
+  --border-color: #dee2e6;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .app {
+    --border-width: 2px;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Focus management for accessibility */
+.app *:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.app *:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Ensure proper stacking context */
+.app > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Global loading state */
+.app.loading {
+  cursor: wait;
+}
+
+.app.loading * {
+  pointer-events: none;
+}
+
+/* Print optimizations */
+@media print {
+  .app {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .app * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

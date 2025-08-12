@@ -1,0 +1,267 @@
+/* How to Play Screen specific styles */
+
+.howto-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: var(--spacing-xl);
+}
+
+.howto-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.howto-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-white);
+  padding: var(--spacing-xl);
+  text-align: center;
+}
+
+.howto-title {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+}
+
+.howto-subtitle {
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+}
+
+.howto-content {
+  padding: var(--spacing-xl);
+}
+
+.howto-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.howto-section:last-child {
+  margin-bottom: 0;
+}
+
+.howto-section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.howto-section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border-radius: 50%;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.howto-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.howto-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
+}
+
+.howto-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border-radius: 50%;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.howto-step-content {
+  flex: 1;
+}
+
+.howto-step-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.howto-step-description {
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.howto-rules {
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+}
+
+.howto-rules-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.howto-rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.howto-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-secondary);
+}
+
+.howto-rule::before {
+  content: "•";
+  color: var(--primary-color);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.howto-tips {
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(108, 117, 125, 0.1));
+  border: var(--border-width) solid rgba(0, 123, 255, 0.2);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+}
+
+.howto-tips-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.howto-tip {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.howto-actions {
+  padding: var(--spacing-xl);
+  background-color: var(--bg-secondary);
+  text-align: center;
+}
+
+.howto-btn {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: var(--transition-base);
+  margin: 0 var(--spacing-sm);
+}
+
+.howto-btn:hover {
+  background-color: color-mix(in srgb, var(--primary-color) 90%, black);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.howto-btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-white);
+}
+
+.howto-btn-secondary:hover {
+  background-color: color-mix(in srgb, var(--secondary-color) 90%, black);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Math example styles */
+.howto-math-example {
+  background-color: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
+  text-align: center;
+  font-size: var(--font-size-lg);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .howto-screen {
+    padding: var(--spacing-lg);
+  }
+  
+  .howto-header,
+  .howto-content,
+  .howto-actions {
+    padding: var(--spacing-lg);
+  }
+  
+  .howto-section-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .howto-step {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .howto-btn {
+    display: block;
+    width: 100%;
+    margin: var(--spacing-sm) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .howto-screen {
+    padding: var(--spacing-md);
+  }
+  
+  .howto-header,
+  .howto-content,
+  .howto-actions {
+    padding: var(--spacing-md);
+  }
+  
+  .howto-step {
+    padding: var(--spacing-sm);
+  }
+}

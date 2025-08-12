@@ -1,0 +1,173 @@
+/* Form and input components */
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: var(--transition-fast);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-control:disabled {
+  background-color: var(--bg-secondary);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-control.is-invalid {
+  border-color: var(--danger-color);
+}
+
+.form-control.is-valid {
+  border-color: var(--success-color);
+}
+
+/* Input sizes */
+.form-control-sm {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.form-control-lg {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+}
+
+/* Keypad styles */
+.keypad-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.keypad-row {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.keypad-btn {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  user-select: none;
+}
+
+.keypad-btn:hover {
+  background-color: var(--bg-secondary);
+  transform: translateY(-1px);
+}
+
+.keypad-btn:active {
+  transform: translateY(0);
+  background-color: var(--primary-color);
+  color: var(--text-white);
+}
+
+.keypad-num-btn {
+  background-color: var(--bg-primary);
+}
+
+.keypad-num-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+}
+
+.keypad-bks-btn {
+  background-color: var(--secondary-color);
+  color: var(--text-white);
+}
+
+.keypad-bks-btn:hover {
+  background-color: color-mix(in srgb, var(--secondary-color) 90%, black);
+}
+
+.keypad-mns-btn {
+  background-color: var(--warning-color);
+  color: var(--text-primary);
+}
+
+.keypad-mns-btn:hover {
+  background-color: color-mix(in srgb, var(--warning-color) 90%, black);
+}
+
+/* Answer display */
+.user-answer-container {
+  margin: var(--spacing-lg) 0;
+}
+
+.user-answer {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  text-align: center;
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.user-answer:empty::before {
+  content: "回答を入力してください";
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+/* Validation feedback */
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--danger-color);
+}
+
+.valid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--success-color);
+}

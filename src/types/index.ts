@@ -3,6 +3,7 @@
 declare global {
     interface Window {
         MathJax: {
+            startup: any;
             typeset: (elements?: HTMLElement[]) => void;
         };
     }

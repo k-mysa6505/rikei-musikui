@@ -1,0 +1,190 @@
+/* Mathematical content display styles */
+
+.math-container {
+  margin: var(--spacing-lg) 0;
+  text-align: center;
+}
+
+.math-display {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-relaxed);
+  margin: var(--spacing-md) 0;
+  color: var(--text-primary);
+}
+
+.math-inline {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Question display */
+.question-container {
+  background-color: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin: var(--spacing-lg) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.question-number {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.question-content {
+  font-size: var(--font-size-xl);
+  margin: var(--spacing-md) 0;
+}
+
+.question-math {
+  background-color: var(--bg-secondary);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
+}
+
+/* MathJax specific overrides */
+.MathJax {
+  font-size: 1.2em !important;
+}
+
+.MathJax_Display {
+  margin: var(--spacing-md) 0 !important;
+}
+
+/* Math symbols and notations */
+.math-symbol {
+  font-family: "Times New Roman", "STIX Two Math", serif;
+  font-style: italic;
+}
+
+.math-operator {
+  font-family: "Times New Roman", "STIX Two Math", serif;
+  font-style: normal;
+  margin: 0 0.1em;
+}
+
+.math-fraction {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.math-superscript {
+  font-size: 0.7em;
+  vertical-align: super;
+}
+
+.math-subscript {
+  font-size: 0.7em;
+  vertical-align: sub;
+}
+
+/* Answer comparison display */
+.answer-comparison {
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+}
+
+.answer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--spacing-sm) 0;
+  padding: var(--spacing-sm) 0;
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.answer-row:last-child {
+  border-bottom: none;
+}
+
+.answer-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 100px;
+}
+
+.answer-value {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+}
+
+.user-answer-value {
+  color: var(--primary-color);
+}
+
+.correct-answer-value {
+  color: var(--success-color);
+}
+
+.incorrect-answer-value {
+  color: var(--danger-color);
+}
+
+/* Mathematical notation helpers */
+.sqrt {
+  position: relative;
+}
+
+.sqrt::before {
+  content: "√";
+  font-size: 1.2em;
+  vertical-align: text-bottom;
+}
+
+.integral {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.matrix {
+  display: inline-block;
+  vertical-align: middle;
+  border-left: 1px solid var(--text-primary);
+  border-right: 1px solid var(--text-primary);
+  padding: 0 0.3em;
+}
+
+.determinant {
+  display: inline-block;
+  vertical-align: middle;
+  border-left: 2px solid var(--text-primary);
+  border-right: 2px solid var(--text-primary);
+  padding: 0 0.3em;
+}
+
+/* Responsive math content */
+@media (max-width: 768px) {
+  .math-display {
+    font-size: var(--font-size-xl);
+  }
+  
+  .question-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .question-math {
+    padding: var(--spacing-md);
+  }
+  
+  .MathJax {
+    font-size: 1em !important;
+  }
+}
+
+/* Dark mode math adjustments */
+@media (prefers-color-scheme: dark) {
+  .MathJax {
+    color: var(--text-primary) !important;
+  }
+  
+  .question-math {
+    background-color: color-mix(in srgb, var(--bg-secondary) 80%, black);
+  }
+}

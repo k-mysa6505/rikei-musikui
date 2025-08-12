@@ -1,0 +1,216 @@
+/* Game Screen specific styles */
+
+.game-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: var(--spacing-lg);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.game-info {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.game-timer {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.game-timer.warning {
+  color: var(--warning-color);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.game-timer.danger {
+  color: var(--danger-color);
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.game-score {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.game-progress {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.game-controls {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.game-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.game-question-area {
+  width: 100%;
+  margin-bottom: var(--spacing-xl);
+}
+
+.game-input-area {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: var(--spacing-xl);
+}
+
+.game-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Question progress indicator */
+.question-progress {
+  width: 100%;
+  height: 8px;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+}
+
+.question-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: var(--border-radius);
+  transition: width var(--transition-base);
+}
+
+/* Game status indicators */
+.game-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  margin-bottom: var(--spacing-md);
+}
+
+.game-status.correct {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+  border: var(--border-width) solid rgba(40, 167, 69, 0.3);
+}
+
+.game-status.incorrect {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+  border: var(--border-width) solid rgba(220, 53, 69, 0.3);
+}
+
+.game-status.thinking {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+  border: var(--border-width) solid rgba(255, 193, 7, 0.3);
+}
+
+/* Loading and transition states */
+.game-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: var(--spacing-md);
+}
+
+.game-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.game-transition {
+  animation: fadeIn var(--transition-base) ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .game-screen {
+    padding: var(--spacing-md);
+  }
+  
+  .game-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+  
+  .game-info {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .game-timer {
+    font-size: var(--font-size-lg);
+  }
+  
+  .game-score,
+  .game-progress {
+    font-size: var(--font-size-base);
+  }
+  
+  .game-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-screen {
+    padding: var(--spacing-sm);
+  }
+  
+  .game-header {
+    padding: var(--spacing-sm);
+  }
+  
+  .game-input-area {
+    max-width: 100%;
+  }
+}

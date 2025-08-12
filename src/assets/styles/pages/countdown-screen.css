@@ -1,0 +1,264 @@
+/* Countdown Screen specific styles */
+
+.countdown-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--text-white);
+  text-align: center;
+  padding: var(--spacing-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-container {
+  z-index: 2;
+  position: relative;
+}
+
+.countdown-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  margin-bottom: var(--spacing-2xl);
+  opacity: 0.9;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-number {
+  font-size: clamp(8rem, 20vw, 12rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: var(--spacing-xl);
+  text-shadow: 4px 8px 16px rgba(0, 0, 0, 0.4);
+  animation: countdownPulse 1s ease-in-out;
+  background: linear-gradient(45deg, var(--text-white), rgba(255, 255, 255, 0.8));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.countdown-number.final {
+  color: var(--warning-color);
+  animation: countdownFinal 1s ease-in-out;
+}
+
+@keyframes countdownPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes countdownFinal {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.2) rotate(5deg);
+  }
+  60% {
+    transform: scale(0.9) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.countdown-message {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  opacity: 0.8;
+  margin-bottom: var(--spacing-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.countdown-progress {
+  width: 200px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.countdown-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--text-white), rgba(255, 255, 255, 0.8));
+  border-radius: var(--border-radius);
+  transition: width 1s linear;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Background animation */
+.countdown-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  animation: backgroundFloat 8s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes backgroundFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-30px) rotate(2deg);
+    opacity: 0.8;
+  }
+}
+
+/* Ready state */
+.countdown-screen.ready {
+  background: linear-gradient(135deg, var(--success-color) 0%, var(--primary-color) 100%);
+}
+
+.countdown-screen.ready .countdown-number {
+  color: var(--text-white);
+  animation: readyPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes readyPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Particles animation */
+.countdown-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.countdown-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: particleFloat 4s ease-in-out infinite;
+}
+
+.countdown-particle:nth-child(odd) {
+  animation-delay: -2s;
+}
+
+.countdown-particle:nth-child(3n) {
+  animation-delay: -1s;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Cancel button */
+.countdown-cancel {
+  position: absolute;
+  top: var(--spacing-xl);
+  right: var(--spacing-xl);
+  z-index: 3;
+}
+
+.countdown-cancel-btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-white);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-weight: 500;
+}
+
+.countdown-cancel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .countdown-screen {
+    padding: var(--spacing-lg);
+  }
+  
+  .countdown-title {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .countdown-message {
+    font-size: var(--font-size-lg);
+  }
+  
+  .countdown-progress {
+    width: 150px;
+  }
+  
+  .countdown-cancel {
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-screen {
+    padding: var(--spacing-md);
+  }
+  
+  .countdown-cancel {
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+  }
+  
+  .countdown-cancel-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+}
