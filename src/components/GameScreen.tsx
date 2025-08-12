@@ -84,6 +84,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
       </div>
       <div className="question-formula-container">
         <div className="question-formula">{question.formula}</div>
+        <div className="question-sub-formula">{question.subformula}</div>
       </div>
       <div className="user-answer-container">
         <div className="user-answer">{userAnswer}</div>

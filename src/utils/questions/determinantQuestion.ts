@@ -1,6 +1,8 @@
 //  utils/questions/determinantQuestion.ts
 //  3×3行列式
 
+import { Question } from "../../types";
+
 function calculateDeterminant(matrix: number[][]): number {
   const [a, b, c] = matrix[0];
   const [d, e, f] = matrix[1];
@@ -8,8 +10,8 @@ function calculateDeterminant(matrix: number[][]): number {
   return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
 }
 
-export const generateDeterminantQuestion = () => {
-  let matrix = Array.from({ length: 3 }, () => Array(3).fill(0));
+export const generateDeterminantQuestion = (): Question => {
+  let matrix: number[][] = Array.from({ length: 3 }, () => Array(3).fill(0));
   for (let i = 0; i < 9; i++) {
     matrix[Math.floor(i / 3)][i % 3] = Math.floor(Math.random() * 6) - 3;   //  -3～3
   }
@@ -39,6 +41,7 @@ export const generateDeterminantQuestion = () => {
 
   return {
     formula: bitedFormula,
+    subformula: "",
     answer: bitedValue
   };
 };

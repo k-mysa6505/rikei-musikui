@@ -12,5 +12,6 @@ export enum GameState {
 // Game questions
 export interface Question {
   formula: string;
+  subformula: string;
   answer: number;   // Correct answer
 }
