@@ -2,7 +2,7 @@
 
 .howto-screen {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background: var(--bg-primary);
   padding: var(--spacing-xl);
 }
 
@@ -16,7 +16,7 @@
 }
 
 .howto-header {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: var(--primary-color);
   color: var(--text-white);
   padding: var(--spacing-xl);
   text-align: center;

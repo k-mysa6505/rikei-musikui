@@ -6,8 +6,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: var(--text-white);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   text-align: center;
   padding: var(--spacing-xl);
   position: relative;
@@ -23,8 +23,8 @@
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 600;
   margin-bottom: var(--spacing-2xl);
-  opacity: 0.9;
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--text-secondary);
+  text-shadow: none;
 }
 
 .countdown-number {
@@ -32,12 +32,9 @@
   font-weight: 800;
   line-height: 1;
   margin-bottom: var(--spacing-xl);
-  text-shadow: 4px 8px 16px rgba(0, 0, 0, 0.4);
+  color: var(--primary-color);
+  text-shadow: none;
   animation: countdownPulse 1s ease-in-out;
-  background: linear-gradient(45deg, var(--text-white), rgba(255, 255, 255, 0.8));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .countdown-number.final {
@@ -81,7 +78,7 @@
 .countdown-message {
   font-size: var(--font-size-xl);
   font-weight: 500;
-  opacity: 0.8;
+  color: var(--text-secondary);
   margin-bottom: var(--spacing-lg);
   line-height: var(--line-height-relaxed);
 }
@@ -97,10 +94,10 @@
 
 .countdown-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--text-white), rgba(255, 255, 255, 0.8));
+  background: var(--primary-color);
   border-radius: var(--border-radius);
   transition: width 1s linear;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
 }
 
 /* Background animation */
@@ -112,10 +109,10 @@
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 25% 25%, rgba(40, 167, 69, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(40, 167, 69, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 20%, rgba(40, 167, 69, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(40, 167, 69, 0.05) 0%, transparent 50%);
   animation: backgroundFloat 8s ease-in-out infinite;
   z-index: 1;
 }
@@ -133,11 +130,11 @@
 
 /* Ready state */
 .countdown-screen.ready {
-  background: linear-gradient(135deg, var(--success-color) 0%, var(--primary-color) 100%);
+  background: var(--bg-green-light);
 }
 
 .countdown-screen.ready .countdown-number {
-  color: var(--text-white);
+  color: var(--primary-color);
   animation: readyPulse 0.8s ease-in-out infinite;
 }
 
@@ -167,7 +164,7 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(40, 167, 69, 0.6);
   border-radius: 50%;
   animation: particleFloat 4s ease-in-out infinite;
 }
@@ -207,19 +204,18 @@
 
 .countdown-cancel-btn {
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  color: var(--text-white);
+  background-color: var(--bg-primary);
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
   border-radius: var(--border-radius);
-  backdrop-filter: blur(10px);
   cursor: pointer;
   transition: var(--transition-fast);
   font-weight: 500;
 }
 
 .countdown-cancel-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--primary-color);
+  color: var(--text-white);
 }
 
 /* Responsive design */

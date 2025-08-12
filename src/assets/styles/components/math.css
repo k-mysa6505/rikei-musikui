@@ -40,7 +40,7 @@
 }
 
 .question-math {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-green-light);
   padding: var(--spacing-lg);
   margin: var(--spacing-md) 0;
   border-radius: var(--border-radius);
