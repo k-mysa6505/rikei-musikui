@@ -69,8 +69,8 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   //  解説
   const explanation = (question: Question): Question => {
     const regex = /\\text{□}/g;
-    const newFormula = question.formula.replace(regex, `<span class="correct-answer">${question.answer}</span>`);
-    const newSubformula = question.subformula.replace(regex, `<span class="correct-answer">${question.answer}</span>`);
+    const newFormula = question.formula.replace(regex, `\\textcolor{red}{${question.answer}}`);
+    const newSubformula = question.subformula.replace(regex, `\\textcolor{red}{${question.answer}}`);
     return { ...question, formula: newFormula, subformula: newSubformula };
   }
 
@@ -81,7 +81,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
 
     const questionWithExplanation = explanation(question);
     document.getElementById("modal-section")!.classList.add("active");
-    document.querySelector(".modal-question-explanation")!.innerHTML = `
+    document.getElementById("modal-question-explanation")!.innerHTML = `
       <div class="question-formula">${questionWithExplanation.formula}</div>
       <div class="question-sub-formula">${questionWithExplanation.subformula}</div>
     `;
@@ -153,7 +153,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
       <div id="modal-section" className="modal-section-overlay">
         <div className="modal-container">
           <p className="modal-title"></p>
-          <div className="modal-question-explanation"></div>
+          <div id="modal-question-explanation" className="modal-question-explanation"></div>
           <div className="user-answer">あなたの回答: {userAnswer}</div>
           <div className="modal-button-section">
             <button className="next-btn" onClick={() => onNext()}>次へ</button>
