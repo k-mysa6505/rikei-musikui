@@ -29,12 +29,14 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
     //  BackSpace
     if (value === "←") {
       setUserAnswer((prev) => prev.slice(0, -1));
+      return;
     }
     //  Minus（未入力のみ有効，0の後ろは0を上書き）
     if (value === "-") {
       if (userAnswer === "" || userAnswer === "0") {
         setUserAnswer("-");
       }
+      return;
     }
     //  0（0, -の後ろは無効）
     if (value === "0") {
@@ -42,6 +44,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
         return;
       }
       setUserAnswer((prev) => prev + value);
+      return;
     }
     //  1～9（0の後ろは0を上書き）
     if (value !== "0") {
@@ -50,13 +53,36 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
         return;
       }
       setUserAnswer((prev) => prev + value);
+      return;
     }
+  }
+
+  //  解説
+  const explanation = (question: Question): Question => {
+    const regex = /\\text{□}/g;
+    const newFormula = question.formula.replace(regex, `<span class="correct-answer">${question.answer}</span>`);
+    const newSubformula = question.subformula.replace(regex, `<span class="correct-answer">${question.answer}</span>`);
+    return { ...question, formula: newFormula, subformula: newSubformula };
   }
 
   //  結果表示
   const handleAnswerButtonClick = () => {
+    const questionWithExplanation = explanation(question);
+    document.getElementById("modal-section")!.classList.add("active");
+    document.querySelector(".modal-question-explanation")!.innerHTML = `
+      <div class="question-formula">${questionWithExplanation.formula}</div>
+      <div class="question-sub-formula">${questionWithExplanation.subformula}</div>
+    `;
     if (userAnswer === question.answer.toString()) {
+      document.querySelector(".modal-title")!.textContent = "正解！";
+    } else {
+      document.querySelector(".modal-title")!.textContent = "不正解...";
     }
+  }
+
+  //  次へボタン
+  function onNext() {
+    document.getElementById("modal-section")!.classList.remove("active");
     setCurrentStage((prevStage) => prevStage + 1);
     if (currentStage < 7) {
       setQuestion(generateQuestion(currentStage + 1));
@@ -112,6 +138,16 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
       </div>
       <div className="answer-btn-container">
         <button className="answer-btn" onClick={() => handleAnswerButtonClick()}>回答</button>
+      </div>
+      <div id="modal-section" className="modal-section-overlay">
+        <div className="modal-container">
+          <p className="modal-title"></p>
+          <div className="modal-question-explanation"></div>
+          <div className="user-answer">あなたの回答: {userAnswer}</div>
+          <div className="modal-button-section">
+            <button className="next-btn" onClick={() => onNext()}>次へ</button>
+          </div>
+        </div>
       </div>
     </div>
   );
