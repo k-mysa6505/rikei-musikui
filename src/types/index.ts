@@ -15,3 +15,19 @@ export interface Question {
   subformula: string;
   answer: number;   // Correct answer
 }
+
+// Game result for each question
+export interface QuestionResult {
+  stage: number;
+  question: Question;
+  userAnswer: string;
+  isCorrect: boolean;
+}
+
+// Overall game result
+export interface GameResult {
+  totalQuestions: number;
+  correctAnswers: number;
+  totalTime: number;
+  questionResults: QuestionResult[];
+}

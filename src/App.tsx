@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GameState } from './types/index';
+import { useGameLogic } from './hooks/useGameLogic';
 import TitleScreen from './components/TitleScreen';
 import HowToPlayScreen from './components/HowToPlayScreen';
 import CountdownScreen from './components/CountdownScreen';
@@ -8,12 +9,23 @@ import ResultScreen from './components/ResultScreen';
 
 const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<GameState>(GameState.TITLE);
+  const { gameResult, initializeGame, recordQuestionResult, finalizeGame } = useGameLogic();
+
+  const handleStartGame = () => {
+    initializeGame();
+    setCurrentScreen(GameState.HOW_TO_PLAY);
+  };
+
+  const handleGameComplete = () => {
+    finalizeGame();
+    setCurrentScreen(GameState.RESULTS);
+  };
 
   const renderScreen = () => {
     switch (currentScreen) {
     case GameState.TITLE:
       return <TitleScreen
-        onPlay={() => setCurrentScreen(GameState.HOW_TO_PLAY)}
+        onPlay={handleStartGame}
       />;
     case GameState.HOW_TO_PLAY:
       return <HowToPlayScreen
@@ -26,12 +38,14 @@ const App: React.FC = () => {
       />;
     case GameState.PLAYING:
       return <GameScreen
-        onComplete={() => setCurrentScreen(GameState.RESULTS)}
+        onComplete={handleGameComplete}
+        onRecordResult={recordQuestionResult}
       />;
     case GameState.RESULTS:
       return <ResultScreen
+        gameResult={gameResult}
         onTitle={() => setCurrentScreen(GameState.TITLE)}
-        onReplay={() => setCurrentScreen(GameState.COUNT_DOWN)}
+        onReplay={handleStartGame}
       />;
     default:
       return null;

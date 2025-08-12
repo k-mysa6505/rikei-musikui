@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Question } from "../types/index";
+import { Question, QuestionResult } from "../types/index";
 import { generateQuestion } from "../utils/questions/generateQuestion";
 
 type GameScreenProps ={
   onComplete: () => void;
+  onRecordResult: (stage: number, question: Question, userAnswer: string) => QuestionResult;
 }
 
-const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
+const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) => {
   const [currentStage, setCurrentStage] = useState(1);
   const [startTime] = useState(() => Date.now());
   const [elapsedTime, setElapsedTime] = useState(startTime);
@@ -67,13 +68,16 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete }) => {
 
   //  結果表示
   const handleAnswerButtonClick = () => {
+    // 回答結果を記録
+    const result = onRecordResult(currentStage, question, userAnswer);
+
     const questionWithExplanation = explanation(question);
     document.getElementById("modal-section")!.classList.add("active");
     document.querySelector(".modal-question-explanation")!.innerHTML = `
       <div class="question-formula">${questionWithExplanation.formula}</div>
       <div class="question-sub-formula">${questionWithExplanation.subformula}</div>
     `;
-    if (userAnswer === question.answer.toString()) {
+    if (result.isCorrect) {
       document.querySelector(".modal-title")!.textContent = "正解！";
     } else {
       document.querySelector(".modal-title")!.textContent = "不正解...";
