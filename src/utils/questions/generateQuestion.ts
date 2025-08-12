@@ -1,6 +1,6 @@
 import { Question } from '../../types';
 import { generateLimitQuestion } from './limitQuestion';
-import { generateDerivativeQuestion } from './derivativeQuestion';
+import { generateDifferentialQuestion } from './differentialQuestion';
 import { generateIntegralQuestion } from './integralQuestion';
 import { generateDeterminantQuestion } from './determinantQuestion';
 import { generateEigenvalueQuestion } from './eigenvalueQuestion';
@@ -9,7 +9,7 @@ import { generateDifferentialEquationQuestion } from './differentialEquationQues
 
 const questionGenerators = [
   generateLimitQuestion,
-  generateDerivativeQuestion,
+  generateDifferentialQuestion,
   generateIntegralQuestion,
   generateDeterminantQuestion,
   generateEigenvalueQuestion,
