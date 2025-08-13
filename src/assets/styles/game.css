@@ -1,0 +1,189 @@
+@import url('base.css');
+
+/* ゲーム画面を縦中央に配置 */
+.game-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.game-screen {
+    text-align: center;
+    width: 100%;
+}
+
+.game-screen .game-header-container,
+.game-screen .question-formula-container,
+.game-screen .user-answer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    color: #2c3e5a;
+    font-size: 24px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.game-screen .question-formula-container {
+    display: block;
+}
+
+.game-screen .question-formula,
+.game-screen .question-sub-formula {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.game-header-container .game-stage {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.game-header-container .elapsed-time {
+    font-style: italic;
+}
+
+.question-formula-container .question-formula {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.user-answer-container {
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.5rem;
+}
+
+.user-answer-container .user-answer {
+    font-size: 28px;
+}
+
+.user-answer-container .user-answer.empty {
+    color: #aaa;
+    font-size: 20px;
+    opacity: 1;
+    font-style: italic;
+}
+
+.keypad-container .keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.keypad-container .btn {
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    border: 2px solid #4CAF50;
+    border-radius: 12px;
+    color: #4CAF50;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.keypad-container .keypad-bks-btn {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.answer-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.answer-btn:disabled {
+    background-color: #656565;
+    cursor: not-allowed;
+}
+
+.modal-section-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-section-overlay.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(0.7);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal-section-overlay.active .modal-container {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.modal-question-explanation {
+    margin: 20px 0;
+}
+
+.modal-user-answer {
+    margin: 20px 0;
+}
+
+.modal-button-section button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* MathJax用スタイル */
+.math-content {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.math-content.rendered {
+    visibility: visible;
+    opacity: 1;
+}
