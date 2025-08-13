@@ -4,7 +4,7 @@ type TitleScreenProps = {
   onPlay: () => void;
 }
 
-const TitleScreen: React.FC<TitleScreenProps> = ({ onPlay }) => {
+const TitleScreen: React.FC<TitleScreenProps> = React.memo(({ onPlay }) => {
   return (
     <div className="title-screen-container">
       <div className="title-screen">
@@ -20,6 +20,6 @@ const TitleScreen: React.FC<TitleScreenProps> = ({ onPlay }) => {
       </div>
     </div>
   );
-};
+});
 
 export default TitleScreen;

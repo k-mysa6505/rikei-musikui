@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Question, QuestionResult } from "../types/index";
 import { generateQuestion } from "../utils/questions/generateQuestion";
+import { useMathJax } from "../hooks/useMathJax";
 
 type GameScreenProps ={
   onComplete: () => void;
@@ -13,17 +14,23 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   const [elapsedTime, setElapsedTime] = useState(startTime);
   const [question, setQuestion] = useState<Question>(() => generateQuestion(currentStage));
   const [userAnswer, setUserAnswer] = useState("");
+  const { renderElement } = useMathJax();
 
-  //  タイマー
-  const formatElapsedTime = () => {
+  // タイマー効率化
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setElapsedTime(Date.now() - startTime);
+    }, 10);
+    return () => clearInterval(interval);
+  }, [startTime]);
+
+  // 時間フォーマット関数をメモ化
+  const formatElapsedTime = useMemo(() => {
     const ms = Math.floor((elapsedTime % 1000) / 10);
     const s = Math.floor((elapsedTime % 60000) / 1000);
     const m = Math.floor(elapsedTime / 60000);
     return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${String(ms).padStart(2, "0")}`;
-  };
-  const timerInterval = setInterval(() => {
-    setElapsedTime(Date.now() - startTime);
-  }, 10);
+  }, [elapsedTime]);
 
   //  入力処理
   const handleButtonClick = (value: string) => {
@@ -76,31 +83,13 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     submitButton.disabled = (userAnswer === '' || userAnswer === '-');
   }
 
-  //  出力処理
-  const renderMathJax = useCallback(async (element: HTMLElement, retryCount = 0) => {
-    if (!window.MathJax || retryCount > 3) return;
-
-    try {
-      await window.MathJax.typeset([element]);
-      // レンダリング完了後に要素を表示
-      element.classList.add('rendered');
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      if (errorMessage.includes('retry')) {
-        setTimeout(() => renderMathJax(element, retryCount + 1), 100);
-      } else {
-        // エラーでも表示する
-        element.classList.add('rendered');
-      }
-    }
-  }, []);
-
+  // 最適化されたMathJaxレンダリング
   useEffect(() => {
     const formulaContainer = document.getElementById("question-formula-container");
-    if (formulaContainer && window.MathJax) {
-      renderMathJax(formulaContainer);
+    if (formulaContainer) {
+      renderElement(formulaContainer);
     }
-  }, [question, renderMathJax]);
+  }, [question, renderElement]);
 
   //  解説
   const explanation = (question: Question): Question => {
@@ -154,7 +143,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
       // MathJax で数式を描画（非同期処理）
       setTimeout(() => {
         if (window.MathJax) {
-          renderMathJax(modalQuestionExplanation);
+          renderElement(modalQuestionExplanation);
         }
       }, 50);
 
@@ -177,16 +166,15 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   useEffect(() => {
     if (currentStage > 7) {
       onComplete();
-      clearInterval(timerInterval);
     }
-  }, [currentStage, timerInterval, onComplete]);
+  }, [currentStage, onComplete]);
 
   return (
     <div className="game-container">
       <div className="game-screen">
         <div className="game-header-container">
           <p className="game-stage">LEVEL {currentStage}</p>
-          <p className="elapsed-time">TIME {formatElapsedTime()}</p>
+          <p className="elapsed-time">TIME {formatElapsedTime}</p>
         </div>
         <div id="question-formula-container" className="question-formula-container">
           <div className="question-formula">{question.formula}</div>
