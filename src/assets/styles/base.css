@@ -31,3 +31,29 @@ body {
 .scrollable-layout {
   padding: 20px 0;
 }
+
+/* 共通ボタンアニメーション */
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes buttonHover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+/* スムーズトランジション用クラス */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button-press-effect {
+  animation: buttonPress 0.15s ease-in-out;
+}
+
+.button-hover-effect:hover {
+  animation: buttonHover 0.2s ease-out forwards;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

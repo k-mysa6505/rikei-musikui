@@ -19,6 +19,13 @@
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: #2c3e5a;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(0);
+}
+
+.how-to-play-screen:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
 }
 
 .how-to-play-screen h1 {
@@ -46,23 +53,49 @@
     font-size: 24px;
     text-align: center;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(0);
+    user-select: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.how-to-play-screen .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.how-to-play-screen .btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
 }
 
 .how-to-play-screen .ok-button {
     background-color: #4caf50;
     color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.how-to-play-screen .ok-button:hover {
+    background-color: #357a38;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
 }
 
 .how-to-play-screen .ok-button:active {
-    background-color: #357a38;
+    background-color: #2e7d32;
 }
 
 .how-to-play-screen .back-button {
     background-color: #888;
     color: white;
+    box-shadow: 0 4px 15px rgba(136, 136, 136, 0.3);
+}
+
+.how-to-play-screen .back-button:hover {
+    background-color: #666;
+    box-shadow: 0 8px 25px rgba(136, 136, 136, 0.4);
 }
 
 .how-to-play-screen .back-button:active {
-    background-color: #666;
+    background-color: #555;
 }

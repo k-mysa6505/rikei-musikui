@@ -135,10 +135,21 @@
     padding: 20px;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.question-header:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question-header:active {
+    transform: translateY(0) scale(0.98);
+    background-color: #e9ecef;
 }
 
 .question-status {
@@ -168,7 +179,7 @@
 .question-details {
     padding: 0 20px 20px 20px;
     border-top: 1px solid #e0e0e0;
-    animation: slideDown 0.3s ease;
+    overflow: hidden;
 }
 
 .status.correct {
@@ -230,33 +241,54 @@
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     min-width: 140px;
+    transform: translateY(0);
+    user-select: none;
+}
+
+.result-buttons .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.result-buttons .btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
 }
 
 .replay-btn {
     background-color: #4CAF50;
     color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 .replay-btn:hover {
     background-color: #357a38;
-    transform: translateY(-2px);
-    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.replay-btn:active {
+    background-color: #2e7d32;
 }
 
 .title-btn {
     background-color: #fff;
     color: #4CAF50;
     border: 2px solid #4CAF50;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
 }
 
 .title-btn:hover {
     background-color: #4CAF50;
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.title-btn:active {
+    background-color: #357a38;
 }
 
 /* MathJax用スタイル */
@@ -276,9 +308,47 @@
     from {
         opacity: 0;
         max-height: 0;
+        transform: translateY(-10px);
+        padding-top: 0;
+        padding-bottom: 0;
     }
     to {
         opacity: 1;
         max-height: 500px;
+        transform: translateY(0);
+        padding-top: 0;
+        padding-bottom: 20px;
     }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        max-height: 500px;
+        transform: translateY(0);
+        padding-top: 0;
+        padding-bottom: 20px;
+    }
+    to {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.question-details {
+    overflow: hidden;
+    animation-duration: 0.2s;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-fill-mode: both;
+}
+
+.question-details.expanding {
+    animation-name: slideDown;
+}
+
+.question-details.collapsing {
+    animation-name: slideUp;
 }

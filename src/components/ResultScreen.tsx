@@ -11,17 +11,72 @@ type ResultScreenProps = {
 const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTitle }) => {
   // 各問題の展開状態を管理
   const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(new Set());
+  // アニメーション状態を管理
+  const [animatingQuestions, setAnimatingQuestions] = useState<Set<number>>(new Set());
   const { renderBySelector } = useMathJax();
+
+  // ボタンクリック時の視覚的フィードバック
+  const handleButtonClick = (callback: () => void) => {
+    return (e: React.MouseEvent<HTMLButtonElement>) => {
+      // DOM要素への参照を保存
+      const button = e.currentTarget;
+      
+      // ボタンプレス効果を追加
+      button.style.transform = 'translateY(-1px) scale(0.98)';
+      button.style.transition = 'all 0.1s ease';
+      
+      setTimeout(() => {
+        button.style.transform = '';
+        button.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      }, 100);
+      
+      // 少し遅延してからコールバック実行
+      setTimeout(callback, 150);
+    };
+  };
 
   // 問題の展開/折りたたみを切り替える
   const toggleQuestion = (index: number) => {
-    const newExpanded = new Set(expandedQuestions);
-    if (newExpanded.has(index)) {
-      newExpanded.delete(index);
-    } else {
-      newExpanded.add(index);
-    }
-    setExpandedQuestions(newExpanded);
+    return (e: React.MouseEvent<HTMLDivElement>) => {
+      // DOM要素への参照を保存
+      const element = e.currentTarget;
+      
+      // クリック感触を追加
+      element.style.transform = 'scale(0.98)';
+      element.style.transition = 'all 0.1s ease';
+      
+      setTimeout(() => {
+        element.style.transform = '';
+        element.style.transition = 'all 0.2s ease';
+      }, 100);
+
+      // 実際の処理
+      setTimeout(() => {
+        const isCurrentlyExpanded = expandedQuestions.has(index);
+        
+        if (isCurrentlyExpanded) {
+          // 閉じる処理：アニメーション開始
+          setAnimatingQuestions(prev => new Set(prev).add(index));
+          
+          // アニメーション完了後に展開状態を更新
+          setTimeout(() => {
+            setExpandedQuestions(prev => {
+              const newExpanded = new Set(prev);
+              newExpanded.delete(index);
+              return newExpanded;
+            });
+            setAnimatingQuestions(prev => {
+              const newAnimating = new Set(prev);
+              newAnimating.delete(index);
+              return newAnimating;
+            });
+          }, 400); // アニメーション時間と同じ
+        } else {
+          // 開く処理：即座に展開状態を更新
+          setExpandedQuestions(prev => new Set(prev).add(index));
+        }
+      }, 50);
+    };
   };
   // 解説バージョンの数式を作成する関数
   const explanation = (question: Question): Question => {
@@ -67,18 +122,19 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
             // 解説バージョンの数式を取得
             const explanationQuestion = explanation(result.question);
             const isExpanded = expandedQuestions.has(index);
+            const isAnimating = animatingQuestions.has(index);
             
             return (
               <div key={index} className="question-result">
                 <div 
                   className="question-header"
-                  onClick={() => toggleQuestion(index)}
+                  onClick={toggleQuestion(index)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      toggleQuestion(index);
+                      toggleQuestion(index)(e as any);
                     }
                   }}
                 >
@@ -93,8 +149,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
                   </div>
                 </div>
                 
-                {isExpanded && (
-                  <div className="question-details">
+                {(isExpanded || isAnimating) && (
+                  <div className={`question-details ${isExpanded && !isAnimating ? 'expanding' : isAnimating ? 'collapsing' : ''}`}>
                     <div className="question-container">
                       <div className="question-formula-container">
                         <div className="question-formula math-content">
@@ -135,8 +191,18 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
         </div>
       </div>
       <div className="result-buttons">
-        <button className="btn replay-btn" onClick={onReplay}>もう一度</button>
-        <button className="btn title-btn"  onClick={onTitle}>タイトルへ戻る</button>
+        <button 
+          className="btn replay-btn" 
+          onClick={handleButtonClick(onReplay)}
+        >
+          もう一度
+        </button>
+        <button 
+          className="btn title-btn"  
+          onClick={handleButtonClick(onTitle)}
+        >
+          タイトルへ戻る
+        </button>
       </div>
     </div>
   );

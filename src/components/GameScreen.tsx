@@ -29,18 +29,33 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   }, [elapsedTime]);
 
   const handleButtonClick = (value: string) => {
-    if (value === "←") {
-      setUserAnswer(prev => prev.slice(0, -1));
-    } else if (value === "-") {
-      if (userAnswer === "" || userAnswer === "0") setUserAnswer("-");
-    } else if (value === "0") {
-      if (userAnswer === "0" || userAnswer === "-") {
-        return;
+    return (e: React.MouseEvent<HTMLButtonElement>) => {
+      // DOM要素への参照を保存
+      const button = e.currentTarget;
+      
+      // ボタンの視覚的フィードバック
+      button.style.transform = 'translateY(0) scale(0.95)';
+      button.style.transition = 'all 0.1s ease';
+      
+      setTimeout(() => {
+        button.style.transform = '';
+        button.style.transition = 'all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      }, 100);
+
+      // 実際の処理
+      if (value === "←") {
+        setUserAnswer(prev => prev.slice(0, -1));
+      } else if (value === "-") {
+        if (userAnswer === "" || userAnswer === "0") setUserAnswer("-");
+      } else if (value === "0") {
+        if (userAnswer === "0" || userAnswer === "-") {
+          return;
+        }
+        if (userAnswer !== "0" && userAnswer !== "-") setUserAnswer(prev => prev + "0");
+      } else {
+        setUserAnswer(prev => prev === "0" ? value : prev + value);
       }
-      if (userAnswer !== "0" && userAnswer !== "-") setUserAnswer(prev => prev + "0");
-    } else {
-      setUserAnswer(prev => prev === "0" ? value : prev + value);
-    }
+    };
   };
 
   useEffect(() => {
@@ -65,38 +80,67 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   };
 
   const handleAnswerButtonClick = () => {
-    const result = onRecordResult(currentStage, question, userAnswer);
-    const questionWithExplanation = explanation(question);
+    return (e: React.MouseEvent<HTMLButtonElement>) => {
+      // DOM要素への参照を保存
+      const button = e.currentTarget;
+      
+      // ボタンの視覚的フィードバック
+      button.style.transform = 'translateY(0) scale(0.98)';
+      button.style.transition = 'all 0.1s ease';
+      
+      setTimeout(() => {
+        button.style.transform = '';
+        button.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      }, 100);
 
-    const modalSection = document.getElementById("modal-section")!;
-    const modalQuestionExplanation = document.getElementById("modal-question-explanation")!;
-    const modalTitle = document.querySelector(".modal-title")! as HTMLElement;
+      // 実際の処理
+      setTimeout(() => {
+        const result = onRecordResult(currentStage, question, userAnswer);
+        const questionWithExplanation = explanation(question);
 
-    modalSection.scrollTop = 0;
-    modalQuestionExplanation.innerHTML = `
-      <div class="question-formula">${questionWithExplanation.formula}</div>
-      ${questionWithExplanation.subformula ? `<div class="question-sub-formula">${questionWithExplanation.subformula}</div>` : ''}
-    `;
+        const modalSection = document.getElementById("modal-section")!;
+        const modalQuestionExplanation = document.getElementById("modal-question-explanation")!;
+        const modalTitle = document.querySelector(".modal-title")! as HTMLElement;
 
-    const phrases = result.isCorrect
-      ? ["やった！！", "すばらしい！", "最高！", "正解！"]
-      : ["もう少し！", "惜しい！", "次はできるよ！", "不正解..."];
+        modalSection.scrollTop = 0;
+        modalQuestionExplanation.innerHTML = `
+          <div class="question-formula">${questionWithExplanation.formula}</div>
+          ${questionWithExplanation.subformula ? `<div class="question-sub-formula">${questionWithExplanation.subformula}</div>` : ''}
+        `;
 
-    modalTitle.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-    modalTitle.style.color = result.isCorrect ? "#4CAF50" : "#e74c3c";
-    modalSection.classList.add("active");
+        const phrases = result.isCorrect
+          ? ["やった！！", "すばらしい！", "最高！", "正解！"]
+          : ["もう少し！", "惜しい！", "次はできるよ！", "不正解..."];
 
-    setTimeout(() => renderElement(modalQuestionExplanation), 50);
+        modalTitle.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+        modalTitle.style.color = result.isCorrect ? "#4CAF50" : "#e74c3c";
+        modalSection.classList.add("active");
 
-    const modalNextBtn = document.querySelector(".next-btn") as HTMLButtonElement;
-    if (modalNextBtn) {
-      const newBtn = modalNextBtn.cloneNode(true) as HTMLButtonElement;
-      modalNextBtn.parentNode?.replaceChild(newBtn, modalNextBtn);
-      newBtn.addEventListener("click", () => {
-        modalSection.classList.remove("active");
-        onNext();
-      });
-    }
+        setTimeout(() => renderElement(modalQuestionExplanation), 50);
+
+        const modalNextBtn = document.querySelector(".next-btn") as HTMLButtonElement;
+        if (modalNextBtn) {
+          const newBtn = modalNextBtn.cloneNode(true) as HTMLButtonElement;
+          modalNextBtn.parentNode?.replaceChild(newBtn, modalNextBtn);
+          newBtn.addEventListener("click", (btnEvent) => {
+            // モーダル内ボタンにも感触を追加
+            const btn = btnEvent.currentTarget as HTMLButtonElement;
+            btn.style.transform = 'translateY(0) scale(0.98)';
+            btn.style.transition = 'all 0.1s ease';
+            
+            setTimeout(() => {
+              btn.style.transform = '';
+              btn.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }, 100);
+
+            setTimeout(() => {
+              modalSection.classList.remove("active");
+              onNext();
+            }, 150);
+          });
+        }
+      }, 150);
+    };
   };
 
   useEffect(() => {
@@ -121,23 +165,23 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
         </div>
       <div className="keypad-container">
         <div className="keypad-grid">
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('1')}>1</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('2')}>2</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('3')}>3</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('4')}>4</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('5')}>5</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('6')}>6</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('7')}>7</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('8')}>8</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('9')}>9</button>
-          <button className="btn keypad-bks-btn" onClick={() => handleButtonClick('←')}>←</button>
-          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('0')}>0</button>
-          <button className="btn keypad-mns-btn" onClick={() => handleButtonClick('-')}>ー</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('1')}>1</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('2')}>2</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('3')}>3</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('4')}>4</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('5')}>5</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('6')}>6</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('7')}>7</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('8')}>8</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('9')}>9</button>
+          <button className="btn keypad-bks-btn" onClick={handleButtonClick('←')}>←</button>
+          <button className="btn keypad-num-btn" onClick={handleButtonClick('0')}>0</button>
+          <button className="btn keypad-mns-btn" onClick={handleButtonClick('-')}>ー</button>
         </div>
       </div>
         <button
           className="answer-btn"
-          onClick={handleAnswerButtonClick}
+          onClick={handleAnswerButtonClick()}
           disabled={userAnswer === '' || userAnswer === '-'}
         >
           OK
