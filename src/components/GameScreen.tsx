@@ -67,7 +67,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   const handleAnswerButtonClick = () => {
     const result = onRecordResult(currentStage, question, userAnswer);
     const questionWithExplanation = explanation(question);
-    
+
     const modalSection = document.getElementById("modal-section")!;
     const modalQuestionExplanation = document.getElementById("modal-question-explanation")!;
     const modalTitle = document.querySelector(".modal-title")! as HTMLElement;
@@ -75,13 +75,13 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     modalSection.scrollTop = 0;
     modalQuestionExplanation.innerHTML = `
       <div class="question-formula">${questionWithExplanation.formula}</div>
-      <div class="question-sub-formula">${questionWithExplanation.subformula}</div>
+      ${questionWithExplanation.subformula ? `<div class="question-sub-formula">${questionWithExplanation.subformula}</div>` : ''}
     `;
 
-    const phrases = result.isCorrect 
+    const phrases = result.isCorrect
       ? ["やった！！", "すばらしい！", "最高！", "正解！"]
       : ["もう少し！", "惜しい！", "次はできるよ！", "不正解..."];
-    
+
     modalTitle.textContent = phrases[Math.floor(Math.random() * phrases.length)];
     modalTitle.style.color = result.isCorrect ? "#4CAF50" : "#e74c3c";
     modalSection.classList.add("active");
@@ -112,7 +112,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
         </div>
         <div id="question-formula-container" className="question-formula-container">
           <div className="question-formula">{question.formula}</div>
-          <div className="question-sub-formula">{question.subformula}</div>
+          {question.subformula && <div className="question-sub-formula">{question.subformula}</div>}
         </div>
         <div className="user-answer-container">
           <div className={`user-answer ${userAnswer === "" ? "empty" : ""}`}>
@@ -135,8 +135,8 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
           <button className="btn keypad-mns-btn" onClick={() => handleButtonClick('-')}>ー</button>
         </div>
       </div>
-        <button 
-          className="answer-btn" 
+        <button
+          className="answer-btn"
           onClick={handleAnswerButtonClick}
           disabled={userAnswer === '' || userAnswer === '-'}
         >

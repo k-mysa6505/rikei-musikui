@@ -16,10 +16,10 @@ export const useMathJax = (options: MathJaxHookOptions = {}) => {
     if (!window.MathJax || retryCount > retryLimit) return;
 
     const elementId = element.id || `math-${Date.now()}-${Math.random()}`;
-    
+
     // 同じ要素が既にレンダリング中の場合はスキップ
     if (renderingRef.current.has(elementId)) return;
-    
+
     renderingRef.current.add(elementId);
 
     try {

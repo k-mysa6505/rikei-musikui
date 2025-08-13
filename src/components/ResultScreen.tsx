@@ -100,9 +100,11 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
                         <div className="question-formula math-content">
                           {explanationQuestion.formula}
                         </div>
-                        <div className="question-sub-formula math-content">
-                          {explanationQuestion.subformula}
-                        </div>
+                        {explanationQuestion.subformula && (
+                          <div className="question-sub-formula math-content">
+                            {explanationQuestion.subformula}
+                          </div>
+                        )}
                       </div>
                       <div className="question-answer-container">
                         <div className="your-answer">あなたの回答</div>

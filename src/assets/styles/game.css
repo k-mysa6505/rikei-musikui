@@ -37,6 +37,8 @@
 .game-screen .question-formula,
 .game-screen .question-sub-formula {
     font-size: 22px;
+    text-align: center;
+    margin-bottom: 8px;
 }
 
 .game-header-container .game-stage {

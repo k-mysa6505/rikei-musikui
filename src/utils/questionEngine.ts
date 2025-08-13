@@ -36,7 +36,7 @@ const QUESTION_TEMPLATES: Record<number, QuestionTemplate> = {
     ]
   },
   2: { // 微分
-    type: "differential", 
+    type: "differential",
     patterns: [
       {
         formula: (p) => `\\[\\frac{d}{dx}(x^${p[0]}) = \\text{□}x^${p[0] - 1}\\]`,
@@ -85,7 +85,7 @@ const QUESTION_TEMPLATES: Record<number, QuestionTemplate> = {
     patterns: [
       {
         formula: (p) => `\\[\\det(A - \\lambda I) = \\lambda^2 - ${p[0] + p[1]}\\lambda + ${p[0] * p[1]} = 0\\]`,
-        subformula: (p) => `この方程式の解の一つは \\lambda = \\text{□}`,
+        subformula: (p) => `\\[\\text{この方程式の解の一つは } \\lambda = \\text{□}\\]`,
         paramRanges: [
           { min: 1, max: 4 },
           { min: 1, max: 4 }
@@ -112,7 +112,7 @@ const QUESTION_TEMPLATES: Record<number, QuestionTemplate> = {
     patterns: [
       {
         formula: (p) => `\\[\\frac{dy}{dx} = ${p[0]}y\\]`,
-        subformula: (p) => `この微分方程式の一般解は y = Ce^{\\text{□}x}`,
+        subformula: (p) => `\\[\\text{この微分方程式の一般解は } y = Ce^{\\text{□}x}\\]`,
         paramRanges: [{ min: 1, max: 5 }],
         answerCalc: (p) => p[0]
       }
@@ -127,7 +127,7 @@ export const generateQuestion = (questionNo: number): Question => {
 
   const template = QUESTION_TEMPLATES[questionNo];
   const pattern = template.patterns[Math.floor(Math.random() * template.patterns.length)];
-  
+
   // パラメータ生成
   const params = pattern.paramRanges.map(range => {
     let value;
