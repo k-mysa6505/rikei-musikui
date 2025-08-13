@@ -1,0 +1,68 @@
+@import url('base.css');
+
+/* ハウトゥ画面を縦中央に配置 */
+.how-to-play-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.how-to-play-screen {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #2c3e5a;
+}
+
+.how-to-play-screen h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.65em 0;
+}
+
+.how-to-play-screen ol {
+    margin: 20px 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.how-to-play-screen li {
+    margin: 10px 0;
+}
+
+.how-to-play-screen .btn {
+    border: none;
+    border-radius: 30px;
+    height: 57px;
+    width: 160px;
+    margin: 10px 0;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.how-to-play-screen .ok-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.how-to-play-screen .ok-button:active {
+    background-color: #357a38;
+}
+
+.how-to-play-screen .back-button {
+    background-color: #888;
+    color: white;
+}
+
+.how-to-play-screen .back-button:active {
+    background-color: #666;
+}

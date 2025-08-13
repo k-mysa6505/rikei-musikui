@@ -1,0 +1,197 @@
+@import url('base.css');
+
+.result-screen {
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.result-screen h1 {
+    font-size: 2.5rem;
+    color: #4cb05a;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.result-summary-section {
+    margin-bottom: 30px;
+}
+
+.result-status {
+    padding: 20px;
+    color: #2c3e5a;
+    margin-bottom: 20px;
+}
+
+.result-status p {
+    margin: 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.result-details-section {
+    margin-bottom: 30px;
+}
+
+.result-details {
+    padding-right: 8px;
+}
+
+.question-result {
+    margin-bottom: 16px;
+    border-radius: 25px;
+    background-color: #fff;
+    color: #2c3e5a;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden;
+}
+
+.question-header {
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2c3e5a;
+    font-weight: bold;
+    flex: 1;
+}
+
+.expand-indicator {
+    margin-left: 16px;
+}
+
+.arrow {
+    font-size: 16px;
+    color: #666;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.arrow.expanded {
+    transform: rotate(180deg);
+}
+
+.question-details {
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid #e0e0e0;
+    animation: slideDown 0.3s ease;
+}
+
+.status.correct {
+    color: #4CAF50;
+}
+
+.status.incorrect {
+    color: #e74c3c;
+}
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-result .question-formula-container {
+    text-align: center;
+}
+
+.question-formula {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.question-sub-formula {
+    font-size: 14px;
+    color: #666;
+}
+
+.question-answer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2c3e5a;
+    font-weight: bold;
+}
+
+.question-answer {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+.result-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.result-buttons .btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+}
+
+.replay-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.replay-btn:hover {
+    background-color: #357a38;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.title-btn {
+    background-color: #fff;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.title-btn:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* MathJax用スタイル */
+.math-content {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.math-content.rendered {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* アニメーション */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 500px;
+    }
+}

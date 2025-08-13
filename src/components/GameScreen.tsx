@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Question, QuestionResult } from "../types/index";
 import { generateQuestion } from "../utils/questions/generateQuestion";
 
@@ -58,13 +58,49 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     }
   }
 
-  //  出力処理
-  if (window.MathJax) {
-    const formulaContainer = document.getElementById("question-formula-container");
-    if (formulaContainer) {
-      window.MathJax.typeset([formulaContainer]);
+  //  プレースホルダー
+  const userAnswerElement = document.querySelector(".user-answer");
+  if (userAnswerElement) {
+    if (userAnswer === "") {
+      userAnswerElement.classList.add("empty");
+      userAnswerElement.textContent = "□に入る数字は？";
+    } else {
+      userAnswerElement.classList.remove("empty");
+      userAnswerElement.textContent = userAnswer;
     }
   }
+
+  //  ボタンの有効化・無効化
+  const submitButton = document.querySelector(".answer-btn") as HTMLButtonElement;
+  if (submitButton) {
+    submitButton.disabled = (userAnswer === '' || userAnswer === '-');
+  }
+
+  //  出力処理
+  const renderMathJax = useCallback(async (element: HTMLElement, retryCount = 0) => {
+    if (!window.MathJax || retryCount > 3) return;
+
+    try {
+      await window.MathJax.typeset([element]);
+      // レンダリング完了後に要素を表示
+      element.classList.add('rendered');
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      if (errorMessage.includes('retry')) {
+        setTimeout(() => renderMathJax(element, retryCount + 1), 100);
+      } else {
+        // エラーでも表示する
+        element.classList.add('rendered');
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const formulaContainer = document.getElementById("question-formula-container");
+    if (formulaContainer && window.MathJax) {
+      renderMathJax(formulaContainer);
+    }
+  }, [question, renderMathJax]);
 
   //  解説
   const explanation = (question: Question): Question => {
@@ -72,24 +108,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     const newFormula = question.formula.replace(regex, `\\textcolor{red}{${question.answer}}`);
     const newSubformula = question.subformula.replace(regex, `\\textcolor{red}{${question.answer}}`);
     return { ...question, formula: newFormula, subformula: newSubformula };
-  }
-
-  //  結果表示
-  const handleAnswerButtonClick = () => {
-    // 回答結果を記録
-    const result = onRecordResult(currentStage, question, userAnswer);
-
-    const questionWithExplanation = explanation(question);
-    document.getElementById("modal-section")!.classList.add("active");
-    document.getElementById("modal-question-explanation")!.innerHTML = `
-      <div class="question-formula">${questionWithExplanation.formula}</div>
-      <div class="question-sub-formula">${questionWithExplanation.subformula}</div>
-    `;
-    if (result.isCorrect) {
-      document.querySelector(".modal-title")!.textContent = "正解！";
-    } else {
-      document.querySelector(".modal-title")!.textContent = "不正解...";
-    }
   }
 
   //  次へボタン
@@ -102,6 +120,59 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     }
   }
 
+  //  結果表示
+  const handleAnswerButtonClick = () => {
+    // 回答結果を記録
+    const result = onRecordResult(currentStage, question, userAnswer);
+
+    const questionWithExplanation = explanation(question);
+    const modalSection = document.getElementById("modal-section");
+    const modalQuestionExplanation = document.getElementById("modal-question-explanation");
+    const modalTitle = document.querySelector(".modal-title");
+
+    if (modalSection && modalQuestionExplanation && modalTitle) {
+      modalSection.scrollTop = 0;
+      modalQuestionExplanation.innerHTML = `
+        <div class="question-formula">${questionWithExplanation.formula}</div>
+        <div class="question-sub-formula">${questionWithExplanation.subformula}</div>
+      `;
+
+      const feedbackPhrases = [
+        ["やった！！", "すばらしい！", "最高！", "正解！"],
+        ["もう少し！", "惜しい！", "次はできるよ！", "不正解..."]
+      ];
+      if (result.isCorrect) {
+        modalTitle.textContent = feedbackPhrases[0][Math.floor(Math.random() * feedbackPhrases[0].length)];
+        (modalTitle as HTMLElement).style.color = "#4CAF50";
+      } else {
+        modalTitle.textContent = feedbackPhrases[1][Math.floor(Math.random() * feedbackPhrases[1].length)];
+        (modalTitle as HTMLElement).style.color = "#e74c3c";
+      }
+
+      modalSection.classList.add("active");
+
+      // MathJax で数式を描画（非同期処理）
+      setTimeout(() => {
+        if (window.MathJax) {
+          renderMathJax(modalQuestionExplanation);
+        }
+      }, 50);
+
+      // 既存のイベントリスナーをクリア
+      const modalNextBtn = document.querySelector(".next-btn") as HTMLButtonElement;
+      if (modalNextBtn) {
+        const newBtn = modalNextBtn.cloneNode(true) as HTMLButtonElement;
+        modalNextBtn.parentNode?.replaceChild(newBtn, modalNextBtn);
+
+        // 新しいイベントリスナーを追加
+        newBtn.addEventListener("click", () => {
+          modalSection.classList.remove("active");
+          onNext();
+        });
+      }
+    }
+  }
+
   //  回答数チェック
   useEffect(() => {
     if (currentStage > 7) {
@@ -111,52 +182,44 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   }, [currentStage, timerInterval, onComplete]);
 
   return (
-    <div className="game-screen">
-      <div className="game-header-container">
-        <p className="game-stage">LEVEL {currentStage}</p>
-        <p className="elapsed-time">TIME {formatElapsedTime()}</p>
-      </div>
-      <div id="question-formula-container" className="question-formula-container">
-        <div className="question-formula">{question.formula}</div>
-        <div className="question-sub-formula">{question.subformula}</div>
-      </div>
-      <div className="user-answer-container">
-        <div className="user-answer">{userAnswer}</div>
-      </div>
+    <div className="game-container">
+      <div className="game-screen">
+        <div className="game-header-container">
+          <p className="game-stage">LEVEL {currentStage}</p>
+          <p className="elapsed-time">TIME {formatElapsedTime()}</p>
+        </div>
+        <div id="question-formula-container" className="question-formula-container">
+          <div className="question-formula">{question.formula}</div>
+          <div className="question-sub-formula">{question.subformula}</div>
+        </div>
+        <div className="user-answer-container">
+          <div className="user-answer">□に入る数字は？</div>
+        </div>
       <div className="keypad-container">
-        <div className="grid">
-          <div className="grid-item">
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("1")}>1</button>
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("2")}>2</button>
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("3")}>3</button>
-          </div>
-          <div className="grid-item">
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("4")}>4</button>
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("5")}>5</button>
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("6")}>6</button>
-          </div>
-          <div className="grid-item">
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("7")}>7</button>
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("8")}>8</button>
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("9")}>9</button>
-          </div>
-          <div className="grid-item">
-            <button className="btn keypad-bks-btn" onClick={() => handleButtonClick("←")}>←</button>
-            <button className="btn keypad-num-btn" onClick={() => handleButtonClick("0")}>0</button>
-            <button className="btn keypad-mns-btn" onClick={() => handleButtonClick("-")}>-</button>
-          </div>
+        <div className="keypad-grid">
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('1')}>1</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('2')}>2</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('3')}>3</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('4')}>4</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('5')}>5</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('6')}>6</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('7')}>7</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('8')}>8</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('9')}>9</button>
+          <button className="btn keypad-bks-btn" onClick={() => handleButtonClick('←')}>←</button>
+          <button className="btn keypad-num-btn" onClick={() => handleButtonClick('0')}>0</button>
+          <button className="btn keypad-mns-btn" onClick={() => handleButtonClick('-')}>ー</button>
         </div>
       </div>
-      <div className="answer-btn-container">
-        <button className="answer-btn" onClick={() => handleAnswerButtonClick()}>回答</button>
-      </div>
-      <div id="modal-section" className="modal-section-overlay">
-        <div className="modal-container">
-          <p className="modal-title"></p>
-          <div id="modal-question-explanation" className="modal-question-explanation"></div>
-          <div className="user-answer">あなたの回答: {userAnswer}</div>
-          <div className="modal-button-section">
-            <button className="next-btn" onClick={() => onNext()}>次へ</button>
+        <button className="answer-btn" onClick={() => handleAnswerButtonClick()}>OK</button>
+        <div id="modal-section" className="modal-section-overlay">
+          <div className="modal-container">
+            <p className="modal-title"></p>
+            <div id="modal-question-explanation" className="modal-question-explanation"></div>
+            <div className="modal-user-answer">あなたの回答: <strong>{userAnswer}</strong></div>
+            <div className="modal-button-section">
+              <button className="next-btn">次へ</button>
+            </div>
           </div>
         </div>
       </div>

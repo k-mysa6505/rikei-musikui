@@ -1,0 +1,33 @@
+@import url('destyle.css');
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 500px;
+  min-height: 100vh;
+  font-family: "Hiragino Maru Gothic ProN", "YuGothic", "Yu Gothic", "sans-serif", "メイリオ";
+  background-position: center;
+  background-color: #f3f4f6;
+  color: #2c3e50;
+  margin: 0 auto;
+}
+
+#root {
+  width: 95%;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* 縦中央揃えが必要な画面用のクラス */
+.centered-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* スクロール可能な画面用のクラス */
+.scrollable-layout {
+  padding: 20px 0;
+}

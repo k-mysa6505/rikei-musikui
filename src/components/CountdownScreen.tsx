@@ -14,8 +14,10 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({ onCountdownEnd }) => 
   }, [onCountdownEnd]);
 
   return (
-    <div className="countdown-screen">
-      <h1>3...2...1...スタート！</h1>
+    <div className="countdown-container">
+      <div className="countdown-screen">
+        <h1>3...2...1...スタート！</h1>
+      </div>
     </div>
   );
 }
