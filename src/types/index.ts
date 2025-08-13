@@ -17,6 +17,15 @@ export enum GameState {
   RESULTS = 4
 };
 
+// Rank enum
+export enum Rank {
+  S = 'S',
+  A = 'A',
+  B = 'B',
+  C = 'C',
+  D = 'D'
+}
+
 // Game questions
 export interface Question {
   formula: string;
@@ -38,4 +47,5 @@ export interface GameResult {
   correctAnswers: number;
   totalTime: number;
   questionResults: QuestionResult[];
+  rank: Rank;
 }

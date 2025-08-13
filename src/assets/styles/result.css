@@ -18,6 +18,89 @@
     margin-bottom: 30px;
 }
 
+.rank-display {
+    margin-bottom: 20px;
+}
+
+.rank-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.rank-label {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e5a;
+}
+
+.rank-value {
+    padding-right: 10px;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: rankGlow 2s ease-in-out infinite alternate;
+}
+
+/* ランクごとの色 */
+.rank-grade.rank-s {
+    font-style: italic;
+    background: linear-gradient(135deg,
+            #FFD700 -20%,
+            #FFF3A1 25%,
+            #FFD700 50%,
+            #FFF3A1 75%,
+            #FFD700 120%
+        );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientGlow 2s ease-in-out infinite alternate;
+}
+
+.rank-grade.rank-a {
+    font-style: italic;
+    background: linear-gradient(135deg,
+            #C0C0C0 -20%,
+            #FFFFFF 25%,
+            #C0C0C0 50%,
+            #FFFFFF 75%,
+            #C0C0C0 120%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientGlow 2s ease-in-out infinite alternate;
+}
+
+.rank-grade.rank-b {
+    font-style: italic;
+    background: linear-gradient(135deg,
+            #CD7F32 -20%,
+            #FFC28C 25%,
+            #CD7F32 50%,
+            #FFC28C 75%,
+            #CD7F32 120%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientGlow 2s ease-in-out infinite alternate;
+}
+
+.rank-grade.rank-c {
+    font-style: italic;
+    color: #9370DB;
+}
+
+.rank-grade.rank-d {
+    font-style: italic;
+    color: #4A4A4A;
+}
+
 .result-status {
     padding: 20px;
     color: #2c3e5a;

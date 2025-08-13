@@ -119,9 +119,19 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
         </div>
       </div>
       <div className="result-summary-section">
-        <div className="result-status">
-          <p>正解数: {gameResult.correctAnswers}/{gameResult.totalQuestions}（{accuracy}%）</p>
-          <p>TIME: {formatTime(gameResult.totalTime)}</p>
+        <div className="rank-display">
+          <div className="result-status">
+            <p>正解数: {gameResult.correctAnswers}/{gameResult.totalQuestions}（{accuracy}%）</p>
+            <p>TIME: {formatTime(gameResult.totalTime)}</p>
+          </div>
+          <div className="rank-container">
+            <span className="rank-label">rank</span>
+            <span 
+              className={`rank-value rank-grade rank-${gameResult.rank.toLowerCase()}`}
+            >
+              {gameResult.rank}
+            </span>
+          </div>
         </div>
       </div>
       <div className="result-buttons">
