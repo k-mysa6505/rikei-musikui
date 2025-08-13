@@ -10,11 +10,89 @@
 
 .countdown-screen {
     text-align: center;
-    color: #4cb05a;
-    font-weight: bold;
+    width: 100%;
 }
 
-.countdown-screen h1 {
-    font-size: 2rem;
-    margin: 0;
+.countdown-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.countdown-text {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #4cb05a;
+    animation: countdownPulse 0.75s ease-in-out;
+}
+
+/* スタート時の特別なアニメーション */
+.start-text {
+    animation: startAnimation 0.75s ease-in-out !important;
+    font-size: 3rem !important;
+    color: #4cb05a !important;
+    font-weight: bold !important;
+}
+
+/* カウントダウンアニメーション */
+@keyframes countdownPulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    25% {
+        transform: scale(1.05);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(0.95);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(1.02);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes startAnimation {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    20% {
+        transform: scale(1.1);
+        opacity: 0.6;
+    }
+    40% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    80% {
+        transform: scale(0.98);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 480px) {
+    .countdown-text {
+        font-size: 3rem;
+    }
+    
+    .start-text {
+        font-size: 2.5rem !important;
+    }
 }
