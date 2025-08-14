@@ -30,19 +30,16 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
 
   const handleButtonClick = (value: string) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
-      // DOM要素への参照を保存
       const button = e.currentTarget;
-      
-      // ボタンの視覚的フィードバック
+
       button.style.transform = 'translateY(0) scale(0.95)';
       button.style.transition = 'all 0.1s ease';
-      
+
       setTimeout(() => {
         button.style.transform = '';
         button.style.transition = 'all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       }, 100);
 
-      // 実際の処理
       if (value === "←") {
         setUserAnswer(prev => prev.slice(0, -1));
       } else if (value === "-") {
@@ -83,11 +80,11 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     return (e: React.MouseEvent<HTMLButtonElement>) => {
       // DOM要素への参照を保存
       const button = e.currentTarget;
-      
+
       // ボタンの視覚的フィードバック
       button.style.transform = 'translateY(0) scale(0.98)';
       button.style.transition = 'all 0.1s ease';
-      
+
       setTimeout(() => {
         button.style.transform = '';
         button.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
@@ -127,7 +124,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
             const btn = btnEvent.currentTarget as HTMLButtonElement;
             btn.style.transform = 'translateY(0) scale(0.98)';
             btn.style.transition = 'all 0.1s ease';
-            
+
             setTimeout(() => {
               btn.style.transform = '';
               btn.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';

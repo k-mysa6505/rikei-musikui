@@ -1,6 +1,5 @@
 import { Question } from "../../types";
 
-// 最大公約数を求める関数
 const gcd = (a: number, b: number): number => {
   while (b !== 0) {
     const temp = b;
@@ -19,14 +18,13 @@ const reduceFraction = (numerator: number, denominator: number): { num: number, 
   };
 };
 
-// 係数の表示形式を決定する関数（1の場合は空文字）
+// 係数の表示形式を決定する関数
 const formatCoefficient = (fraction: { num: number, den: number }, includeSign: boolean = false): string => {
   const sign = includeSign ? '' : '';
-  
   if (fraction.den === 1) {
     // 整数の場合
     if (fraction.num === 1) {
-      return sign; // 1の場合は何も表示しない
+      return sign;
     } else {
       return `${sign}${fraction.num}`;
     }
@@ -43,10 +41,10 @@ export const generateIntegralQuestion = (): Question => {
       const n = Math.floor(Math.random() * 3) + 2; // 2-4
       const denominator = a * (n + 1);
       const fraction = reduceFraction(1, denominator);
-      
+
       // 係数の表示形式を決定（1の場合は表示しない）
       const coeffDisplay = formatCoefficient(fraction);
-      
+
       const positions = [
         {
           formula: `\\[\\int (\\text{□}x)^${n} dx = ${coeffDisplay}(${a}x)^{${n + 1}} + C\\]`,
@@ -72,10 +70,10 @@ export const generateIntegralQuestion = (): Question => {
       const k = Math.floor(Math.random() * 4) + 2; // 2-5
       const a = Math.floor(Math.random() * 3) + 2; // 2-4
       const fraction = reduceFraction(k, a);
-      
+
       // 係数の表示形式を決定（1の場合は表示しない）
       const coeffDisplay = formatCoefficient(fraction);
-      
+
       const positions = [
         {
           formula: `\\[\\int \\text{□}e^{${a}x} dx = ${coeffDisplay} e^{${a}x} + C\\]`,
@@ -106,11 +104,11 @@ export const generateIntegralQuestion = (): Question => {
       ];
       const selected = trigIntegrals[Math.floor(Math.random() * trigIntegrals.length)];
       const fraction = reduceFraction(Math.abs(selected.coeff), selected.divisor);
-      
+
       // 係数の表示形式を決定（1の場合は表示しない、符号は別途処理）
       const coeffDisplay = formatCoefficient(fraction);
       const signedCoeffDisplay = (selected.coeff < 0 ? '-' : '') + coeffDisplay;
-      
+
       const positions = [
         {
           formula: `\\[\\int \\text{□}${selected.func} dx = ${signedCoeffDisplay} ${selected.resultFunc}(${a}x) + C\\]`,

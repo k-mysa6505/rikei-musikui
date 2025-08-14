@@ -1,6 +1,5 @@
 import { Question } from "../../types";
 
-// 最大公約数を求める関数
 const gcd = (a: number, b: number): number => {
   while (b !== 0) {
     const temp = b;
@@ -10,7 +9,6 @@ const gcd = (a: number, b: number): number => {
   return Math.abs(a);
 };
 
-// 分数を既約分数にする関数
 const reduceFraction = (numerator: number, denominator: number): { num: number, den: number } => {
   const divisor = gcd(numerator, denominator);
   return {
@@ -21,10 +19,9 @@ const reduceFraction = (numerator: number, denominator: number): { num: number, 
 
 export const generateLimitQuestion = (): Question => {
   const patterns = [
-    // パターン1: 微分の定義型（必ず□が含まれる）
     () => {
-      const a = Math.floor(Math.random() * 4) + 2; // 2-5
-      const n = Math.floor(Math.random() * 4) + 2; // 2-5
+      const a = Math.floor(Math.random() * 4) + 2;
+      const n = Math.floor(Math.random() * 4) + 2;
       const result = n * Math.pow(a, n - 1);
       const positions = [
         {
@@ -52,7 +49,6 @@ export const generateLimitQuestion = (): Question => {
       };
     },
 
-    // パターン2: 指数関数の極限（係数バリエーション）
     () => {
       const bases = [2, 3, 4, 5];
       const base = bases[Math.floor(Math.random() * bases.length)];
@@ -78,7 +74,6 @@ export const generateLimitQuestion = (): Question => {
       };
     },
 
-    // パターン3: 三角関数の極限（係数バリエーション）
     () => {
       const coefficients = [2, 3, 4, 5];
       const coeff = coefficients[Math.floor(Math.random() * coefficients.length)];
@@ -104,13 +99,11 @@ export const generateLimitQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    // パターン6: 分子の次数が分母より小さい場合（極限値が0）
     () => {
       const a = Math.floor(Math.random() * 4) + 2; // 2-5
       const b = Math.floor(Math.random() * 3) + 1; // 1-3
       const c = Math.floor(Math.random() * 3) + 1; // 1-3
 
-      // この場合極限値は0なので、主要項の係数のみが有意味
       const positions = [
         {
           formula: `\\[\\lim_{x \\to \\infty} \\frac{\\text{□}x + ${b}}{${c}x^2 + 1} = 0\\]`,
@@ -129,7 +122,6 @@ export const generateLimitQuestion = (): Question => {
       };
     },
 
-    // パターン7: 0での三角関数の極限（複雑版）
     () => {
       const a = Math.floor(Math.random() * 3) + 2; // 2-4
       const b = Math.floor(Math.random() * 3) + 2; // 2-4
@@ -160,7 +152,6 @@ export const generateLimitQuestion = (): Question => {
       };
     },
 
-    // パターン8: 1への指数関数の極限
     () => {
       const n = Math.floor(Math.random() * 4) + 2; // 2-5
       const positions = [
@@ -185,7 +176,6 @@ export const generateLimitQuestion = (): Question => {
       };
     },
 
-    // パターン9: eの定義関連
     () => {
       const n = Math.floor(Math.random() * 4) + 2; // 2-5
       const positions = [

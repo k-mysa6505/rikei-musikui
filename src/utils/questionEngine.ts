@@ -13,7 +13,6 @@ interface PatternConfig {
   blankPosition?: number;
 }
 
-// 統一された問題テンプレート
 const QUESTION_TEMPLATES: Record<number, QuestionTemplate> = {
   1: { // 極限
     type: "limit",

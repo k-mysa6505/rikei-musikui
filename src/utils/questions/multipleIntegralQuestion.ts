@@ -2,7 +2,6 @@ import { Question } from "../../types";
 
 export const generateMultipleIntegralQuestion = (): Question => {
   const patterns = [
-    // パターン1: 基本的な重積分
     () => {
       const a = Math.floor(Math.random() * 2) + 1; // 1-2
       const b = Math.floor(Math.random() * 2) + 1; // 1-2
@@ -28,7 +27,6 @@ export const generateMultipleIntegralQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    // パターン2: 定数関数の重積分
     () => {
       const a = Math.floor(Math.random() * 3) + 1; // 1-3
       const b = Math.floor(Math.random() * 3) + 1; // 1-3
@@ -59,7 +57,6 @@ export const generateMultipleIntegralQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    // パターン3: x^2 + y^2 の積分 - 既約分数で表現
     () => {
       const a = Math.floor(Math.random() * 2) + 1; // 1-2
       const results = a === 1 ? { numerator: 2, a: 1 } : { numerator: 32, a: 2 };
@@ -84,7 +81,6 @@ export const generateMultipleIntegralQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    // パターン4: 三角領域での積分 - 既約分数で表現
     () => {
       const a = Math.floor(Math.random() * 2) + 2; // 2-3
       const results = a === 2 ? { numerator: 8, denom: 3 } : { numerator: 9, denom: 1 };
@@ -109,10 +105,9 @@ export const generateMultipleIntegralQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    // パターン5: 極座標での積分 - 整数解に調整
     () => {
-      const r = 2; // r=2で計算しやすく
-      const result = 2; // π/2 * 2 = π ≈ 3.14, ここでは簡略化して2
+      const r = 2;
+      const result = 2;
       const positions = [
         {
           formula: `\\[\\int_0^{\\pi/2} \\int_0^\\text{□} r \\, dr \\, d\\theta = ${result}\\]`,

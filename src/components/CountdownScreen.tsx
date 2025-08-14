@@ -7,7 +7,7 @@ type CountdownScreenProps = {
 
 const CountdownScreen: React.FC<CountdownScreenProps> = ({ onCountdownEnd }) => {
   const [currentCount, setCurrentCount] = useState<string>("3");
-  const [key, setKey] = useState<number>(0); // アニメーションを再トリガーするためのkey
+  const [key, setKey] = useState<number>(0);
 
   useEffect(() => {
     const countSequence = ["3", "2", "1", "スタート！"];
@@ -17,14 +17,14 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({ onCountdownEnd }) => 
       currentIndex++;
       if (currentIndex < countSequence.length) {
         setCurrentCount(countSequence[currentIndex]);
-        setKey(prev => prev + 1); // アニメーションをリセット
+        setKey(prev => prev + 1);
       } else {
         clearInterval(timer);
         setTimeout(() => {
           onCountdownEnd();
-        }, 500); // "スタート！"を少し表示してから終了
+        }, 500);
       }
-    }, 750); // 750msごとに切り替え
+    }, 750);
 
     return () => clearInterval(timer);
   }, [onCountdownEnd]);

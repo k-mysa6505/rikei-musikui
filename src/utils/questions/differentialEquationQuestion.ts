@@ -1,6 +1,5 @@
 import { Question } from "../../types";
 
-// 最大公約数を求める関数
 const gcd = (a: number, b: number): number => {
   while (b !== 0) {
     const temp = b;
@@ -23,14 +22,14 @@ const reduceFraction = (numerator: number, denominator: number): { num: number, 
 const simplifySquareRoot = (n: number): { coefficient: number, inside: number } => {
   let coefficient = 1;
   let inside = n;
-  
+
   for (let i = 2; i * i <= inside; i++) {
     while (inside % (i * i) === 0) {
       coefficient *= i;
       inside /= (i * i);
     }
   }
-  
+
   return { coefficient, inside };
 };
 
@@ -75,9 +74,9 @@ export const generateDifferentialEquationQuestion = (): Question => {
       };
     },
     () => {
-      const k = Math.floor(Math.random() * 3) + 2; // 2-4（1を除外）
-      const fraction = reduceFraction(k, 2); // k/2を既約分数にする
-      
+      const k = Math.floor(Math.random() * 3) + 2;
+      const fraction = reduceFraction(k, 2);
+
       // 指数部分の表示形式を決定
       let exponentDisplay;
       if (fraction.den === 1) {
@@ -91,7 +90,7 @@ export const generateDifferentialEquationQuestion = (): Question => {
         // 分数の場合
         exponentDisplay = `\\frac{${fraction.num}}{${fraction.den}}x^2`;
       }
-      
+
       const positions = [
         {
           formula: `\\[\\frac{dy}{dx} = \\text{□}xy\\]`,
@@ -121,11 +120,11 @@ export const generateDifferentialEquationQuestion = (): Question => {
       const nonPerfectSquares = [2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15];
       const k = nonPerfectSquares[Math.floor(Math.random() * nonPerfectSquares.length)];
       const simplifiedRoot = simplifySquareRoot(k);
-      
-      const rootExpression = simplifiedRoot.coefficient === 1 
+
+      const rootExpression = simplifiedRoot.coefficient === 1
         ? `\\sqrt{${simplifiedRoot.inside}}`
         : `${simplifiedRoot.coefficient}\\sqrt{${simplifiedRoot.inside}}`;
-        
+
       const positions = [
         {
           formula: `\\[\\frac{d^2y}{dx^2} + \\text{□}y = 0\\]`,

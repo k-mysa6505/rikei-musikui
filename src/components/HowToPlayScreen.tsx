@@ -6,22 +6,18 @@ type HowToPlayScreenProps = {
 }
 
 const HowToPlayScreen: React.FC<HowToPlayScreenProps> = ({ onOK, onBack }) => {
-  // ボタンクリック時の視覚的フィードバック
   const handleButtonClick = (callback: () => void) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
-      // DOM要素への参照を保存
       const button = e.currentTarget;
-      
-      // ボタンプレス効果を追加
+
       button.style.transform = 'translateY(-1px) scale(0.98)';
       button.style.transition = 'all 0.1s ease';
-      
+
       setTimeout(() => {
         button.style.transform = '';
         button.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       }, 100);
-      
-      // 少し遅延してからコールバック実行
+
       setTimeout(callback, 150);
     };
   };
@@ -37,14 +33,14 @@ const HowToPlayScreen: React.FC<HowToPlayScreenProps> = ({ onOK, onBack }) => {
           <li>4．Sランク目指してがんばってね</li>
           <li>※負数は「-」先に押してね</li>
         </ol>
-        <button 
-          className="btn ok-button" 
+        <button
+          className="btn ok-button"
           onClick={handleButtonClick(onOK)}
         >
           OK
         </button>
-        <button 
-          className="btn back-button" 
+        <button
+          className="btn back-button"
           onClick={handleButtonClick(onBack)}
         >
           もどる

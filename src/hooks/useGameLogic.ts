@@ -13,7 +13,6 @@ export function useGameLogic() {
 
   const [gameStartTime, setGameStartTime] = useState<number>(0);
 
-  // ゲーム開始時の初期化
   const initializeGame = useCallback(() => {
     setGameResult({
       totalQuestions: 0,
@@ -25,7 +24,6 @@ export function useGameLogic() {
     setGameStartTime(Date.now());
   }, []);
 
-  // 問題の回答を記録
   const recordQuestionResult = useCallback((
     stage: number,
     question: Question,
@@ -45,13 +43,12 @@ export function useGameLogic() {
       correctAnswers: prev.correctAnswers + (isCorrect ? 1 : 0),
       totalTime: Date.now() - gameStartTime,
       questionResults: [...prev.questionResults, questionResult],
-      rank: prev.rank // 一時的に前の値を保持
+      rank: prev.rank
     }));
 
     return questionResult;
   }, [gameStartTime]);
 
-  // ゲーム完了時の最終結果を取得
   const finalizeGame = useCallback(() => {
     setGameResult(prev => {
       const finalTime = Date.now() - gameStartTime;
