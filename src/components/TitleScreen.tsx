@@ -10,16 +10,16 @@ const TitleScreen: React.FC<TitleScreenProps> = React.memo(({ onPlay }) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
       // DOM要素への参照を保存
       const button = e.currentTarget;
-      
+
       // ボタンプレス効果を追加
       button.style.transform = 'translateY(-1px) scale(0.98)';
       button.style.transition = 'all 0.1s ease';
-      
+
       setTimeout(() => {
         button.style.transform = '';
         button.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       }, 100);
-      
+
       // 少し遅延してからコールバック実行
       setTimeout(callback, 150);
     };
@@ -36,8 +36,9 @@ const TitleScreen: React.FC<TitleScreenProps> = React.memo(({ onPlay }) => {
           い
           <ruby>算<rt>ざん</rt></ruby>
         </h1>
-        <button 
-          className="play-button" 
+        <img src="./images/musi.png" alt="musi-san" />
+        <button
+          className="play-button"
           onClick={handleButtonClick(onPlay)}
         >
           あそぶ
