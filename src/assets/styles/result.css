@@ -11,15 +11,15 @@
     font-size: 2.5rem;
     color: #4cb05a;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin: 30px 0;
 }
 
 .result-summary-section {
-    margin-bottom: 30px;
+    margin: 30px 0;
 }
 
 .rank-display {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .rank-container {
@@ -132,7 +132,7 @@
 }
 
 .question-header {
-    padding: 20px;
+    padding: 15px 20px;
     cursor: pointer;
     user-select: none;
     transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -309,13 +309,13 @@
     from {
         opacity: 0;
         max-height: 0;
-        transform: translateY(-10px);
+        transform: translateY(-8px);
         padding-top: 0;
         padding-bottom: 0;
     }
     to {
         opacity: 1;
-        max-height: 500px;
+        max-height: 800px;
         transform: translateY(0);
         padding-top: 0;
         padding-bottom: 20px;
@@ -325,7 +325,7 @@
 @keyframes slideUp {
     from {
         opacity: 1;
-        max-height: 500px;
+        max-height: 800px;
         transform: translateY(0);
         padding-top: 0;
         padding-bottom: 20px;
@@ -333,7 +333,7 @@
     to {
         opacity: 0;
         max-height: 0;
-        transform: translateY(-10px);
+        transform: translateY(-8px);
         padding-top: 0;
         padding-bottom: 0;
     }
@@ -341,9 +341,10 @@
 
 .question-details {
     overflow: hidden;
-    animation-duration: 0.2s;
-    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
     animation-fill-mode: both;
+    will-change: max-height, opacity, transform;
 }
 
 .question-details.expanding {
