@@ -6,6 +6,7 @@ import { generateDeterminantQuestion } from "./determinantQuestion";
 import { generateEigenvalueQuestion } from "./eigenvalueQuestion";
 import { generateMultipleIntegralQuestion } from "./multipleIntegralQuestion";
 import { generateDifferentialEquationQuestion } from "./differentialEquationQuestion";
+import { generateHighLevelQuestion } from "./highLevelQuestion";
 
 export const generateQuestion = (questionNo: number): Question => {
   switch (questionNo) {
@@ -23,6 +24,8 @@ export const generateQuestion = (questionNo: number): Question => {
       return generateMultipleIntegralQuestion();
     case 7:
       return generateDifferentialEquationQuestion();
+    case 8:
+      return generateHighLevelQuestion();
     default:
       throw new Error(`Invalid question number: ${questionNo}`);
   }

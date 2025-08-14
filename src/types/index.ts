@@ -15,6 +15,7 @@ export enum GameState {
 };
 
 export enum Rank {
+  SS = 'SS',
   S = 'S',
   A = 'A',
   B = 'B',
@@ -26,6 +27,7 @@ export interface Question {
   formula: string;
   subformula: string;
   answer: number;
+  isHighLevel?: boolean;
 }
 
 export interface QuestionResult {

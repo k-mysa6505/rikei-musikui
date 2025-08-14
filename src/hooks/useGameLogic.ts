@@ -52,7 +52,12 @@ export function useGameLogic() {
   const finalizeGame = useCallback(() => {
     setGameResult(prev => {
       const finalTime = Date.now() - gameStartTime;
-      const rank = calculateRank(prev.correctAnswers, prev.totalQuestions, finalTime);
+      const rank = calculateRank(
+        prev.correctAnswers, 
+        prev.totalQuestions, 
+        finalTime, 
+        prev.questionResults
+      );
       return {
         ...prev,
         totalTime: finalTime,

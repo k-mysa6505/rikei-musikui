@@ -14,7 +14,13 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   const [elapsedTime, setElapsedTime] = useState(startTime);
   const [question, setQuestion] = useState<Question>(() => generateQuestion(currentStage));
   const [userAnswer, setUserAnswer] = useState("");
+  const [questionResults, setQuestionResults] = useState<QuestionResult[]>([]);
   const { renderElement } = useMathJax();
+
+  // 全問正解かどうかを判定
+  const allCorrect = useMemo(() => {
+    return questionResults.length > 0 && questionResults.every(result => result.isCorrect);
+  }, [questionResults]);
 
   useEffect(() => {
     const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 10);
@@ -70,7 +76,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   const onNext = () => {
     document.getElementById("modal-section")!.classList.remove("active");
     setCurrentStage(prev => prev + 1);
-    if (currentStage < 7) {
+    if (currentStage < 7 || (currentStage < 8 && allCorrect)) {
       setQuestion(generateQuestion(currentStage + 1));
       setUserAnswer("");
     }
@@ -93,6 +99,8 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
       // 実際の処理
       setTimeout(() => {
         const result = onRecordResult(currentStage, question, userAnswer);
+        // 結果を状態に追加
+        setQuestionResults(prev => [...prev, result]);
         const questionWithExplanation = explanation(question);
 
         const modalSection = document.getElementById("modal-section")!;
@@ -105,9 +113,18 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
           ${questionWithExplanation.subformula ? `<div class="question-sub-formula">${questionWithExplanation.subformula}</div>` : ''}
         `;
 
-        const phrases = result.isCorrect
-          ? ["やった！！", "すばらしい！", "最高！", "正解！"]
-          : ["もう少し！", "惜しい！", "次はできるよ！", "不正解..."];
+        let phrases: string[];
+        if (currentStage === 8) {
+          // ハイレベル問題用のフィードバック
+          phrases = result.isCorrect
+            ? ["驚異的！！", "天才的！", "完璧！", "神業！", "圧巻！"]
+            : ["素晴らしい挑戦！", "勇敢でした！", "よく頑張った！", "挑戦者の誇り！", "感動的でした！"];
+        } else {
+          // 通常問題用のフィードバック
+          phrases = result.isCorrect
+            ? ["やった！！", "すばらしい！", "最高！", "正解！"]
+            : ["もう少し！", "惜しい！", "次はできるよ！", "不正解..."];
+        }
 
         modalTitle.textContent = phrases[Math.floor(Math.random() * phrases.length)];
         modalTitle.style.color = result.isCorrect ? "#4CAF50" : "#e74c3c";
@@ -120,7 +137,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
           const newBtn = modalNextBtn.cloneNode(true) as HTMLButtonElement;
           modalNextBtn.parentNode?.replaceChild(newBtn, modalNextBtn);
           newBtn.addEventListener("click", (btnEvent) => {
-            // モーダル内ボタンにも感触を追加
             const btn = btnEvent.currentTarget as HTMLButtonElement;
             btn.style.transform = 'translateY(0) scale(0.98)';
             btn.style.transition = 'all 0.1s ease';
@@ -141,14 +157,16 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   };
 
   useEffect(() => {
-    if (currentStage > 7) onComplete();
+    if (currentStage > 8) onComplete();
   }, [currentStage, onComplete]);
 
   return (
     <div className="game-container">
       <div className="game-screen">
         <div className="game-header-container">
-          <p className="game-stage">LEVEL {currentStage}</p>
+          <p className="game-stage">
+            {currentStage === 8 ? "HIGH LEVEL" : `LEVEL ${currentStage}`}
+          </p>
           <p className="elapsed-time">TIME {formatElapsedTime}</p>
         </div>
         <div id="question-formula-container" className="question-formula-container">
