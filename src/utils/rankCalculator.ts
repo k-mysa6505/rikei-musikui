@@ -11,11 +11,11 @@ interface RankCriteria {
 
 // ランク判定基準
 const RANK_CRITERIA: Record<Rank, RankCriteria> = {
-  [Rank.S]: { minAccuracy: 90, maxTime: 120 },  // 90%以上、2分以内
-  [Rank.A]: { minAccuracy: 80, maxTime: 180 },  // 80%以上、3分以内
-  [Rank.B]: { minAccuracy: 70, maxTime: 240 },  // 70%以上、4分以内
-  [Rank.C]: { minAccuracy: 60, maxTime: 300 },  // 60%以上、5分以内
-  [Rank.D]: { minAccuracy: 0, maxTime: Infinity }  // その他
+  [Rank.S]: { minAccuracy: 100, maxTime: 60 },
+  [Rank.A]: { minAccuracy: 85, maxTime: 90 },
+  [Rank.B]: { minAccuracy: 70, maxTime: 120 },
+  [Rank.C]: { minAccuracy: 50, maxTime: 240 },
+  [Rank.D]: { minAccuracy: 0, maxTime: Infinity }
 };
 
 /**
