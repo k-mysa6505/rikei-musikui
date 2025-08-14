@@ -31,13 +31,6 @@
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.game-screen .game-header-container:hover,
-.game-screen .question-formula-container:hover,
-.game-screen .user-answer-container:hover {
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
-
 .game-screen .question-formula-container {
     display: block;
 }
@@ -134,19 +127,19 @@
 }
 
 .keypad-container .keypad-mns-btn {
-    border-color: #ff9800;
-    color: #ff9800;
-    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+    border-color: #2196F3;
+    color: #2196F3;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
 }
 
 .keypad-container .keypad-mns-btn:hover {
-    background-color: #fff8e1;
-    border-color: #f57c00;
-    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+    background-color: #e3f2fd;
+    border-color: #2196F3;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
 .keypad-container .keypad-mns-btn:active {
-    background-color: #ffecb3;
+    background-color: #bbdefb;
 }
 
 .answer-btn {

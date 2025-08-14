@@ -37,10 +37,15 @@ const formatCoefficient = (fraction: { num: number, den: number }, includeSign: 
 export const generateIntegralQuestion = (): Question => {
   const patterns = [
     () => {
-      const a = Math.floor(Math.random() * 3) + 2; // 2-4
-      const n = Math.floor(Math.random() * 3) + 2; // 2-4
-      const denominator = a * (n + 1);
-      const fraction = reduceFraction(1, denominator);
+      let a, n, denominator, fraction;
+
+      // 積分後の係数が1にならないまで繰り返し
+      do {
+        a = Math.floor(Math.random() * 3) + 2; // 2-4
+        n = Math.floor(Math.random() * 3) + 2; // 2-4
+        denominator = a * (n + 1);
+        fraction = reduceFraction(1, denominator);
+      } while (fraction.num === 1 && fraction.den === 1);
 
       // 係数の表示形式を決定（1の場合は表示しない）
       const coeffDisplay = formatCoefficient(fraction);
@@ -67,9 +72,14 @@ export const generateIntegralQuestion = (): Question => {
       };
     },
     () => {
-      const k = Math.floor(Math.random() * 4) + 2; // 2-5
-      const a = Math.floor(Math.random() * 3) + 2; // 2-4
-      const fraction = reduceFraction(k, a);
+      let k, a, fraction;
+
+      // 積分後の係数が1にならないまで繰り返し
+      do {
+        k = Math.floor(Math.random() * 4) + 2; // 2-5
+        a = Math.floor(Math.random() * 3) + 2; // 2-4
+        fraction = reduceFraction(k, a);
+      } while (fraction.num === 1 && fraction.den === 1);
 
       // 係数の表示形式を決定（1の場合は表示しない）
       const coeffDisplay = formatCoefficient(fraction);
@@ -96,14 +106,19 @@ export const generateIntegralQuestion = (): Question => {
       };
     },
     () => {
-      const k = Math.floor(Math.random() * 4) + 2; // 2-5
-      const a = Math.floor(Math.random() * 3) + 2; // 2-4
-      const trigIntegrals = [
-        { func: `\\sin(${a}x)`, integral: `\\cos(${a}x)`, coeff: -k, divisor: a, resultFunc: "\\cos" },
-        { func: `\\cos(${a}x)`, integral: `\\sin(${a}x)`, coeff: k, divisor: a, resultFunc: "\\sin" }
-      ];
-      const selected = trigIntegrals[Math.floor(Math.random() * trigIntegrals.length)];
-      const fraction = reduceFraction(Math.abs(selected.coeff), selected.divisor);
+      let k, a, selected, fraction;
+
+      // 積分後の係数が1にならないまで繰り返し
+      do {
+        k = Math.floor(Math.random() * 4) + 2; // 2-5
+        a = Math.floor(Math.random() * 3) + 2; // 2-4
+        const trigIntegrals = [
+          { func: `\\sin(${a}x)`, integral: `\\cos(${a}x)`, coeff: -k, divisor: a, resultFunc: "\\cos" },
+          { func: `\\cos(${a}x)`, integral: `\\sin(${a}x)`, coeff: k, divisor: a, resultFunc: "\\sin" }
+        ];
+        selected = trigIntegrals[Math.floor(Math.random() * trigIntegrals.length)];
+        fraction = reduceFraction(Math.abs(selected.coeff), selected.divisor);
+      } while (fraction.num === 1 && fraction.den === 1);
 
       // 係数の表示形式を決定（1の場合は表示しない、符号は別途処理）
       const coeffDisplay = formatCoefficient(fraction);

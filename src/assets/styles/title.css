@@ -20,7 +20,8 @@
     top: 27%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2.5rem;
+    font-size: 2.7rem;
+    letter-spacing: 0.075em;
     color: #4cb05a;
     font-weight: bold;
 }

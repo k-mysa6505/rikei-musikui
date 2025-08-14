@@ -31,7 +31,7 @@ const HowToPlayScreen: React.FC<HowToPlayScreenProps> = ({ onOK, onBack }) => {
           <li>2．答えは整数の範囲だよ</li>
           <li>3．全7問あるよ</li>
           <li>4．Sランク目指してがんばってね</li>
-          <li>※負数は「-」先に押してね</li>
+          <li>※負数はマイナス（ー）を先に押してね</li>
         </ol>
         <button
           className="btn ok-button"

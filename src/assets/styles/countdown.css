@@ -24,77 +24,12 @@
     font-size: 4rem;
     font-weight: bold;
     color: #4cb05a;
-    animation: countdownPulse 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     text-shadow: 0 4px 10px rgba(76, 176, 90, 0.3);
 }
 
-/* スタート時の特別なアニメーション */
 .start-text {
-    animation: startAnimation 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     font-size: 3rem !important;
     color: #4cb05a !important;
     font-weight: bold !important;
     text-shadow: 0 6px 15px rgba(76, 176, 90, 0.4) !important;
-}
-
-/* カウントダウンアニメーション */
-@keyframes countdownPulse {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    25% {
-        transform: scale(1.05);
-        opacity: 0.7;
-    }
-    50% {
-        transform: scale(0.95);
-        opacity: 1;
-    }
-    75% {
-        transform: scale(1.02);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes startAnimation {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    20% {
-        transform: scale(1.1);
-        opacity: 0.6;
-    }
-    40% {
-        transform: scale(0.9);
-        opacity: 0.8;
-    }
-    60% {
-        transform: scale(1.05);
-        opacity: 1;
-    }
-    80% {
-        transform: scale(0.98);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 480px) {
-    .countdown-text {
-        font-size: 3rem;
-    }
-    
-    .start-text {
-        font-size: 2.5rem !important;
-    }
 }
