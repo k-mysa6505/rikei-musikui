@@ -1,5 +1,39 @@
 import { Question } from "../../types";
 
+// 最大公約数を求める関数
+const gcd = (a: number, b: number): number => {
+  while (b !== 0) {
+    const temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return Math.abs(a);
+};
+
+// 分数を既約分数にする関数
+const reduceFraction = (numerator: number, denominator: number): { num: number, den: number } => {
+  const divisor = gcd(numerator, denominator);
+  return {
+    num: numerator / divisor,
+    den: denominator / divisor
+  };
+};
+
+// 平方根の中身を最も簡単な形にする関数
+const simplifySquareRoot = (n: number): { coefficient: number, inside: number } => {
+  let coefficient = 1;
+  let inside = n;
+  
+  for (let i = 2; i * i <= inside; i++) {
+    while (inside % (i * i) === 0) {
+      coefficient *= i;
+      inside /= (i * i);
+    }
+  }
+  
+  return { coefficient, inside };
+};
+
 export const generateDifferentialEquationQuestion = (): Question => {
   const patterns = [
     () => {
@@ -41,11 +75,27 @@ export const generateDifferentialEquationQuestion = (): Question => {
       };
     },
     () => {
-      const k = Math.floor(Math.random() * 3) + 2;
+      const k = Math.floor(Math.random() * 3) + 2; // 2-4（1を除外）
+      const fraction = reduceFraction(k, 2); // k/2を既約分数にする
+      
+      // 指数部分の表示形式を決定
+      let exponentDisplay;
+      if (fraction.den === 1) {
+        // 整数の場合
+        if (fraction.num === 1) {
+          exponentDisplay = "x^2"; // 1x^2 → x^2
+        } else {
+          exponentDisplay = `${fraction.num}x^2`;
+        }
+      } else {
+        // 分数の場合
+        exponentDisplay = `\\frac{${fraction.num}}{${fraction.den}}x^2`;
+      }
+      
       const positions = [
         {
           formula: `\\[\\frac{dy}{dx} = \\text{□}xy\\]`,
-          subformula: `\\[y = Ce^{${k}x^2/2}\\]`,
+          subformula: `\\[y = Ce^{${exponentDisplay}}\\]`,
           answer: k
         },
         {
@@ -67,11 +117,19 @@ export const generateDifferentialEquationQuestion = (): Question => {
       };
     },
     () => {
-      const k = Math.floor(Math.random() * 4) + 2;
+      // 完全平方数でない値を選択してルートを最簡形にする
+      const nonPerfectSquares = [2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15];
+      const k = nonPerfectSquares[Math.floor(Math.random() * nonPerfectSquares.length)];
+      const simplifiedRoot = simplifySquareRoot(k);
+      
+      const rootExpression = simplifiedRoot.coefficient === 1 
+        ? `\\sqrt{${simplifiedRoot.inside}}`
+        : `${simplifiedRoot.coefficient}\\sqrt{${simplifiedRoot.inside}}`;
+        
       const positions = [
         {
           formula: `\\[\\frac{d^2y}{dx^2} + \\text{□}y = 0\\]`,
-          subformula: `\\[y = C_1 \\cos(\\sqrt{${k}}x) + C_2 \\sin(\\sqrt{${k}}x)\\]`,
+          subformula: `\\[y = C_1 \\cos(${rootExpression}x) + C_2 \\sin(${rootExpression}x)\\]`,
           answer: k
         },
         {

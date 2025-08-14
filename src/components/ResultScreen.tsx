@@ -177,8 +177,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
       <div className="result-summary-section">
         <div className="rank-display">
           <div className="result-status">
-            <p>正解数: {gameResult.correctAnswers}/{gameResult.totalQuestions}（{accuracy}%）</p>
-            <p>TIME: {formatTime(gameResult.totalTime)}</p>
+            <p>正解数：{gameResult.correctAnswers}/{gameResult.totalQuestions} ({accuracy}%)</p>
+            <p>TIME：{formatTime(gameResult.totalTime)}</p>
           </div>
           <div className="rank-container">
             <span className="rank-label">rank</span>

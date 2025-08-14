@@ -21,7 +21,7 @@ const reduceFraction = (numerator: number, denominator: number): { num: number, 
 
 export const generateLimitQuestion = (): Question => {
   const patterns = [
-    // パターン1: 微分の定義型
+    // パターン1: 微分の定義型（必ず□が含まれる）
     () => {
       const a = Math.floor(Math.random() * 4) + 2; // 2-5
       const n = Math.floor(Math.random() * 4) + 2; // 2-5
@@ -36,6 +36,10 @@ export const generateLimitQuestion = (): Question => {
           answer: n
         },
         {
+          formula: `\\[\\lim_{x \\to ${a}} \\frac{x^${n} - \\text{□}}{x - ${a}} = ${result}\\]`,
+          answer: Math.pow(a, n)
+        },
+        {
           formula: `\\[\\lim_{x \\to ${a}} \\frac{x^${n} - ${Math.pow(a, n)}}{x - ${a}} = \\text{□}\\]`,
           answer: result
         }
@@ -47,7 +51,7 @@ export const generateLimitQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    
+
     // パターン2: 指数関数の極限（係数バリエーション）
     () => {
       const bases = [2, 3, 4, 5];
@@ -60,6 +64,10 @@ export const generateLimitQuestion = (): Question => {
         {
           formula: `\\[\\lim_{x \\to 0} \\frac{${base}^x - 1}{x} = \\ln \\text{□}\\]`,
           answer: base
+        },
+        {
+          formula: `\\[\\lim_{x \\to \\text{□}} \\frac{${base}^x - 1}{x} = \\ln ${base}\\]`,
+          answer: 0
         }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
@@ -69,7 +77,7 @@ export const generateLimitQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    
+
     // パターン3: 三角関数の極限（係数バリエーション）
     () => {
       const coefficients = [2, 3, 4, 5];
@@ -96,60 +104,20 @@ export const generateLimitQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    
-    // パターン4: 無限大での有理関数（次数が同じ）
+    // パターン6: 分子の次数が分母より小さい場合（極限値が0）
     () => {
       const a = Math.floor(Math.random() * 4) + 2; // 2-5
-      const b = Math.floor(Math.random() * 4) + 1; // 1-4
-      const c = Math.floor(Math.random() * 3) + 1; // 1-3
-      const d = Math.floor(Math.random() * 3) + 1; // 1-3
-      const fraction = reduceFraction(a, c);
-      const positions = [
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{\\text{□}x^2 + ${b}x}{${c}x^2 + ${d}} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
-          answer: a
-        },
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x^2 + \\text{□}x}{${c}x^2 + ${d}} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
-          answer: b
-        },
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x^2 + ${b}x}{\\text{□}x^2 + ${d}} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
-          answer: c
-        },
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x^2 + ${b}x}{${c}x^2 + ${d}} = ${fraction.den === 1 ? '\\text{□}' : `\\frac{\\text{□}}{${fraction.den}}`}\\]`,
-          answer: fraction.num
-        },
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x^2 + ${b}x}{${c}x^2 + ${d}} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{\\text{□}}`}\\]`,
-          answer: fraction.den
-        }
-      ];
-      const selectedPos = positions[Math.floor(Math.random() * positions.length)];
-      return {
-        formula: selectedPos.formula,
-        subformula: "",
-        answer: selectedPos.answer
-      };
-    },
-    
-    // パターン5: 無限大での有理関数（分子の次数が高い）
-    () => {
-      const a = Math.floor(Math.random() * 3) + 2; // 2-4
       const b = Math.floor(Math.random() * 3) + 1; // 1-3
       const c = Math.floor(Math.random() * 3) + 1; // 1-3
+
+      // この場合極限値は0なので、主要項の係数のみが有意味
       const positions = [
         {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{\\text{□}x^3 + ${b}x}{${c}x^2 + 1} = \\infty\\]`,
+          formula: `\\[\\lim_{x \\to \\infty} \\frac{\\text{□}x + ${b}}{${c}x^2 + 1} = 0\\]`,
           answer: a
         },
         {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x^3 + \\text{□}x}{${c}x^2 + 1} = \\infty\\]`,
-          answer: b
-        },
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x^3 + ${b}x}{\\text{□}x^2 + 1} = \\infty\\]`,
+          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x + ${b}}{\\text{□}x^2 + 1} = 0\\]`,
           answer: c
         }
       ];
@@ -160,8 +128,8 @@ export const generateLimitQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    
-    // パターン6: 0での三角関数の極限（複雑版）
+
+    // パターン7: 0での三角関数の極限（複雑版）
     () => {
       const a = Math.floor(Math.random() * 3) + 2; // 2-4
       const b = Math.floor(Math.random() * 3) + 2; // 2-4
@@ -191,8 +159,8 @@ export const generateLimitQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    
-    // パターン7: 1への指数関数の極限
+
+    // パターン8: 1への指数関数の極限
     () => {
       const n = Math.floor(Math.random() * 4) + 2; // 2-5
       const positions = [
@@ -216,8 +184,8 @@ export const generateLimitQuestion = (): Question => {
         answer: selectedPos.answer
       };
     },
-    
-    // パターン8: eの定義関連
+
+    // パターン9: eの定義関連
     () => {
       const n = Math.floor(Math.random() * 4) + 2; // 2-5
       const positions = [

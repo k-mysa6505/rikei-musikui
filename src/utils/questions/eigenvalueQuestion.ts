@@ -82,6 +82,8 @@ export const generateEigenvalueQuestion = (): Question => {
       
       const selected = eigenvalues[Math.floor(Math.random() * eigenvalues.length)];
       const eigenvalueText = selected.lambda1 === selected.lambda2 ? `${selected.lambda1}` : `${selected.lambda1}, ${selected.lambda2}`;
+      
+      // 2行1列の要素（c）を□にするのを完全に避ける
       const positions = [
         {
           formula: `\\[A = \\begin{pmatrix} \\text{□} & ${selected.b} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
@@ -90,10 +92,6 @@ export const generateEigenvalueQuestion = (): Question => {
         {
           formula: `\\[A = \\begin{pmatrix} ${selected.a} & \\text{□} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
           answer: selected.b
-        },
-        {
-          formula: `\\[A = \\begin{pmatrix} ${selected.a} & ${selected.b} \\\\ \\text{□} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
-          answer: selected.c
         },
         {
           formula: `\\[A = \\begin{pmatrix} ${selected.a} & ${selected.b} \\\\ ${selected.c} & \\text{□} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
@@ -108,6 +106,7 @@ export const generateEigenvalueQuestion = (): Question => {
           answer: selected.lambda2
         }
       ];
+      
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
       return {
         formula: selectedPos.formula,
