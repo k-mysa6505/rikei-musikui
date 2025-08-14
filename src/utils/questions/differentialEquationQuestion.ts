@@ -79,11 +79,6 @@ export const generateDifferentialEquationQuestion = (): Question => {
           subformula: `\\[y = C_1 \\cos(\\sqrt{\\text{□}}x) + C_2 \\sin(\\sqrt{\\text{□}}x)\\]`,
           answer: k
         },
-        {
-          formula: `\\[\\frac{d^2y}{dx^2} + ${k}y = 0\\]`,
-          subformula: `\\[y = C_1 \\cos(\\sqrt{${k}}x) + C_2 \\sin(\\sqrt{${k}}x)\\]`,
-          answer: k
-        }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
       return {
