@@ -6,7 +6,7 @@ interface RankCriteria {
 }
 
 const RANK_CRITERIA: Record<Rank, RankCriteria> = {
-  [Rank.SS]: { minAccuracy: 100, maxTime: 60 },
+  [Rank.SS]: { minAccuracy: 100, maxTime: Infinity },
   [Rank.S]: { minAccuracy: 100, maxTime: 60 },
   [Rank.A]: { minAccuracy: 85, maxTime: 90 },
   [Rank.B]: { minAccuracy: 70, maxTime: 120 },
