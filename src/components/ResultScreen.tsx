@@ -121,7 +121,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
                   }}
                 >
                   <div className="question-status">
-                    <span className="level">LEVEL {result.stage}</span>
+                    <span className="level">
+                      {result.stage === 8 ? "HIGH LEVEL" : `LEVEL ${result.stage}`}
+                    </span>
                     <span className={`status ${result.isCorrect ? "correct" : "incorrect"}`}>
                       {result.isCorrect ? "正解！" : "不正解"}
                     </span>

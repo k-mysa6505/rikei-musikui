@@ -45,6 +45,27 @@
 }
 
 /* ランクごとの色 */
+.rank-grade.rank-ss {
+    font-style: italic;
+    background: linear-gradient(45deg,
+            #ff0000 0%,
+            #ff7300 14%,
+            #fffb00 28%,
+            #48ff00 42%,
+            #00ffd5 57%,
+            #002bff 71%,
+            #7a00ff 85%,
+            #ff00c8 100%
+        );
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: rainbowGlow 6s ease-in-out infinite, rainbowShift 8s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+}
+
 .rank-grade.rank-s {
     font-style: italic;
     background: linear-gradient(135deg,
@@ -305,6 +326,63 @@
 }
 
 /* アニメーション */
+@keyframes rainbowShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes rainbowGlow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 0, 0, 0.2));
+    }
+    14% {
+        filter: drop-shadow(0 0 5px rgba(255, 115, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 115, 0, 0.2));
+    }
+    28% {
+        filter: drop-shadow(0 0 5px rgba(255, 251, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 251, 0, 0.2));
+    }
+    42% {
+        filter: drop-shadow(0 0 5px rgba(72, 255, 0, 0.4)) drop-shadow(0 0 10px rgba(72, 255, 0, 0.2));
+    }
+    57% {
+        filter: drop-shadow(0 0 5px rgba(0, 255, 213, 0.4)) drop-shadow(0 0 10px rgba(0, 255, 213, 0.2));
+    }
+    71% {
+        filter: drop-shadow(0 0 5px rgba(0, 43, 255, 0.4)) drop-shadow(0 0 10px rgba(0, 43, 255, 0.2));
+    }
+    85% {
+        filter: drop-shadow(0 0 5px rgba(122, 0, 255, 0.4)) drop-shadow(0 0 10px rgba(122, 0, 255, 0.2));
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(255, 0, 200, 0.4)) drop-shadow(0 0 10px rgba(255, 0, 200, 0.2));
+    }
+}
+
+@keyframes rankGlow {
+    from {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    to {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes gradientGlow {
+    from {
+        filter: brightness(1) contrast(1);
+    }
+    to {
+        filter: brightness(1.2) contrast(1.1);
+    }
+}
+
 @keyframes slideDown {
     from {
         opacity: 0;
