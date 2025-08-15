@@ -75,11 +75,30 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
 
   const onNext = () => {
     document.getElementById("modal-section")!.classList.remove("active");
+
+    // 7問目完了後で全問正解の場合、ハイレベル問題案内モーダルを表示
+    if (currentStage === 7 && allCorrect) {
+      setTimeout(() => {
+        document.getElementById("high-level-modal-section")!.classList.add("active");
+      }, 300);
+      return;
+    }
+
     setCurrentStage(prev => prev + 1);
-    if (currentStage < 7 || (currentStage < 8 && allCorrect)) {
+    if (currentStage < 7 || (currentStage === 7 && allCorrect)) {
       setQuestion(generateQuestion(currentStage + 1));
       setUserAnswer("");
+    } else if (currentStage === 7 && !allCorrect) {
+      setCurrentStage(prev => prev + 1);
+      setUserAnswer("");
     }
+  };
+
+  const onHighLevelStart = () => {
+    document.getElementById("high-level-modal-section")!.classList.remove("active");
+    setCurrentStage(prev => prev + 1);
+    setQuestion(generateQuestion(8));
+    setUserAnswer("");
   };
 
   const handleAnswerButtonClick = () => {
@@ -208,6 +227,36 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
             <div className="modal-user-answer">あなたの回答: <strong>{userAnswer}</strong></div>
             <div className="modal-button-section">
               <button className="next-btn">次へ</button>
+            </div>
+          </div>
+        </div>
+
+        {/* ハイレベル問題案内モーダル */}
+        <div id="high-level-modal-section" className="modal-section-overlay">
+          <div className="modal-container">
+            <p className="modal-title" style={{ color: "#FFD700", fontSize: "1.5em" }}>
+              7問連続正解すごいね！
+            </p>
+            <div className="modal-button-section">
+              <button
+                className="next-btn"
+                onClick={() => {
+                  const button = document.querySelector('#high-level-modal-section .next-btn') as HTMLButtonElement;
+                  button.style.transform = 'translateY(0) scale(0.98)';
+                  button.style.transition = 'all 0.1s ease';
+
+                  setTimeout(() => {
+                    button.style.transform = '';
+                    button.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                  }, 100);
+
+                  setTimeout(() => {
+                    onHighLevelStart();
+                  }, 150);
+                }}
+              >
+                ハイレベル問題に進む
+              </button>
             </div>
           </div>
         </div>
