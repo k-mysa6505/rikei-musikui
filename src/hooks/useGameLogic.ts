@@ -53,9 +53,9 @@ export function useGameLogic() {
     setGameResult(prev => {
       const finalTime = Date.now() - gameStartTime;
       const rank = calculateRank(
-        prev.correctAnswers, 
-        prev.totalQuestions, 
-        finalTime, 
+        prev.correctAnswers,
+        prev.totalQuestions,
+        finalTime,
         prev.questionResults
       );
       return {

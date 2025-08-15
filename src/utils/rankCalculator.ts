@@ -6,11 +6,11 @@ interface RankCriteria {
 }
 
 const RANK_CRITERIA: Record<Rank, RankCriteria> = {
-  [Rank.SS]: { minAccuracy: 100, maxTime: 60 }, // SSランクは後で特別処理
-  [Rank.S]: { minAccuracy: 100, maxTime: 60 },
-  [Rank.A]: { minAccuracy: 85, maxTime: 90 },
-  [Rank.B]: { minAccuracy: 70, maxTime: 120 },
-  [Rank.C]: { minAccuracy: 50, maxTime: 240 },
+  [Rank.SS]: { minAccuracy: 100, maxTime: 30000 }, // SSランクは後で特別処理
+  [Rank.S]: { minAccuracy: 100, maxTime: 30000 },
+  [Rank.A]: { minAccuracy: 85, maxTime: 30000 },
+  [Rank.B]: { minAccuracy: 70, maxTime: 30000 },
+  [Rank.C]: { minAccuracy: 50, maxTime: 30000 },
   [Rank.D]: { minAccuracy: 0, maxTime: Infinity }
 };
 
