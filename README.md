@@ -27,9 +27,32 @@
 REACT_APP_RESEND_API_KEY=your_resend_api_key_here
 REACT_APP_BUG_REPORT_EMAIL=support@yourdomain.com
 REACT_APP_FROM_EMAIL=rikei-musikui@yourdomain.com
+REACT_APP_ENABLE_DEV_EMAIL=true
+REACT_APP_SERVERLESS_ENDPOINT=https://your-site.netlify.app/.netlify/functions/send-bug-report
 ```
 
 **重要**: `.env`ファイルはGitで管理されません。本番環境では適切な方法で環境変数を設定してください。
+
+### 3. 開発環境でのメール送信テスト
+
+開発環境でメール送信をテストするには2つの方法があります：
+
+#### 方法1: 直接API呼び出し（CORS制限あり）
+```env
+REACT_APP_ENABLE_DEV_EMAIL=true
+```
+- **注意**: ブラウザのCORS制限により失敗する可能性があります
+- テストの場合はコンソールログで確認してください
+
+#### 方法2: サーバーレスファンクション（推奨）
+1. Netlify Functionsをデプロイ
+2. サーバーレスファンクションのURLを設定
+3. CORSの問題を回避してメール送信可能
+
+```env
+REACT_APP_SERVERLESS_ENDPOINT=https://your-site.netlify.app/.netlify/functions/send-bug-report
+REACT_APP_ENABLE_DEV_EMAIL=true
+```
 
 ### 3. セキュリティ注意事項
 

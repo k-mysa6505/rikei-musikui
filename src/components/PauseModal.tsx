@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { sendBugReport, validateBugReport } from '../utils/bugReportService';
+import React, { useState, useEffect } from 'react';
+import { sendBugReport } from '../utils/bugReportService';
 
 type PauseModalProps = {
   isOpen: boolean;
@@ -38,6 +38,24 @@ const PauseModal: React.FC<PauseModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // ESCキーでモーダルを閉じる
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        if (showBugForm) {
+          handleBackFromBugForm();
+        } else {
+          onResume(); // ポーズ画面では再開で閉じる
+        }
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscKey);
+      return () => document.removeEventListener('keydown', handleEscKey);
+    }
+  }, [isOpen, showBugForm, onResume]);
+
   if (!isOpen) return null;
 
   const handleBugReportClick = () => {
@@ -54,15 +72,8 @@ const PauseModal: React.FC<PauseModalProps> = ({
 
   const handleBugSubmit = async () => {
     // バリデーション
-    const validationError = validateBugReport({
-      issues: selectedIssues,
-      description: bugDescription,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent
-    });
-
-    if (validationError) {
-      alert(validationError);
+    if (selectedIssues.length === 0) {
+      alert('少なくとも1つの問題を選択してください。');
       return;
     }
 
@@ -77,25 +88,19 @@ const PauseModal: React.FC<PauseModalProps> = ({
       };
 
       // ReSend APIでメール送信
-      const success = await sendBugReport(bugReportData);
+      await sendBugReport(bugReportData);
 
-      if (success) {
-        // 送信成功
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        
-        // 3秒後にフォームを閉じる
-        setTimeout(() => {
-          setShowBugForm(false);
-          setIsSubmitted(false);
-          setSelectedIssues([]);
-          setBugDescription('');
-        }, 3000);
-      } else {
-        // 送信失敗
-        setIsSubmitting(false);
-        alert('送信に失敗しました。ネットワーク接続を確認して、もう一度お試しください。');
-      }
+      // 送信成功
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      
+      // 3秒後にフォームを閉じる
+      setTimeout(() => {
+        setShowBugForm(false);
+        setIsSubmitted(false);
+        setSelectedIssues([]);
+        setBugDescription('');
+      }, 3000);
     } catch (error) {
       console.error('Error submitting bug report:', error);
       setIsSubmitting(false);
@@ -113,11 +118,11 @@ const PauseModal: React.FC<PauseModalProps> = ({
 
   if (showBugForm) {
     return (
-      <div className="pause-modal-overlay">
+      <div className="pause-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="bug-report-title">
         <div className="pause-modal bug-report-modal">
           <div className="pause-modal-header">
-            <h2>バグレポート</h2>
-            <button className="back-button" onClick={handleBackFromBugForm}>
+            <h2 id="bug-report-title">バグレポート</h2>
+            <button className="back-button" onClick={handleBackFromBugForm} aria-label="メニューに戻る">
               ← 戻る
             </button>
           </div>
@@ -177,29 +182,29 @@ const PauseModal: React.FC<PauseModalProps> = ({
   }
 
   return (
-    <div className="pause-modal-overlay">
+    <div className="pause-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="pause-modal-title">
       <div className="pause-modal">
         <div className="pause-modal-header">
-          <h2>ポーズ</h2>
+          <h2 id="pause-modal-title">ポーズ</h2>
         </div>
 
         <div className="pause-modal-content">
-          <button className="pause-button pause-button-resume" onClick={onResume}>
+          <button className="pause-button pause-button-resume" onClick={onResume} aria-label="ゲームを続ける">
             <span className="icon">▶</span>
             <span className="text">つづける</span>
           </button>
 
-          <button className="pause-button pause-button-restart" onClick={onRestart}>
+          <button className="pause-button pause-button-restart" onClick={onRestart} aria-label="ゲームをやり直す">
             <span className="icon">↻</span>
             <span className="text">やりなおす</span>
           </button>
 
-          <button className="pause-button pause-button-home" onClick={onBackToTitle}>
+          <button className="pause-button pause-button-home" onClick={onBackToTitle} aria-label="タイトル画面に戻る">
             <span className="icon">🏠</span>
             <span className="text">タイトルへ戻る</span>
           </button>
 
-          <button className="pause-button pause-button-bug" onClick={handleBugReportClick}>
+          <button className="pause-button pause-button-bug" onClick={handleBugReportClick} aria-label="バグを報告する">
             <span className="icon">🐛</span>
             <span className="text">バグレポート</span>
           </button>
