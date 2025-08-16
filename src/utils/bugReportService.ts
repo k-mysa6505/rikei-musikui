@@ -17,7 +17,7 @@ export async function sendBugReport(report: BugReport): Promise<void> {
 
   const emailData = {
     from: 'onboarding@resend.dev',
-    to: 'kota.mysa6505@gmail.com',
+    to: process.env.TO_EMAIL_ADDRESS || '',
     subject: '数学クイズ - バグレポート',
     text: `発生した問題:\n${report.issues.join('\n')}\n\n詳細:\n${report.description || 'なし'}`
   };
