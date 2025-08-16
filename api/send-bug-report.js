@@ -58,7 +58,7 @@ ${formattedIssues}
 ${description || '詳細な説明はありません'}
 
 【システム情報】
-- アプリケーション: 理系数学クイズ (rikei-musikui)
+- アプリケーション: 理系虫食い算 (rikei-musikui)
 - 報告元: Webアプリケーション
 - User Agent: ${req.headers['user-agent'] || '不明'}
 

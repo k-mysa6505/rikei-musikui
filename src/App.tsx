@@ -16,6 +16,11 @@ const App: React.FC = () => {
     setCurrentScreen(GameState.HOW_TO_PLAY);
   };
 
+  const handleRestartGame = () => {
+    initializeGame();
+    setCurrentScreen(GameState.COUNT_DOWN);
+  };
+
   const handleGameComplete = () => {
     finalizeGame();
     setCurrentScreen(GameState.RESULTS);
@@ -40,14 +45,14 @@ const App: React.FC = () => {
       return <GameScreen
         onComplete={handleGameComplete}
         onRecordResult={recordQuestionResult}
-        onRestart={handleStartGame}
+        onRestart={handleRestartGame}
         onBackToTitle={() => setCurrentScreen(GameState.TITLE)}
       />;
     case GameState.RESULTS:
       return <ResultScreen
         gameResult={gameResult}
         onTitle={() => setCurrentScreen(GameState.TITLE)}
-        onReplay={handleStartGame}
+        onReplay={handleRestartGame}
       />;
     default:
       return null;

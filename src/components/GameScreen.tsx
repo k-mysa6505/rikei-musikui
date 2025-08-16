@@ -224,7 +224,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult, onR
       <button className="pause-btn-fixed" onClick={handlePause} title="一時停止">
         ⏸
       </button>
-      
+
       <div className="game-screen">
         <div className="game-header-container">
           <p className="game-stage">
