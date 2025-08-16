@@ -55,19 +55,14 @@ export const generateDifferentialQuestion = (): Question => {
     () => {
       const k = Math.floor(Math.random() * 4) + 2;
       const a = Math.floor(Math.random() * 3) + 2;
-      const result = k * a;
       const positions = [
         {
-          formula: `\\[\\frac{d}{dx}(\\text{□}\\ln(${a}x)) = \\frac{${result}}{x}\\]`,
+          formula: `\\[\\frac{d}{dx}(\\text{□}\\ln(${a}x)) = \\frac{${k}}{x}\\]`,
           answer: k
         },
         {
-          formula: `\\[\\frac{d}{dx}(${k}\\ln(\\text{□}x)) = \\frac{${result}}{x}\\]`,
-          answer: a
-        },
-        {
           formula: `\\[\\frac{d}{dx}(${k}\\ln(${a}x)) = \\frac{\\text{□}}{x}\\]`,
-          answer: result
+          answer: k
         }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
