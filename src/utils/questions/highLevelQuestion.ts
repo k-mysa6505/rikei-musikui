@@ -114,18 +114,18 @@ export const generateHighLevelEigenvalueQuestion = (): Question => {
 export const generateHighLevelMultipleIntegralQuestion = (): Question => {
   const problems = [
     {
-      formula: "\\[\\iint_D xy \\, dA = \\text{□}, \\quad D: x^2 + y^2 \\leq 4, \\, x,y \\geq 0\\]",
-      subformula: "",
+      formula: "\\[\\iint_D xy \\, dA = \\text{□}\\]",
+      subformula: "\\[D: x^2 + y^2 \\leq 4, \\, x,y \\geq 0\\]",
       answer: 2
     },
     {
-      formula: "\\[\\iiint_V xyz \\, dV = \\frac{1}{\\text{□}}, \\quad V: 0 \\leq x,y,z \\leq 1\\]",
-      subformula: "",
+      formula: "\\[\\iiint_V xyz \\, dV = \\frac{1}{\\text{□}}\\]",
+      subformula: "\\[V: 0 \\leq x,y,z \\leq 1\\]",
       answer: 8
     },
     {
-      formula: "\\[\\iint_D (x^2 + y^2) \\, dA = \\frac{\\pi}{\\text{□}}, \\quad D: x^2 + y^2 \\leq 1\\]",
-      subformula: "",
+      formula: "\\[\\iint_D (x^2 + y^2) \\, dA = \\frac{\\pi}{\\text{□}}\\]",
+      subformula: "\\[D: x^2 + y^2 \\leq 1\\]",
       answer: 2
     }
   ];

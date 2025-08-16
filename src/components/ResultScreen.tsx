@@ -163,6 +163,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
           <div className="result-status">
             <p>正解数：{gameResult.correctAnswers}/{gameResult.totalQuestions} ({accuracy}%)</p>
             <p>TIME：{formatTime(gameResult.basicTime)}</p>
+            {gameResult.hasHighLevelBonus && (
+              <div className="bonus-text">＋ハイレベルボーナス</div>
+            )}
           </div>
           <div className="rank-container">
             <span className="rank-label">rank</span>
@@ -170,9 +173,6 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
               {gameResult.rank}
             </span>
           </div>
-          {gameResult.hasHighLevelBonus && (
-            <div className="bonus-text">ハイレベルボーナス！</div>
-          )}
         </div>
       </div>
       <div className="result-buttons">

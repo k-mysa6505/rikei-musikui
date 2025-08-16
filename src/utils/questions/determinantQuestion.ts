@@ -3,9 +3,17 @@ import { Question } from "../../types";
 export const generateDeterminantQuestion = (): Question => {
   const patterns = [
     () => {
-      const matrix = Array(3).fill(0).map(() =>
-        Array(3).fill(0).map(() => Math.floor(Math.random() * 5) - 2) // -2 ~ 2
-      );
+      let matrix: number[][];
+      let zeroCount: number;
+
+      // 0の要素がちょうど1個になるまで行列を生成し直す
+      do {
+        matrix = Array(3).fill(0).map(() =>
+          Array(3).fill(0).map(() => Math.floor(Math.random() * 5) - 2) // -2 ~ 2
+        );
+        zeroCount = matrix.flat().filter(val => val === 0).length;
+      } while (zeroCount !== 1);
+
       const det = matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) -
                   matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) +
                   matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0]);

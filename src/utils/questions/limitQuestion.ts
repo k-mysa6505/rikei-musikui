@@ -12,8 +12,8 @@ const gcd = (a: number, b: number): number => {
 const reduceFraction = (numerator: number, denominator: number): { num: number, den: number } => {
   const divisor = gcd(numerator, denominator);
   return {
-    num: numerator / divisor,
-    den: denominator / divisor
+    num: numerator / divisor,   //  分子
+    den: denominator / divisor   //  分母
   };
 };
 
@@ -100,31 +100,11 @@ export const generateLimitQuestion = (): Question => {
       };
     },
     () => {
-      const a = Math.floor(Math.random() * 4) + 2; // 2-5
-      const b = Math.floor(Math.random() * 4) + 2;
-      const c = Math.floor(Math.random() * 4) + 2;
-
-      const positions = [
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{\\text{□}x + ${b}}{${c}x^2 + 1} = 0\\]`,
-          answer: a
-        },
-        {
-          formula: `\\[\\lim_{x \\to \\infty} \\frac{${a}x + ${b}}{\\text{□}x^2 + 1} = 0\\]`,
-          answer: c
-        }
-      ];
-      const selectedPos = positions[Math.floor(Math.random() * positions.length)];
-      return {
-        formula: selectedPos.formula,
-        subformula: "",
-        answer: selectedPos.answer
-      };
-    },
-
-    () => {
-      const a = Math.floor(Math.random() * 3) + 2; // 2-4
-      const b = Math.floor(Math.random() * 3) + 2;
+      let a: number, b: number;
+      do {
+        a = Math.floor(Math.random() * 3) + 2; // 2-4
+        b = Math.floor(Math.random() * 3) + 2;
+      } while (a === b);
       const fraction = reduceFraction(a, b);
       const positions = [
         {
@@ -140,7 +120,7 @@ export const generateLimitQuestion = (): Question => {
           answer: fraction.num
         },
         {
-          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin ${b}x} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{\\text{□}}`}\\]`,
+          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin ${b}x} = ${fraction.den === 1 ? '\\text{□}' : `\\frac{${fraction.num}}{\\text{□}}`}\\]`,
           answer: fraction.den
         }
       ];
