@@ -5,31 +5,15 @@ export interface BugReport {
   description: string;
 }
 
-// Resend API でメール送信（最小限の実装）
+// Vercel API でメール送信（CORS対応）
 export async function sendBugReport(report: BugReport): Promise<void> {
-  const apiKey = process.env.REACT_APP_RESEND_API_KEY;
-  
-  if (!apiKey) {
-    console.log('バグレポート（メール送信無効）:', report);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return;
-  }
-
-  const emailData = {
-    from: 'onboarding@resend.dev',
-    to: process.env.TO_EMAIL_ADDRESS || '',
-    subject: '数学クイズ - バグレポート',
-    text: `発生した問題:\n${report.issues.join('\n')}\n\n詳細:\n${report.description || 'なし'}`
-  };
-
   try {
-    const response = await fetch('https://api.resend.com/emails', {
+    const response = await fetch('/api/send-bug-report', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
       },
-      body: JSON.stringify(emailData)
+      body: JSON.stringify(report)
     });
 
     if (!response.ok) {
