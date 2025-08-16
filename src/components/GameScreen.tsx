@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Question, QuestionResult } from "../types/index";
 import { generateQuestion } from "../utils/questions/generateQuestion";
 import { useMathJax } from "../hooks/useMathJax";
-import { CLIENT_RENEG_LIMIT } from "tls";
 
 type GameScreenProps = {
   onComplete: () => void;
@@ -193,7 +192,9 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
           <p className="game-stage">
             {currentStage === 8 ? "HIGH LEVEL" : `LEVEL ${currentStage}`}
           </p>
-          <p className="elapsed-time">TIME {formatElapsedTime}</p>
+          <p className="elapsed-time">
+            {currentStage === 8 ? "BONUS TIME" : `TIME ${formatElapsedTime}`}
+          </p>
         </div>
         <div id="question-formula-container" className="question-formula-container">
           <div className="question-formula">{question.formula}</div>
