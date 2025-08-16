@@ -1,8 +1,43 @@
-# Getting Started with Create React App
+# 理系ムジークイ (Rikei Musikui)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+数学問題を解くゲームアプリです。
 
-## Available Scripts
+## 機能
+
+- 数学問題のクイズゲーム
+- タイマー機能
+- スコア・ランクシステム
+- バグレポート機能（ReSend API使用）
+
+## バグレポート機能の設定
+
+このアプリはReSend APIを使用してバグレポートをメール送信します。
+
+### 1. ReSend APIキーの取得
+
+1. [ReSend](https://resend.com/)でアカウントを作成
+2. APIキーを生成
+3. 送信元ドメインを設定・認証
+
+### 2. 環境変数の設定
+
+`.env.example`をコピーして`.env`ファイルを作成し、以下の値を設定してください：
+
+```env
+REACT_APP_RESEND_API_KEY=your_resend_api_key_here
+REACT_APP_BUG_REPORT_EMAIL=support@yourdomain.com
+REACT_APP_FROM_EMAIL=rikei-musikui@yourdomain.com
+```
+
+**重要**: `.env`ファイルはGitで管理されません。本番環境では適切な方法で環境変数を設定してください。
+
+### 3. セキュリティ注意事項
+
+- **本番環境では**、APIキーを適切にセキュアに管理してください
+- フロントエンドアプリでのAPIキー使用は開発・テスト目的のみ推奨
+- 本格運用では、バックエンドAPIを経由してメール送信を行うことを推奨
+
+## 開発用スクリプト
 
 In the project directory, you can run:
 

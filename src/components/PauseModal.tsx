@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sendBugReport, validateBugReport } from '../utils/bugReportService';
 
 type PauseModalProps = {
   isOpen: boolean;
@@ -52,30 +53,37 @@ const PauseModal: React.FC<PauseModalProps> = ({
   };
 
   const handleBugSubmit = async () => {
-    if (selectedIssues.length === 0 && bugDescription.trim() === '') {
-      alert('問題を選択するか、具体的な内容を入力してください。');
+    // バリデーション
+    const validationError = validateBugReport({
+      issues: selectedIssues,
+      description: bugDescription,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    });
+
+    if (validationError) {
+      alert(validationError);
       return;
     }
 
     setIsSubmitting(true);
 
-    // 簡単な送信処理（実際の実装では適切なAPIに送信）
     try {
-      const bugReport = {
+      const bugReportData = {
         issues: selectedIssues,
         description: bugDescription,
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent
       };
 
-      // コンソールにログ出力（実際の実装ではAPI送信）
-      console.log('Bug Report Submitted:', bugReport);
+      // ReSend APIでメール送信
+      const success = await sendBugReport(bugReportData);
 
-      // 送信完了状態に変更
-      setTimeout(() => {
+      if (success) {
+        // 送信成功
         setIsSubmitting(false);
         setIsSubmitted(true);
-
+        
         // 3秒後にフォームを閉じる
         setTimeout(() => {
           setShowBugForm(false);
@@ -83,11 +91,15 @@ const PauseModal: React.FC<PauseModalProps> = ({
           setSelectedIssues([]);
           setBugDescription('');
         }, 3000);
-      }, 1000);
+      } else {
+        // 送信失敗
+        setIsSubmitting(false);
+        alert('送信に失敗しました。ネットワーク接続を確認して、もう一度お試しください。');
+      }
     } catch (error) {
       console.error('Error submitting bug report:', error);
       setIsSubmitting(false);
-      alert('送信に失敗しました。もう一度お試しください。');
+      alert('予期しないエラーが発生しました。もう一度お試しください。');
     }
   };
 
