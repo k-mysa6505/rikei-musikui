@@ -51,6 +51,63 @@
     font-style: italic;
 }
 
+/* 右上固定のポーズボタン */
+.pause-btn-fixed {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #55ba59;
+    border: none;
+    border-radius: 20%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.pause-btn-fixed:hover {
+    background: #45a049;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pause-btn-fixed:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* 古いポーズボタンスタイル（削除） */
+.pause-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pause-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pause-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
 .question-formula-container .question-formula {
     margin: 0 auto;
     text-align: center;

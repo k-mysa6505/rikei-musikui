@@ -2,23 +2,29 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Question, QuestionResult } from "../types/index";
 import { generateQuestion } from "../utils/questions/generateQuestion";
 import { useMathJax } from "../hooks/useMathJax";
+import PauseModal from "./PauseModal";
 
 type GameScreenProps = {
   onComplete: () => void;
   onRecordResult: (stage: number, question: Question, userAnswer: string) => QuestionResult;
+  onRestart?: () => void;
+  onBackToTitle?: () => void;
 }
 
-const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) => {
+const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult, onRestart, onBackToTitle }) => {
   const [currentStage, setCurrentStage] = useState(1);
   const [startTime] = useState(() => Date.now());
-  const [elapsedTime, setElapsedTime] = useState(startTime);
+  const [elapsedTime, setElapsedTime] = useState(0);
   const [question, setQuestion] = useState<Question>(() => generateQuestion(currentStage));
   const [userAnswer, setUserAnswer] = useState("");
   const [questionResults, setQuestionResults] = useState<QuestionResult[]>([]);
+  const [isPaused, setIsPaused] = useState(false);
   const { renderElement } = useMathJax();
 
   useEffect(() => {
-    const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 10);
+    const interval = setInterval(() => {
+      setElapsedTime(Date.now() - startTime);
+    }, 10);
     return () => clearInterval(interval);
   }, [startTime]);
 
@@ -96,6 +102,33 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     setCurrentStage(prev => prev + 1);
     setQuestion(generateQuestion(8));
     setUserAnswer("");
+  };
+
+  // ポーズモーダルのハンドラー
+  const handlePause = () => {
+    setIsPaused(true);
+  };
+
+  const handleResume = () => {
+    setIsPaused(false);
+  };
+
+  const handleRestart = () => {
+    setIsPaused(false);
+    if (onRestart) {
+      onRestart();
+    }
+  };
+
+  const handleBackToTitle = () => {
+    setIsPaused(false);
+    if (onBackToTitle) {
+      onBackToTitle();
+    }
+  };
+
+  const handleBugReport = () => {
+    // バグレポートはポーズモーダル内で処理されるため、空の実装
   };
 
   const handleAnswerButtonClick = () => {
@@ -187,6 +220,11 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
 
   return (
     <div className="game-container">
+      {/* 右上のポーズボタン */}
+      <button className="pause-btn-fixed" onClick={handlePause} title="一時停止">
+        ⏸
+      </button>
+      
       <div className="game-screen">
         <div className="game-header-container">
           <p className="game-stage">
@@ -268,6 +306,15 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
             </div>
           </div>
         </div>
+
+        {/* ポーズモーダル */}
+        <PauseModal
+          isOpen={isPaused}
+          onResume={handleResume}
+          onRestart={handleRestart}
+          onBackToTitle={handleBackToTitle}
+          onBugReport={handleBugReport}
+        />
       </div>
     </div>
   );

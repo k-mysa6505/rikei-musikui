@@ -40,6 +40,8 @@ const App: React.FC = () => {
       return <GameScreen
         onComplete={handleGameComplete}
         onRecordResult={recordQuestionResult}
+        onRestart={handleStartGame}
+        onBackToTitle={() => setCurrentScreen(GameState.TITLE)}
       />;
     case GameState.RESULTS:
       return <ResultScreen
