@@ -76,25 +76,26 @@ export const generateIntegralQuestion = (): Question => {
 
       // 積分後の係数が1にならないまで繰り返し
       do {
-        k = Math.floor(Math.random() * 4) + 2; // 2-5
+        k = (Math.floor(Math.random() * 8) + 2) * (Math.random() < 0.5 ? 1 : -1); // -5～-2, 2～5
         a = Math.floor(Math.random() * 3) + 2; // 2-4
-        fraction = reduceFraction(k, a);
+        fraction = reduceFraction(Math.abs(k), a);
       } while (fraction.num === 1 && fraction.den === 1);
 
       // 係数の表示形式を決定（1の場合は表示しない）
       const coeffDisplay = formatCoefficient(fraction);
+      const signedCoeffDisplay = (k < 0 ? '-' : '') + coeffDisplay;
 
       const positions = [
         {
-          formula: `\\[\\int \\text{□}e^{${a}x} dx = ${coeffDisplay} e^{${a}x} + C\\]`,
+          formula: `\\[\\int \\text{□}e^{${a}x} dx = ${signedCoeffDisplay} e^{${a}x} + C\\]`,
           answer: k
         },
         {
-          formula: `\\[\\int ${k}e^{\\text{□}x} dx = ${coeffDisplay} e^{${a}x} + C\\]`,
+          formula: `\\[\\int ${k}e^{\\text{□}x} dx = ${signedCoeffDisplay} e^{${a}x} + C\\]`,
           answer: a
         },
         {
-          formula: `\\[\\int ${k}e^{${a}x} dx = ${fraction.den === 1 ? '\\text{□}' : `\\frac{\\text{□}}{${fraction.den}}`} e^{${a}x} + C\\]`,
+          formula: `\\[\\int ${k}e^{${a}x} dx = ${k < 0 ? '-' : ''}${fraction.den === 1 ? '\\text{□}' : `\\frac{\\text{□}}{${fraction.den}}`} e^{${a}x} + C\\]`,
           answer: fraction.num
         }
       ];
@@ -110,7 +111,7 @@ export const generateIntegralQuestion = (): Question => {
 
       // 積分後の係数が1にならないまで繰り返し
       do {
-        k = Math.floor(Math.random() * 4) + 2; // 2-5
+        k = (Math.floor(Math.random() * 8) + 2) * (Math.random() < 0.5 ? 1 : -1); // -5～-2, 2～5
         a = Math.floor(Math.random() * 3) + 2; // 2-4
         const trigIntegrals = [
           { func: `\\sin(${a}x)`, integral: `\\cos(${a}x)`, coeff: -k, divisor: a, resultFunc: "\\cos" },

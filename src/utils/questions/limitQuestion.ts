@@ -101,8 +101,8 @@ export const generateLimitQuestion = (): Question => {
     },
     () => {
       const a = Math.floor(Math.random() * 4) + 2; // 2-5
-      const b = Math.floor(Math.random() * 3) + 1; // 1-3
-      const c = Math.floor(Math.random() * 3) + 1; // 1-3
+      const b = Math.floor(Math.random() * 4) + 2;
+      const c = Math.floor(Math.random() * 4) + 2;
 
       const positions = [
         {
@@ -124,7 +124,7 @@ export const generateLimitQuestion = (): Question => {
 
     () => {
       const a = Math.floor(Math.random() * 3) + 2; // 2-4
-      const b = Math.floor(Math.random() * 3) + 2; // 2-4
+      const b = Math.floor(Math.random() * 3) + 2;
       const fraction = reduceFraction(a, b);
       const positions = [
         {

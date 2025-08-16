@@ -17,11 +17,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   const [questionResults, setQuestionResults] = useState<QuestionResult[]>([]);
   const { renderElement } = useMathJax();
 
-  // 全問正解かどうかを判定
-  const allCorrect = useMemo(() => {
-    return questionResults.length > 0 && questionResults.every(result => result.isCorrect);
-  }, [questionResults]);
-
   useEffect(() => {
     const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 10);
     return () => clearInterval(interval);
@@ -64,6 +59,8 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   useEffect(() => {
     const formulaContainer = document.getElementById("question-formula-container");
     if (formulaContainer) renderElement(formulaContainer);
+    //  DEBUG
+    console.log(question.answer);
   }, [question, renderElement]);
 
   const explanation = (question: Question): Question => {
@@ -76,8 +73,8 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
   const onNext = () => {
     document.getElementById("modal-section")!.classList.remove("active");
 
-    // 7問目完了後で全問正解の場合、ハイレベル問題案内モーダルを表示
-    if (currentStage === 7 && allCorrect) {
+    // 7問目完了後の判定（グローバル変数を使用）
+    if (currentStage === 7 && (window as any).isAllCorrectAfter7th) {
       setTimeout(() => {
         document.getElementById("high-level-modal-section")!.classList.add("active");
       }, 300);
@@ -85,10 +82,10 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
     }
 
     setCurrentStage(prev => prev + 1);
-    if (currentStage < 7 || (currentStage === 7 && allCorrect)) {
+    if (currentStage < 7 || (currentStage === 7 && (window as any).isAllCorrectAfter7th)) {
       setQuestion(generateQuestion(currentStage + 1));
       setUserAnswer("");
-    } else if (currentStage === 7 && !allCorrect) {
+    } else if (currentStage === 7 && !(window as any).isAllCorrectAfter7th) {
       setCurrentStage(prev => prev + 1);
       setUserAnswer("");
     }
@@ -118,6 +115,15 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
       // 実際の処理
       setTimeout(() => {
         const result = onRecordResult(currentStage, question, userAnswer);
+
+        // 7問目の判定を即座に行う（状態更新を待たない）
+        if (currentStage === 7) {
+          const allCorrectIncludingCurrent = [...questionResults, result].every(r => r.isCorrect);
+
+          // グローバル変数として保存（onNextで使用）
+          (window as any).isAllCorrectAfter7th = allCorrectIncludingCurrent;
+        }
+
         // 結果を状態に追加
         setQuestionResults(prev => [...prev, result]);
         const questionWithExplanation = explanation(question);
@@ -186,7 +192,9 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult }) =
           <p className="game-stage">
             {currentStage === 8 ? "HIGH LEVEL" : `LEVEL ${currentStage}`}
           </p>
-          <p className="elapsed-time">TIME {formatElapsedTime}</p>
+          <p className="elapsed-time">
+            {currentStage === 8 ? "BONUS TIME" : `TIME ${formatElapsedTime}`}
+          </p>
         </div>
         <div id="question-formula-container" className="question-formula-container">
           <div className="question-formula">{question.formula}</div>

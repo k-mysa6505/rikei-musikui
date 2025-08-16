@@ -42,10 +42,6 @@ export const generateEigenvalueQuestion = (): Question => {
           answer: lambda1
         },
         {
-          formula: `\\[A = \\begin{pmatrix} ${lambda1} & \\text{□} \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
-          answer: b
-        },
-        {
           formula: `\\[A = \\begin{pmatrix} ${lambda1} & ${b} \\\\ 0 & \\text{□} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
           answer: lambda2
         },
@@ -80,10 +76,6 @@ export const generateEigenvalueQuestion = (): Question => {
         {
           formula: `\\[A = \\begin{pmatrix} \\text{□} & ${selected.b} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
           answer: selected.a
-        },
-        {
-          formula: `\\[A = \\begin{pmatrix} ${selected.a} & \\text{□} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
-          answer: selected.b
         },
         {
           formula: `\\[A = \\begin{pmatrix} ${selected.a} & ${selected.b} \\\\ ${selected.c} & \\text{□} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,

@@ -44,26 +44,36 @@
     animation: rankGlow 2s ease-in-out infinite alternate;
 }
 
+/* ハイレベルボーナス表示用のスタイル */
+.bonus-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-align: center;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
 /* ランクごとの色 */
 .rank-grade.rank-ss {
     font-style: italic;
-    background: linear-gradient(45deg,
-            #ff0000 0%,
-            #ff7300 14%,
-            #fffb00 28%,
-            #48ff00 42%,
-            #00ffd5 57%,
-            #002bff 71%,
-            #7a00ff 85%,
-            #ff00c8 100%
-        );
-    background-size: 400% 400%;
+    background: repeating-linear-gradient(
+        90deg,
+        hsl(0deg, 75%, 55%),
+        hsl(60deg, 75%, 55%),
+        hsl(120deg, 75%, 55%),
+        hsl(180deg, 75%, 55%),
+        hsl(240deg, 75%, 55%),
+        hsl(300deg, 75%, 55%),
+        hsl(360deg, 75%, 55%) 50%
+    );
+    background-size: 1000% 1000%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: rainbowGlow 6s ease-in-out infinite, rainbowShift 8s ease-in-out infinite;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+    animation: rainbowRotation 60s linear infinite;
+    filter: drop-shadow(0 0 5px rgba(242, 13, 13, 0.4));
 }
 
 .rank-grade.rank-s {
@@ -326,42 +336,48 @@
 }
 
 /* アニメーション */
+@keyframes rainbowRotation {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 500% 500%;
+    }
+}
+
 @keyframes rainbowShift {
     0% {
         background-position: 0% 50%;
     }
-    50% {
-        background-position: 100% 50%;
-    }
     100% {
-        background-position: 0% 50%;
+        background-position: 100% 50%;
     }
 }
 
 @keyframes rainbowGlow {
     0% {
-        filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 0, 0, 0.2));
+        filter: drop-shadow(0 0 5px rgba(242, 13, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 13, 13, 0.2));
     }
-    14% {
-        filter: drop-shadow(0 0 5px rgba(255, 115, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 115, 0, 0.2));
+    14.28% {
+        filter: drop-shadow(0 0 5px rgba(242, 107, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 107, 13, 0.2));
     }
-    28% {
-        filter: drop-shadow(0 0 5px rgba(255, 251, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 251, 0, 0.2));
+    28.57% {
+        filter: drop-shadow(0 0 5px rgba(242, 242, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 242, 13, 0.2));
     }
-    42% {
-        filter: drop-shadow(0 0 5px rgba(72, 255, 0, 0.4)) drop-shadow(0 0 10px rgba(72, 255, 0, 0.2));
+    42.85% {
+        filter: drop-shadow(0 0 5px rgba(65, 242, 13, 0.4)) drop-shadow(0 0 10px rgba(65, 242, 13, 0.2));
     }
-    57% {
-        filter: drop-shadow(0 0 5px rgba(0, 255, 213, 0.4)) drop-shadow(0 0 10px rgba(0, 255, 213, 0.2));
+    57.14% {
+        filter: drop-shadow(0 0 5px rgba(13, 36, 242, 0.4)) drop-shadow(0 0 10px rgba(13, 36, 242, 0.2));
     }
-    71% {
-        filter: drop-shadow(0 0 5px rgba(0, 43, 255, 0.4)) drop-shadow(0 0 10px rgba(0, 43, 255, 0.2));
+    71.42% {
+        filter: drop-shadow(0 0 5px rgba(115, 13, 242, 0.4)) drop-shadow(0 0 10px rgba(115, 13, 242, 0.2));
     }
-    85% {
-        filter: drop-shadow(0 0 5px rgba(122, 0, 255, 0.4)) drop-shadow(0 0 10px rgba(122, 0, 255, 0.2));
+    85.71% {
+        filter: drop-shadow(0 0 5px rgba(242, 13, 190, 0.4)) drop-shadow(0 0 10px rgba(242, 13, 190, 0.2));
     }
     100% {
-        filter: drop-shadow(0 0 5px rgba(255, 0, 200, 0.4)) drop-shadow(0 0 10px rgba(255, 0, 200, 0.2));
+        filter: drop-shadow(0 0 5px rgba(242, 13, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 13, 13, 0.2));
     }
 }
 
@@ -382,6 +398,8 @@
         filter: brightness(1.2) contrast(1.1);
     }
 }
+
+/* ハイレベルボーナス用アニメーション - 現在は未使用 */
 
 @keyframes slideDown {
     from {

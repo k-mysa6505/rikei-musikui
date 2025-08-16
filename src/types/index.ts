@@ -41,6 +41,9 @@ export interface GameResult {
   totalQuestions: number;
   correctAnswers: number;
   totalTime: number;
+  basicTime: number; // 基本問題（1-7問）の時間
   questionResults: QuestionResult[];
   rank: Rank;
+  basicRank?: Rank; // ハイレベルボーナス前の基本ランク
+  hasHighLevelBonus: boolean; // ハイレベルボーナスがあるか
 }
