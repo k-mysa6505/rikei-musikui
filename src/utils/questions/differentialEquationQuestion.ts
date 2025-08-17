@@ -79,12 +79,12 @@ export const generateDifferentialEquationQuestion = (): Question => {
 
       // 指数部分の表示形式を決定
       let exponentDisplay;
-      if (fraction.den === 1) {
+      if (fraction.num % fraction.den === 0) {
         // 整数の場合
         if (fraction.num === 1) {
           exponentDisplay = "x^2"; // 1x^2 → x^2
         } else {
-          exponentDisplay = `${fraction.num}x^2`;
+          exponentDisplay = `${fraction.num / fraction.den}x^2`;
         }
       } else {
         // 分数の場合
@@ -95,11 +95,6 @@ export const generateDifferentialEquationQuestion = (): Question => {
         {
           formula: `\\[\\frac{dy}{dx} = \\text{□}xy\\]`,
           subformula: `\\[y = Ce^{${exponentDisplay}}\\]`,
-          answer: k
-        },
-        {
-          formula: `\\[\\frac{dy}{dx} = ${k}xy\\]`,
-          subformula: `\\[\\frac{dy}{y} = \\text{□}x dx\\]`,
           answer: k
         },
         {
