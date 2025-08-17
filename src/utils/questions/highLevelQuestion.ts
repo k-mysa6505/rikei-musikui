@@ -82,11 +82,6 @@ export const generateHighLevelDeterminantQuestion = (): Question => {
       subformula: "",
       answer: 3
     },
-    {
-      formula: "\\[A = (a_{ij}), \\quad a_{ij} = i + j, \\quad \\det(A) = 0\\]",
-      subformula: "\\[\\min\\{n : \\det(A_n) = 0\\} = \\text{□}\\]",
-      answer: 3
-    }
   ];
 
   return problems[Math.floor(Math.random() * problems.length)];
