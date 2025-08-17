@@ -1,104 +1,71 @@
-# 理系ムジークイ (Rikei Musikui)
+# 🐛理系虫食い算（Advanced Worm-eaten Calculations）
 
-数学問題を解くゲームアプリです。
+<div align="center">
 
-## 機能
+[![React](https://img.shields.io/badge/React-61dafb?logo=react)](https://react.dev)
+[![Made with TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-blue.svg)](https://www.typescriptlang.org/)
+[![MathJax](https://img.shields.io/badge/Powered%20by-MathJax-blue.svg)](https://www.mathjax.org)
 
-- 数学問題のクイズゲーム
-- タイマー機能
-- スコア・ランクシステム
-- バグレポート機能（ReSend API使用）
+_**□にあてはまる数を書きなさい。**_
 
-## バグレポート機能の設定
+</div>
 
-このアプリはReSend APIを使用してバグレポートをメール送信します。
+## 📖 概要
 
-### 1. ReSend APIキーの取得
+このゲームは以前作成したゲーム「[虫食い算](https://github.com/k-mysa6505/musikui/)」の進化版です．
 
-1. [ReSend](https://resend.com/)でアカウントを作成
-2. APIキーを生成
-3. 送信元ドメインを設定・認証
+数式の一部が虫に食べられたという設定で，食べられた数字を当てるクイズゲームです．高校～大学レベルの内容に対応しています。
 
-### 2. 環境変数の設定
+This is a quiz game in which you guess the numbers missing from equations, “eaten” by worms. This version covers science and mathematics topics at high school to university level.
 
-`.env.example`をコピーして`.env`ファイルを作成し、以下の値を設定してください：
+[プレイはこちら](https://rikei-musikui.vercel.app)
 
-```env
-REACT_APP_RESEND_API_KEY=your_resend_api_key_here
-REACT_APP_BUG_REPORT_EMAIL=support@yourdomain.com
-REACT_APP_FROM_EMAIL=rikei-musikui@yourdomain.com
-REACT_APP_ENABLE_DEV_EMAIL=true
-REACT_APP_SERVERLESS_ENDPOINT=https://your-site.netlify.app/.netlify/functions/send-bug-report
-```
+<!-- スクリーンショットがあればここに挿入 -->
 
-**重要**: `.env`ファイルはGitで管理されません。本番環境では適切な方法で環境変数を設定してください。
+## 特徴
 
-### 3. 開発環境でのメール送信テスト
+- タップのみの操作とアニメーションで**プレイのしやすさ**を重視
+- 理系数学（数学Ⅲ～大学数学）を出題
+- ランクシステムで繰り返しプレイを促進
+- 基本問題（全7問）を全問正解したユーザーにはハイレベル問題を出題
 
-開発環境でメール送信をテストするには2つの方法があります：
+## ランク基準
 
-#### 方法1: 直接API呼び出し（CORS制限あり）
-```env
-REACT_APP_ENABLE_DEV_EMAIL=true
-```
-- **注意**: ブラウザのCORS制限により失敗する可能性があります
-- テストの場合はコンソールログで確認してください
+正答率と回答時間によって5段階（S～D）にランクをつけています。
 
-#### 方法2: サーバーレスファンクション（推奨）
-1. Netlify Functionsをデプロイ
-2. サーバーレスファンクションのURLを設定
-3. CORSの問題を回避してメール送信可能
+- SS: Sランクを獲得かつハイレベル問題に正解
+- S：全問正解かつ60秒以内
+- A：正答率85%以上かつ90秒以内
+- B：正答率70%以上かつ120秒以内
+- C：正答率50%以上かつ240秒以内
+- D：正答率50%未満
 
-```env
-REACT_APP_SERVERLESS_ENDPOINT=https://your-site.netlify.app/.netlify/functions/send-bug-report
-REACT_APP_ENABLE_DEV_EMAIL=true
-```
+## 💻 動作環境
 
-### 3. セキュリティ注意事項
+### 動作確認済み環境一覧
 
-- **本番環境では**、APIキーを適切にセキュアに管理してください
-- フロントエンドアプリでのAPIキー使用は開発・テスト目的のみ推奨
-- 本格運用では、バックエンドAPIを経由してメール送信を行うことを推奨
+| ブラウザ | OS | バージョン |
+|:---|:---|:---|
+| Chrome | Android | 最新 |
+| Chrome | iPadOS（iOS） | 最新 |
+| Chrome | Windows | 最新 |
 
-## 開発用スクリプト
+※ 最新版のブラウザの使用を推奨します．<br>
+※ JavaScriptを有効にしてください．
 
-In the project directory, you can run:
+## 🛠 技術スタック
 
-### `npm start`
+| 技術 | 用途 |
+|:--- |:--- |
+| ⚛️ React | UI構築・状態管理 |
+| 📜 TypeScript | ゲームロジック・UI |
+| 📐 MathJax | 数式表示 |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📜 ライセンス
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+本リポジトリの内容はMITライセンスです。[LICENSE](LICENSE)をご参照ください。
 
-### `npm test`
+## 🙏 Special Thanks
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Claude 4 Sonnet**
+*開発補助 & 技術サポート*
