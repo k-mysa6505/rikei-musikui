@@ -146,22 +146,22 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-.rank-ss {
+.ranking-content .rank-ss {
   background: linear-gradient(135deg, #2E7D32, #43A047);
 }
-.rank-s {
+.ranking-content .rank-s {
   background: linear-gradient(135deg, #4CAF50, #66BB6A);
 }
-.rank-a {
+.ranking-content .rank-a {
   background: linear-gradient(135deg, #8BC34A, #AED581);
 }
-.rank-b {
+.ranking-content .rank-b {
   background: linear-gradient(135deg, #CDDC39, #DCE775);
 }
-.rank-c {
+.ranking-content .rank-c {
   background: linear-gradient(135deg, #FFC107, #FFD54F);
 }
-.rank-d {
+.ranking-content .rank-d {
   background: linear-gradient(135deg, #9E9E9E, #BDBDBD);
 }
 
