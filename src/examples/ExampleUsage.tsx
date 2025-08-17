@@ -1,16 +1,11 @@
 // 使用例とテスト用ファイル
 import React, { useState } from 'react';
 import RankingModal from '../components/RankingModal';
-import { handleGameComplete, validatePlayerName } from '../utils/rankingUtils';
+import { saveRankingEntry, validatePlayerName } from '../utils/rankingDB';
 
 // ゲーム画面での使用例
 const ExampleGameScreen: React.FC = () => {
   const [showRankingModal, setShowRankingModal] = useState(false);
-  const [lastEntry, setLastEntry] = useState<{
-    username: string;
-    rank: string;
-    time: number;
-  } | undefined>();
   const [playerName, setPlayerName] = useState('');
 
   // ゲーム終了時の処理例
@@ -30,14 +25,13 @@ const ExampleGameScreen: React.FC = () => {
     };
 
     try {
-      const success = await handleGameComplete(
+      const id = await saveRankingEntry(
         gameResult.username,
         gameResult.rank,
         gameResult.time
       );
 
-      if (success) {
-        setLastEntry(gameResult);
+      if (id) {
         setShowRankingModal(true);
       } else {
         alert('ランキングの保存に失敗しました。もう一度お試しください。');
@@ -105,11 +99,6 @@ const ExampleGameScreen: React.FC = () => {
       <RankingModal 
         isOpen={showRankingModal}
         onClose={() => setShowRankingModal(false)}
-        currentGameResult={lastEntry ? {
-          rank: lastEntry.rank,
-          time: lastEntry.time
-        } : undefined}
-        newEntry={lastEntry}
       />
     </div>
   );

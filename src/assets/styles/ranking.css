@@ -32,7 +32,7 @@
   align-items: center;
   padding: 20px 24px;
   border-bottom: 1px solid #e5e7eb;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4CAF50, #357a38);
   color: white;
 }
 
@@ -147,22 +147,22 @@
 }
 
 .rank-ss {
-  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  background: linear-gradient(135deg, #2E7D32, #43A047);
 }
 .rank-s {
-  background: linear-gradient(135deg, #ef4444, #f87171);
+  background: linear-gradient(135deg, #4CAF50, #66BB6A);
 }
 .rank-a {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  background: linear-gradient(135deg, #8BC34A, #AED581);
 }
 .rank-b {
-  background: linear-gradient(135deg, #10b981, #34d399);
+  background: linear-gradient(135deg, #CDDC39, #DCE775);
 }
 .rank-c {
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  background: linear-gradient(135deg, #FFC107, #FFD54F);
 }
 .rank-d {
-  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  background: linear-gradient(135deg, #9E9E9E, #BDBDBD);
 }
 
 .score-info {
@@ -351,18 +351,8 @@
 }
 
 .top-three-section {
-  background: linear-gradient(135deg, #fef3c7, #fbbf24, #f59e0b);
-  border-radius: 16px;
   padding: 20px;
   margin: 0 24px;
-}
-
-.top-three-section h3 {
-  margin: 0 0 16px 0;
-  text-align: center;
-  color: #92400e;
-  font-size: 20px;
-  font-weight: bold;
 }
 
 .top-three-list {
@@ -505,18 +495,9 @@
 }
 
 .user-position-section {
-  background: linear-gradient(135deg, #ede9fe, #8b5cf6);
-  border-radius: 16px;
-  padding: 20px;
-  margin: 0 24px;
+  margin: 0 16px;
+  padding: 16px;
   color: white;
-}
-
-.user-position-section h3 {
-  margin: 0 0 16px 0;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
 }
 
 .user-ranking-entry {
@@ -532,6 +513,7 @@
 .rank-achievement {
   text-align: center;
   margin-top: 12px;
+  color: #333;
   font-size: 16px;
   font-weight: bold;
   animation: bounce 2s infinite;
@@ -539,10 +521,10 @@
 
 @keyframes celebrationGlow {
   0%, 100% { 
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
   }
   50% { 
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.8), 0 0 40px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 0 30px rgba(76, 175, 80, 0.8), 0 0 40px rgba(76, 175, 80, 0.3);
   }
 }
 
@@ -560,7 +542,7 @@
 
 /* モバイル対応 */
 @media (max-width: 768px) {
-  .top-three-section, .rank-in-section, .user-position-section {
+  .top-three-section, .rank-in-section {
     margin: 0 16px;
     padding: 16px;
   }
@@ -576,4 +558,130 @@
   .name-input-buttons button {
     width: 100%;
   }
+}
+
+/* 名前変更機能のスタイル */
+.user-ranking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.user-ranking-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.name-edit-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.name-edit-btn:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+.name-edit-btn:active {
+  transform: translateY(0);
+}
+
+.name-edit-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid #4CAF50;
+}
+
+.name-edit-section h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.name-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.name-input-form input {
+  padding: 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.name-input-form input:focus {
+  border-color: #4CAF50;
+}
+
+.name-input-form input.error {
+  border-color: #ef4444;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: -8px;
+}
+
+.name-input-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.name-input-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+}
+
+.cancel-btn {
+  background: #777;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #6b7280;
+}
+
+.submit-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.submit-btn:hover {
+  background: #45a049;
+}
+
+.submit-btn:disabled,
+.cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn:disabled:hover,
+.cancel-btn:disabled:hover {
+  background: #4CAF50;
 }

@@ -59,9 +59,9 @@ const firebaseConfig = {
 
 ### ランキング保存
 ```typescript
-import { handleGameComplete } from '../utils/rankingUtils';
+import { saveRankingEntry } from '../utils/rankingDB';
 
-const success = await handleGameComplete('プレイヤー名', 'A', 45.67, 850);
+const id = await saveRankingEntry('プレイヤー名', 'A', 45.67);
 ```
 
 ### ランキング表示

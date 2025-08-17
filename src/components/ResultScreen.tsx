@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { GameResult, Question } from "../types/index";
 import { useMathJax } from "../hooks/useMathJax";
 import RankingModal from "./RankingModal";
+import { saveRankingEntry } from "../utils/rankingDB";
 
 type ResultScreenProps = {
   gameResult: GameResult;
@@ -13,7 +14,22 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
   const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(new Set());
   const [animatingQuestions, setAnimatingQuestions] = useState<Set<number>>(new Set());
   const [showRankingModal, setShowRankingModal] = useState(false);
+  const [registeredId, setRegisteredId] = useState<string | null>(null);
+  const hasRegistered = useRef(false); // 登録済みフラグ
   const { renderBySelector } = useMathJax();
+
+  useEffect(() => {
+    // 既に登録済みの場合は何もしない
+    if (hasRegistered.current) return;
+    
+    const register = async () => {
+      hasRegistered.current = true; // 重複実行を防ぐ
+      const playerName = `Player${Math.floor(Math.random() * 9999) + 1}`;
+      const id = await saveRankingEntry(playerName, gameResult.rank, gameResult.basicTime / 1000);
+      if (id) setRegisteredId(id);
+    };
+    register();
+  }, [gameResult.rank, gameResult.basicTime]); // registeredIdを依存配列から除去
 
   const handleButtonClick = (callback: () => void) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -212,10 +228,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
       <RankingModal 
         isOpen={showRankingModal}
         onClose={() => setShowRankingModal(false)}
-        currentGameResult={{
-          rank: gameResult.rank,
-          time: gameResult.basicTime / 1000
-        }}
+        autoRegisteredId={registeredId || undefined}
       />
     </div>
   );

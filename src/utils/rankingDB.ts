@@ -1,7 +1,6 @@
-import { ref, push, query, orderByChild, limitToLast, onValue, off } from 'firebase/database';
+import { ref, push, onValue, off, serverTimestamp, update } from 'firebase/database';
 import { db } from '../config/firebase';
 
-// ランキングデータの型定義
 export interface RankingEntry {
   id?: string;
   username: string;
@@ -10,73 +9,88 @@ export interface RankingEntry {
   timestamp: number;
 }
 
-/**
- * ランキングエントリをデータベースに保存
- */
-export async function saveRankingEntry(
-  username: string,
-  rank: string,
-  time: number
-): Promise<boolean> {
+export async function saveRankingEntry(username: string, rank: string, time: number) {
   try {
-    const rankingRef = ref(db, 'rankings');
-    
-    await push(rankingRef, {
-      username: username.trim(),
-      rank: rank,
-      time: Number(time.toFixed(3)),
-      timestamp: Date.now()
+    const result = await push(ref(db, 'rankings'), {
+      username,
+      rank,
+      time: Number(time.toFixed(2)),
+      // timestamp: Date.now()
+      timestamp: serverTimestamp() // Firebaseサーバーのタイムスタンプを使用
     });
-    
-    console.log("ランキングエントリが正常に保存されました！");
+    return result.key;
+  } catch (error) {
+    console.error('ランキング保存エラー:', error);
+    return null;
+  }
+}
+
+export async function updateRankingEntryName(entryId: string, newName: string) {
+  try {
+    const entryRef = ref(db, `rankings/${entryId}`);
+    await update(entryRef, {
+      username: newName
+    });
     return true;
-  } catch (error: any) {
-    console.error("ランキングの保存中にエラーが発生しました:", error);
+  } catch (error) {
+    console.error('ランキング名前更新エラー:', error);
     return false;
   }
-}/**
- * ランキングデータをリアルタイムで取得し、コールバックに渡す
- */
-export function subscribeToRankings(
-  callback: (rankings: RankingEntry[]) => void,
-  limit: number = 20
-): () => void {
-  // スコアが高い順で取得するため、limitToLastを使用して後でリバース
-  const topRankingsRef = query(
-    ref(db, 'rankings'),
-    orderByChild('score'),
-    limitToLast(limit)
-  );
+}
 
-  onValue(topRankingsRef, (snapshot) => {
+export function subscribeToRankings(callback: (rankings: RankingEntry[]) => void) {
+  const rankingsRef = ref(db, 'rankings');
+
+  onValue(rankingsRef, (snapshot) => {
     const rankings: RankingEntry[] = [];
 
     if (snapshot.exists()) {
-      snapshot.forEach((childSnapshot) => {
-        const data = childSnapshot.val();
+      snapshot.forEach((child) => {
+        const data = child.val();
         rankings.push({
-          id: childSnapshot.key || undefined,
-          username: data.username,
-          rank: data.rank,
-          time: data.time,
-          timestamp: data.timestamp
+          id: child.key || undefined,
+          ...data
         });
       });
 
-      // 時間昇順でソート（スコアは削除）
+      // ランク優先度を定義（数値が小さいほど上位）
+      const getRankPriority = (rank: string): number => {
+        const rankOrder: { [key: string]: number } = {
+          'SS': 1,
+          'S': 2,
+          'A': 3,
+          'B': 4,
+          'C': 5,
+          'D': 6
+        };
+        return rankOrder[rank] || 999;
+      };
+
+      // 第1にランク、同じランクでは時間が早い順でソート
       rankings.sort((a, b) => {
-        return a.time - b.time; // 時間昇順（速いほうが上位）
+        const rankDiff = getRankPriority(a.rank) - getRankPriority(b.rank);
+        if (rankDiff !== 0) {
+          return rankDiff; // ランクが異なる場合はランク優先
+        }
+        return a.time - b.time; // 同じランクの場合は時間が早い順
       });
     }
 
     callback(rankings);
-  }, (error) => {
-    console.error("ランキングデータの取得中にエラーが発生しました:", error);
-    callback([]);
   });
 
-  // アンサブスクライブ関数を返す
-  return () => {
-    off(topRankingsRef);
-  };
+  return () => off(rankingsRef);
+}
+
+// プレイヤー名のバリデーション関数
+export function validatePlayerName(name: string): { valid: boolean; error?: string } {
+  if (!name || name.trim().length === 0) {
+    return { valid: false, error: 'プレイヤー名を入力してください' };
+  }
+  
+  if (name.trim().length > 20) {
+    return { valid: false, error: 'プレイヤー名は20文字以内で入力してください' };
+  }
+  
+  return { valid: true };
 }

@@ -2,15 +2,15 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
-// Firebase設定 - 実際の値に置き換えてください
+// Firebase設定
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "https://rikei-musikui-default-rtdb.firebaseio.com/", // Realtime Databaseには必須
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "rikei-musikui.firebaseapp.com",
+  databaseURL: "https://rikei-musikui-default-rtdb.firebaseio.com",
   projectId: "rikei-musikui",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  storageBucket: "rikei-musikui.firebasestorage.app",
+  messagingSenderId: "1080138865054",
+  appId: "1:1080138865054:web:f7011351756c0c110d1e8f"
 };
 
 // Firebaseアプリを初期化

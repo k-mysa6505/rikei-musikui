@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { validatePlayerName } from '../utils/rankingUtils';
+import { validatePlayerName } from '../utils/rankingDB';
 
 type PlayerNameModalProps = {
   isOpen: boolean;
