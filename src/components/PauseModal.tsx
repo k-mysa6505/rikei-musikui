@@ -93,7 +93,7 @@ const PauseModal: React.FC<PauseModalProps> = ({
       // 送信成功
       setIsSubmitting(false);
       setIsSubmitted(true);
-      
+
       // 3秒後にフォームを閉じる
       setTimeout(() => {
         setShowBugForm(false);
@@ -132,7 +132,7 @@ const PauseModal: React.FC<PauseModalProps> = ({
               <div className="submission-success">
                 <div className="success-icon">✓</div>
                 <h3>レポートを送信しました</h3>
-                <p>ご協力ありがとうございます！<br/>改善に活用させていただきます。</p>
+                <p>ご協力ありがとうございます！<br/>改善に活用させていただきます．</p>
               </div>
             ) : (
               <>

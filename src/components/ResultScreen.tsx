@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { GameResult, Question } from "../types/index";
 import { useMathJax } from "../hooks/useMathJax";
+import RankingModal from "./RankingModal";
+import { saveRankingEntry } from "../utils/rankingDB";
 
 type ResultScreenProps = {
   gameResult: GameResult;
@@ -11,7 +13,23 @@ type ResultScreenProps = {
 const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTitle }) => {
   const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(new Set());
   const [animatingQuestions, setAnimatingQuestions] = useState<Set<number>>(new Set());
+  const [showRankingModal, setShowRankingModal] = useState(false);
+  const [registeredId, setRegisteredId] = useState<string | null>(null);
+  const hasRegistered = useRef(false); // 登録済みフラグ
   const { renderBySelector } = useMathJax();
+
+  useEffect(() => {
+    // 既に登録済みの場合は何もしない
+    if (hasRegistered.current) return;
+    
+    const register = async () => {
+      hasRegistered.current = true; // 重複実行を防ぐ
+      const playerName = `Player${Math.floor(Math.random() * 9999) + 1}`;
+      const id = await saveRankingEntry(playerName, gameResult.rank, gameResult.basicTime / 1000);
+      if (id) setRegisteredId(id);
+    };
+    register();
+  }, [gameResult.rank, gameResult.basicTime]); // registeredIdを依存配列から除去
 
   const handleButtonClick = (callback: () => void) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -96,6 +114,11 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
     [gameResult.correctAnswers, gameResult.totalQuestions]
   );
 
+  // ランキング表示（保存なし）
+  const handleShowRanking = () => {
+    setShowRankingModal(true);
+  };
+
   return (
     <div className="result-screen">
       <h1>RESULTS</h1>
@@ -174,6 +197,17 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
             </span>
           </div>
         </div>
+        
+        {/* ランキングボタン */}
+        <div className="ranking-buttons">
+          <button
+            className="btn ranking-view-btn"
+            onClick={handleButtonClick(handleShowRanking)}
+            title="ランキングを表示"
+          >
+            📊 ランキング表示
+          </button>
+        </div>
       </div>
       <div className="result-buttons">
         <button
@@ -189,6 +223,13 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
           タイトルへ戻る
         </button>
       </div>
+      
+      {/* ランキングモーダル */}
+      <RankingModal 
+        isOpen={showRankingModal}
+        onClose={() => setShowRankingModal(false)}
+        autoRegisteredId={registeredId || undefined}
+      />
     </div>
   );
 };
