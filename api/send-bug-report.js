@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       'timer': 'タイマーが正しく動作しない',
       'freeze': 'アプリが固まる・動かない',
       'button': 'ボタンが反応しない',
-      'difficult': '難しすぎる',
+      'peaceful': '簡単すぎる',
       'other': 'その他'
     };
 
