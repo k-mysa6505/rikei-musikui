@@ -65,8 +65,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult, onR
   useEffect(() => {
     const formulaContainer = document.getElementById("question-formula-container");
     if (formulaContainer) renderElement(formulaContainer);
-    //  DEBUG
-    console.log(question.answer);
   }, [question, renderElement]);
 
   const explanation = (question: Question): Question => {

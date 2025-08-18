@@ -99,8 +99,8 @@ export const generateDifferentialEquationQuestion = (): Question => {
         },
         {
           formula: `\\[\\frac{dy}{dx} = ${k}xy\\]`,
-          subformula: `\\[y = Ce^{\\text{□}x^2/2}\\]`,
-          answer: k
+          subformula: `\\[y = Ce^{${k % 2 ? `\\frac{${k}}{2}` : `${k / 2}`}x^2}\\]`,
+          answer: k % 2 ? k : k / 2
         }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
