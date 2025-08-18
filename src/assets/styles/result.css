@@ -1,0 +1,530 @@
+@import url('base.css');
+
+.result-screen {
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.result-screen h1 {
+    font-size: 2.5rem;
+    color: #4cb05a;
+    font-weight: bold;
+    margin: 40px 0;
+}
+
+.result-summary-section {
+    margin: 30px 0;
+}
+
+.rank-display {
+    margin: 30px 0 60px 0;
+}
+
+.rank-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.rank-label {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e5a;
+}
+
+.rank-value {
+    padding-right: 10px;
+    font-size: 4rem;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: rankGlow 2s ease-in-out infinite alternate;
+}
+
+/* ハイレベルボーナス表示用のスタイル */
+.bonus-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-align: center;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+/* ランクごとの色 */
+.rank-grade.rank-ss {
+    background: repeating-linear-gradient(
+        90deg,
+        hsl(0deg, 100%, 55%),
+        hsl(60deg, 100%, 55%),
+        hsl(120deg, 100%, 55%),
+        hsl(180deg, 100%, 55%),
+        hsl(240deg, 100%, 55%),
+        hsl(300deg, 100%, 55%),
+        hsl(360deg, 100%, 55%) 50%
+    );
+    background-size: 1000% 1000%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: rainbowRotation 60s linear infinite;
+    filter: drop-shadow(0 0 5px rgba(242, 13, 13, 0.4));
+}
+
+.rank-grade.rank-s {
+    font-style: italic;
+    background: linear-gradient(135deg,
+            #FFD700 -20%,
+            #FFF3A1 25%,
+            #FFD700 50%,
+            #FFF3A1 75%,
+            #FFD700 120%
+        );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientGlow 2s ease-in-out infinite alternate;
+}
+
+.rank-grade.rank-a {
+    background: linear-gradient(135deg,
+            #C0C0C0 -20%,
+            #FFFFFF 25%,
+            #C0C0C0 50%,
+            #FFFFFF 75%,
+            #C0C0C0 120%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientGlow 2s ease-in-out infinite alternate;
+}
+
+.rank-grade.rank-b {
+    background: linear-gradient(135deg,
+            #CD7F32 -20%,
+            #FFC28C 25%,
+            #CD7F32 50%,
+            #FFC28C 75%,
+            #CD7F32 120%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientGlow 2s ease-in-out infinite alternate;
+}
+
+.rank-grade.rank-c {
+    color: #9370DB;
+}
+
+.rank-grade.rank-d {
+    color: #4A4A4A;
+}
+
+.result-status {
+    padding: 20px;
+    color: #2c3e5a;
+}
+
+.result-status p {
+    margin: 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.result-details-section {
+    margin-bottom: 30px;
+}
+
+.result-details {
+    padding-right: 8px;
+}
+
+.question-result {
+    margin-bottom: 16px;
+    border-radius: 25px;
+    background-color: #fff;
+    color: #2c3e5a;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden;
+}
+
+.question-header {
+    padding: 15px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question-header:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question-header:active {
+    transform: translateY(0) scale(0.98);
+    background-color: #e9ecef;
+}
+
+.question-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2c3e5a;
+    font-weight: bold;
+    flex: 1;
+}
+
+.expand-indicator {
+    margin-left: 16px;
+}
+
+.arrow {
+    font-size: 16px;
+    color: #666;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.arrow.expanded {
+    transform: rotate(180deg);
+}
+
+.question-details {
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+.status.correct {
+    color: #4CAF50;
+}
+
+.status.incorrect {
+    color: #e74c3c;
+}
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-result .question-formula-container {
+    text-align: center;
+}
+
+.question-formula {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.question-sub-formula {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #2c3e5a;
+}
+
+.question-answer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2c3e5a;
+    font-weight: bold;
+}
+
+.question-answer {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+.result-buttons {
+    display: flex;
+    margin-top: 10%;
+    margin-bottom: 30%;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.result-buttons .btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+    transform: translateY(0);
+    user-select: none;
+}
+
+.result-buttons .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.result-buttons .btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
+}
+
+.replay-btn {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.replay-btn:hover {
+    background-color: #357a38;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.replay-btn:active {
+    background-color: #2e7d32;
+}
+
+.title-btn {
+    background-color: #fff;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+}
+
+.title-btn:hover {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.title-btn:active {
+    background-color: #357a38;
+}
+
+/* MathJax用スタイル */
+.math-content {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.math-content.rendered {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* アニメーション */
+@keyframes rainbowRotation {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 500% 500%;
+    }
+}
+
+@keyframes rainbowShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes rainbowGlow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(242, 13, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 13, 13, 0.2));
+    }
+    14.28% {
+        filter: drop-shadow(0 0 5px rgba(242, 107, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 107, 13, 0.2));
+    }
+    28.57% {
+        filter: drop-shadow(0 0 5px rgba(242, 242, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 242, 13, 0.2));
+    }
+    42.85% {
+        filter: drop-shadow(0 0 5px rgba(65, 242, 13, 0.4)) drop-shadow(0 0 10px rgba(65, 242, 13, 0.2));
+    }
+    57.14% {
+        filter: drop-shadow(0 0 5px rgba(13, 36, 242, 0.4)) drop-shadow(0 0 10px rgba(13, 36, 242, 0.2));
+    }
+    71.42% {
+        filter: drop-shadow(0 0 5px rgba(115, 13, 242, 0.4)) drop-shadow(0 0 10px rgba(115, 13, 242, 0.2));
+    }
+    85.71% {
+        filter: drop-shadow(0 0 5px rgba(242, 13, 190, 0.4)) drop-shadow(0 0 10px rgba(242, 13, 190, 0.2));
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(242, 13, 13, 0.4)) drop-shadow(0 0 10px rgba(242, 13, 13, 0.2));
+    }
+}
+
+@keyframes rankGlow {
+    from {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    to {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes gradientGlow {
+    from {
+        filter: brightness(1) contrast(1);
+    }
+    to {
+        filter: brightness(1.2) contrast(1.1);
+    }
+}
+
+/* ハイレベルボーナス用アニメーション - 現在は未使用 */
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-8px);
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 800px;
+        transform: translateY(0);
+        padding-top: 0;
+        padding-bottom: 20px;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        max-height: 800px;
+        transform: translateY(0);
+        padding-top: 0;
+        padding-bottom: 20px;
+    }
+    to {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-8px);
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.question-details {
+    overflow: hidden;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+    animation-fill-mode: both;
+    will-change: max-height, opacity, transform;
+}
+
+.question-details.expanding {
+    animation-name: slideDown;
+}
+
+.question-details.collapsing {
+    animation-name: slideUp;
+}
+
+/* ランキングボタンのスタイル */
+.ranking-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0 30px 0;
+    flex-wrap: wrap;
+}
+
+.ranking-save-btn {
+    background: linear-gradient(135deg, #4CAF50, #357a38);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.ranking-save-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.ranking-save-btn:hover:before {
+    left: 100%;
+}
+
+.ranking-save-btn:hover {
+    background: linear-gradient(135deg, #357a38, #2e7d32);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+.ranking-view-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3);
+}
+
+.ranking-view-btn:hover {
+    background: #357a38;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+.ranking-buttons .btn {
+    min-width: 140px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .ranking-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .ranking-buttons .btn {
+        width: 80%;
+        max-width: 280px;
+    }
+}

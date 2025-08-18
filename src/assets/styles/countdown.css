@@ -1,0 +1,35 @@
+@import url('base.css');
+
+/* カウントダウン画面を縦中央に配置 */
+.countdown-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.countdown-screen {
+    text-align: center;
+    width: 100%;
+}
+
+.countdown-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.countdown-text {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #4cb05a;
+    text-shadow: 0 4px 10px rgba(76, 176, 90, 0.3);
+}
+
+.start-text {
+    font-size: 3rem !important;
+    color: #4cb05a !important;
+    font-weight: bold !important;
+    text-shadow: 0 6px 15px rgba(76, 176, 90, 0.4) !important;
+}

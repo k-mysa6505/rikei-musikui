@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+# 🐛理系虫食い算（Advanced Worm-eaten Calculations）
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Made with React](https://img.shields.io/badge/Made%20with-React-blue.svg)](https://reactjs.org/)
+[![Made with TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-blue.svg)](https://www.typescriptlang.org/)
+[![MathJax](https://img.shields.io/badge/Powered%20by-MathJax-blue.svg)](https://www.mathjax.org)
+[![Powered by Firebase](https://img.shields.io/badge/Powered%20by-Firebase-orange.svg)](https://firebase.google.com/)
 
-In the project directory, you can run:
+***□にあてはまる数を書きなさい。***
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📖 概要
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+このゲームは以前作成したゲーム「[虫食い算](https://github.com/k-mysa6505/musikui/)」の進化版です．
 
-### `npm test`
+数式の一部が虫に食べられたという設定で，食べられた数字を当てるクイズゲームです．
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This is a quiz game in which you have to guess the number of the equation that has been eaten by a worm.
 
-### `npm run build`
+[プレイはこちら](https://rikei-musikui.vercel.app)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<div align="center">
+  <img src="./src/assets/screenshots/1.png" alt="ゲーム画面" width="200">
+  <img src="./src/assets/screenshots/2.png" alt="ゲーム画面" width="200">
+  <img src="./src/assets/screenshots/3.png" alt="ゲーム画面" width="200">
+  <img src="./src/assets/screenshots/4.png" alt="ゲーム画面" width="200">
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 新機能・特徴
+- 理系に特化した出題範囲（数学Ⅲ（微積・極限）～大学1，2年程度）
+- 解答フィードバックの表示
+- 結果画面における，解いた問題の一覧表示
+- 基本の7問を全問正解したユーザーに向けた，ハイレベル問題の出題
+- 全ユーザーの成績を集計して，上位3位をランキング表示
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ランク基準
 
-### `npm run eject`
+正答率と回答時間によって5段階（S～D）にランクをつけています．
+ハイレベル問題に正解すると1段階上がります．
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 基本ランク（正答率 × 回答時間）
+| ランク | 正答率 | 回答時間 |
+|:---:|:---:|:---:|
+| 🥇 **S** | 100% | 60秒以内 |
+| 🥈 **A** | 85%以上 | 90秒以内 |
+| 🥉 **B** | 70%以上 | 120秒以内 |
+| 🏅 **C** | 50%以上 | 240秒以内 |
+| 📝 **D** | 50%未満 | 時間問わず |
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### ランクアップボーナス
+**ハイレベル問題正解** → **1ランク昇格**
+- A → S，B → A，C → B，D → C
+- **Sランク + ハイレベル正解 = SS（最高ランク）**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🛠 技術スタック
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+| 技術 | 用途 |
+|:--- |:--- |
+| ⚛️ React | UI構築・状態管理 |
+| 📜 TypeScript | ゲームロジック |
+| 📐 MathJax | 数式表示 |
+| 🔥 Firebase | 成績集計 |
 
-## Learn More
+## 📜 ライセンス
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+本リポジトリの内容はMITライセンスです。[LICENSE](LICENSE)をご参照ください。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🙏 Special Thanks
+
+**Claude 4 Sonnet**
+*開発補助 & 技術サポート*

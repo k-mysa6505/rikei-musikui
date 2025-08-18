@@ -1,0 +1,424 @@
+/* ポーズモーダルのスタイル */
+.pause-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.pause-modal {
+  background: #f3f4f6;
+  border: 2px solid #4caf50;
+  border-radius: 20px;
+  padding: 30px;
+  min-width: 400px;
+  max-width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: pauseModalAppear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pauseModalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.pause-modal-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pause-modal-header h2 {
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.pause-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pause-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 15px 20px;
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  background: white;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-height: 60px;
+}
+
+.pause-button:hover {
+  background: #4caf50;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.pause-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.pause-button .icon {
+  font-size: 24px;
+  margin-right: 15px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.pause-button .text {
+  font-size: 18px;
+  flex-grow: 1;
+}
+
+.pause-button .subtext {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-left: 10px;
+  font-style: italic;
+}
+
+/* バグレポートフォーム用スタイル */
+.bug-report-modal {
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.bug-report-modal .pause-modal-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-button {
+  background: white;
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  color: #4caf50;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: #4caf50;
+  color: white;
+}
+
+.bug-form-content {
+  padding: 10px 0;
+}
+
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-section h3 {
+  color: #2c3e50;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.issue-checkboxes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #e0e0e0;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.checkbox-item:hover {
+  border-color: #4caf50;
+  background: #f8f9fa;
+}
+
+.checkbox-item input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  margin-right: 12px;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark {
+  background: #4caf50;
+  border-color: #4caf50;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.bug-description {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #2c3e50;
+  font-size: 14px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.bug-description::placeholder {
+  color: #999;
+}
+
+.bug-description:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.submit-button {
+  background: #4caf50;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  min-width: 120px;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submission-success {
+  text-align: center;
+  padding: 40px 20px;
+  color: #2c3e50;
+}
+
+.success-icon {
+  font-size: 60px;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+.submission-success h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #4caf50;
+}
+
+.submission-success p {
+  font-size: 16px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* 各ボタンの特別なスタイル */
+.pause-button-resume {
+  border-color: #4caf50;
+}
+
+.pause-button-resume:hover {
+  background: #4caf50;
+  color: white;
+}
+
+.pause-button-restart {
+  border-color: #ff9800;
+}
+
+.pause-button-restart:hover {
+  background: #ff9800;
+  color: white;
+}
+
+.pause-button-home {
+  border-color: #2196f3;
+}
+
+.pause-button-home:hover {
+  background: #2196f3;
+  color: white;
+}
+
+.pause-button-bug {
+  border-color: #f44336;
+}
+
+.pause-button-bug:hover {
+  background: #f44336;
+  color: white;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .pause-modal {
+    min-width: 350px;
+    padding: 25px;
+  }
+
+  .bug-report-modal {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .pause-modal-header h2 {
+    font-size: 24px;
+  }
+
+  .pause-button {
+    padding: 12px 15px;
+    min-height: 55px;
+  }
+
+  .pause-button .icon {
+    font-size: 20px;
+    margin-right: 12px;
+    min-width: 25px;
+  }
+
+  .pause-button .text {
+    font-size: 16px;
+  }
+
+  .checkbox-item {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .checkmark {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
+
+  .bug-description {
+    font-size: 13px;
+    min-height: 80px;
+  }
+
+  .form-section h3 {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pause-modal {
+    min-width: 300px;
+    padding: 20px;
+  }
+
+  .bug-report-modal {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .pause-button {
+    flex-direction: column;
+    text-align: center;
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .pause-button .icon {
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  .issue-checkboxes {
+    gap: 8px;
+  }
+
+  .checkbox-item {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .checkmark {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  .submit-button {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+
+  .success-icon {
+    font-size: 48px;
+  }
+
+  .submission-success h3 {
+    font-size: 20px;
+  }
+
+  .submission-success p {
+    font-size: 14px;
+  }
+}
