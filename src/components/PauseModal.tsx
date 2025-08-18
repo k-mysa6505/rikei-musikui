@@ -21,7 +21,7 @@ const bugIssues: BugIssue[] = [
   { id: 'timer', label: 'タイマーが正しく動作しない' },
   { id: 'freeze', label: 'アプリが固まる・動かない' },
   { id: 'button', label: 'ボタンが反応しない' },
-  { id: 'difficult', label: '難しすぎる' },
+  { id: 'peaceful', label: '簡単すぎる' },
   { id: 'other', label: 'その他' }
 ];
 
