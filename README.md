@@ -2,11 +2,13 @@
 
 <div align="center">
 
-[![React](https://img.shields.io/badge/React-61dafb?logo=react)](https://react.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Made with React](https://img.shields.io/badge/Made%20with-React-blue.svg)](https://reactjs.org/)
 [![Made with TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 [![MathJax](https://img.shields.io/badge/Powered%20by-MathJax-blue.svg)](https://www.mathjax.org)
+[![Powered by Firebase](https://img.shields.io/badge/Powered%20by-Firebase-orange.svg)](https://firebase.google.com/)
 
-_**□にあてはまる数を書きなさい。**_
+***□にあてはまる数を書きなさい。***
 
 </div>
 
@@ -14,52 +16,53 @@ _**□にあてはまる数を書きなさい。**_
 
 このゲームは以前作成したゲーム「[虫食い算](https://github.com/k-mysa6505/musikui/)」の進化版です．
 
-数式の一部が虫に食べられたという設定で，食べられた数字を当てるクイズゲームです．高校～大学レベルの内容に対応しています。
+数式の一部が虫に食べられたという設定で，食べられた数字を当てるクイズゲームです．
 
-This is a quiz game in which you guess the numbers missing from equations, “eaten” by worms. This version covers science and mathematics topics at high school to university level.
+This is a quiz game in which you have to guess the number of the equation that has been eaten by a worm.
 
 [プレイはこちら](https://rikei-musikui.vercel.app)
 
-<!-- スクリーンショットがあればここに挿入 -->
+<div align="center">
+  <img src="./src/assets/screenshots/1.png" alt="ゲーム画面" width="200">
+  <img src="./src/assets/screenshots/2.png" alt="ゲーム画面" width="200">
+  <img src="./src/assets/screenshots/3.png" alt="ゲーム画面" width="200">
+  <img src="./src/assets/screenshots/4.png" alt="ゲーム画面" width="200">
+</div>
 
-## 特徴
-
-- タップのみの操作とアニメーションで**プレイのしやすさ**を重視
-- 理系数学（数学Ⅲ～大学数学）を出題
-- ランクシステムで繰り返しプレイを促進
-- 基本問題（全7問）を全問正解したユーザーにはハイレベル問題を出題
+## 新機能・特徴
+- 理系に特化した出題範囲（数学Ⅲ（微積・極限）～大学1，2年程度）
+- 解答フィードバックの表示
+- 結果画面における，解いた問題の一覧表示
+- 基本の7問を全問正解したユーザーに向けた，ハイレベル問題の出題
+- 全ユーザーの成績を集計して，上位3位をランキング表示
 
 ## ランク基準
 
-正答率と回答時間によって5段階（S～D）にランクをつけています。
+正答率と回答時間によって5段階（S～D）にランクをつけています．
+ハイレベル問題に正解すると1段階上がります．
 
-- SS: Sランクを獲得かつハイレベル問題に正解
-- S：全問正解かつ60秒以内
-- A：正答率85%以上かつ90秒以内
-- B：正答率70%以上かつ120秒以内
-- C：正答率50%以上かつ240秒以内
-- D：正答率50%未満
+### 基本ランク（正答率 × 回答時間）
+| ランク | 正答率 | 回答時間 |
+|:---:|:---:|:---:|
+| 🥇 **S** | 100% | 60秒以内 |
+| 🥈 **A** | 85%以上 | 90秒以内 |
+| 🥉 **B** | 70%以上 | 120秒以内 |
+| 🏅 **C** | 50%以上 | 240秒以内 |
+| 📝 **D** | 50%未満 | 時間問わず |
 
-## 💻 動作環境
-
-### 動作確認済み環境一覧
-
-| ブラウザ | OS | バージョン |
-|:---|:---|:---|
-| Chrome | Android | 最新 |
-| Chrome | iPadOS（iOS） | 最新 |
-| Chrome | Windows | 最新 |
-
-※ 最新版のブラウザの使用を推奨します．<br>
-※ JavaScriptを有効にしてください．
+### ランクアップボーナス
+**ハイレベル問題正解** → **1ランク昇格**
+- A → S，B → A，C → B，D → C
+- **Sランク + ハイレベル正解 = SS（最高ランク）**
 
 ## 🛠 技術スタック
 
 | 技術 | 用途 |
 |:--- |:--- |
 | ⚛️ React | UI構築・状態管理 |
-| 📜 TypeScript | ゲームロジック・UI |
+| 📜 TypeScript | ゲームロジック |
 | 📐 MathJax | 数式表示 |
+| 🔥 Firebase | 成績集計 |
 
 ## 📜 ライセンス
 
