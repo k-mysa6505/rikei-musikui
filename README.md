@@ -20,7 +20,7 @@
 
 This is a quiz game in which you have to guess the number of the equation that has been eaten by a worm.
 
-[プレイはこちら](https://rikei-musikui.vercel.app)
+[click here to play](https://rikei-musikui.vercel.app)
 
 <div align="center">
   <img src="./src/assets/screenshots/1.png" alt="ゲーム画面" width="200">
