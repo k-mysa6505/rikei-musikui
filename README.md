@@ -70,5 +70,5 @@ This is a quiz game in which you have to guess the number of the equation that h
 
 ## 🙏 Special Thanks
 
-**Claude 4 Sonnet**
+**Claude Sonnet 4**
 *開発補助 & 技術サポート*
