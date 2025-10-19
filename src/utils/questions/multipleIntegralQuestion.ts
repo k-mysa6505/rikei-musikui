@@ -85,20 +85,22 @@ export const generateMultipleIntegralQuestion = (): Question => {
       };
     },
     () => {
-      const a = Math.floor(Math.random() * 2) + 2; // 2-3
-      const results = a === 2 ? { numerator: 8, denom: 3 } : { numerator: 9, denom: 1 };
+      // ∫₀^a ∫₀^(a-x) y² dy dx = a⁴/12
+      // a=6のとき、6⁴/12 = 1296/12 = 108（整数）
+      const a = 6;
+      const result = 108; // 6⁴/12 = 108
       const positions = [
         {
-          formula: `\\[\\int_0^\\text{□} \\int_0^{${a}-x} y^2 \\, dy \\, dx = ${results.denom === 1 ? results.numerator : `\\frac{${results.numerator}}{${results.denom}}`}\\]`,
+          formula: `\\[\\int_0^\\text{□} \\int_0^{6-x} y^2 \\, dy \\, dx = ${result}\\]`,
           answer: a
         },
         {
-          formula: `\\[\\int_0^${a} \\int_0^{\\text{□}-x} y^2 \\, dy \\, dx = ${results.denom === 1 ? results.numerator : `\\frac{${results.numerator}}{${results.denom}}`}\\]`,
+          formula: `\\[\\int_0^6 \\int_0^{\\text{□}-x} y^2 \\, dy \\, dx = ${result}\\]`,
           answer: a
         },
         {
-          formula: `\\[\\int_0^${a} \\int_0^{${a}-x} y^2 \\, dy \\, dx = ${results.denom === 1 ? '\\text{□}' : `\\frac{\\text{□}}{${results.denom}}`}\\]`,
-          answer: results.numerator
+          formula: `\\[\\int_0^6 \\int_0^{6-x} y^2 \\, dy \\, dx = \\text{□}\\]`,
+          answer: result
         }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
@@ -109,16 +111,19 @@ export const generateMultipleIntegralQuestion = (): Question => {
       };
     },
     () => {
-      const r = 2;
-      const result = 2;
+      // ∫₀^(π/2) ∫₀^r r dr dθ = r²/2 * π/2 = πr²/4
+      // r=2のとき、π*4/4 = π
+      // r=4のとき、π*16/4 = 4π
+      const r = Math.random() < 0.5 ? 2 : 4;
+      const coefficient = r * r / 4; // 2→1, 4→4
       const positions = [
         {
-          formula: `\\[\\int_0^{\\pi/2} \\int_0^\\text{□} r \\, dr \\, d\\theta = ${result}\\]`,
+          formula: `\\[\\int_0^{\\pi/2} \\int_0^\\text{□} r \\, dr \\, d\\theta = ${coefficient === 1 ? '\\pi' : `${coefficient}\\pi`}\\]`,
           answer: r
         },
         {
-          formula: `\\[\\int_0^{\\pi/2} \\int_0^${r} r \\, dr \\, d\\theta = \\text{□}\\]`,
-          answer: result
+          formula: `\\[\\int_0^{\\pi/2} \\int_0^${r} r \\, dr \\, d\\theta = \\text{□}\\pi\\]`,
+          answer: coefficient
         }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
