@@ -1,3 +1,6 @@
+// src/utils/questions/highLevelQuestion.ts
+// 第8問 ハイレベル問題生成
+
 import { Question } from "../../types";
 
 // ハイレベル極限問題

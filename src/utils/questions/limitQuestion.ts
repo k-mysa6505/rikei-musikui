@@ -1,3 +1,6 @@
+// src/utils/questions/limitQuestion.ts
+// 第1問 極限の問題生成
+
 import { Question } from "../../types";
 
 const gcd = (a: number, b: number): number => {

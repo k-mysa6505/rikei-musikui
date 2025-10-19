@@ -1,3 +1,6 @@
+// src/utils/questions/eigenvalueQuestion.ts
+// 第5問 固有値の問題生成
+
 import { Question } from "../../types";
 
 export const generateEigenvalueQuestion = (): Question => {

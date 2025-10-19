@@ -1,3 +1,6 @@
+// src/utils/questions/differentialEquationQuestion.ts
+// 第7問 微分方程式の問題生成
+
 import { Question } from "../../types";
 
 const gcd = (a: number, b: number): number => {

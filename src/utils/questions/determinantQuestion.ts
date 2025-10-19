@@ -1,3 +1,6 @@
+// src/utils/questions/determinantQuestion.ts
+// 第4問 行列と行列式の問題生成
+
 import { Question } from "../../types";
 
 export const generateDeterminantQuestion = (): Question => {

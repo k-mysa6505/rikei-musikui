@@ -1,3 +1,6 @@
+// src/utils/questions/multipleIntegralQuestion.ts
+// 第6問 重積分の問題生成
+
 import { Question } from "../../types";
 
 export const generateMultipleIntegralQuestion = (): Question => {
