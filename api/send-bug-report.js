@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { issues, description } = req.body;
+    const { issues, description, currentQuestion } = req.body;
 
     // 現在の日時を取得
     const now = new Date();
@@ -43,6 +43,12 @@ export default async function handler(req, res) {
     const formattedIssues = issues.map(issue => `• ${issueLabels[issue] || issue}`).join('\n');
 
     // 充実したメール内容
+    const questionInfo = currentQuestion 
+      ? currentQuestion === 8 
+        ? 'ハイレベル問題'
+        : `第${currentQuestion}問目`
+      : '不明';
+
     const emailText = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 　　　　　　　　理系虫食い算 - バグレポート
@@ -50,6 +56,9 @@ export default async function handler(req, res) {
 
 【報告日時】
 ${timestamp}
+
+【発生場所】
+${questionInfo}
 
 【発生した問題】
 ${formattedIssues}
@@ -80,7 +89,7 @@ ${description || '詳細な説明はありません'}
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
         to: process.env.TO_EMAIL_ADDRESS,
-        subject: `【バグレポート】理系虫食い算 - ${issues.length}件の問題報告 (${timestamp})`,
+        subject: `【バグレポート】理系虫食い算 - ${questionInfo} - ${issues.length}件の問題報告 (${timestamp})`,
         text: emailText
       })
     });

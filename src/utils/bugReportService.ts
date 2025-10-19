@@ -3,6 +3,7 @@
 export interface BugReport {
   issues: string[];
   description: string;
+  currentQuestion?: number; // 現在の問題番号（オプショナル）
 }
 
 export interface BugReportResponse {
@@ -92,6 +93,13 @@ export class BugReportService {
     // 説明文の長さ制限（例: 1000文字）
     if (report.description.length > 1000) {
       throw new Error('説明文が長すぎます（1000文字以内で入力してください）');
+    }
+
+    // 問題番号の妥当性チェック（オプショナルなので存在する場合のみ）
+    if (report.currentQuestion !== undefined) {
+      if (!Number.isInteger(report.currentQuestion) || report.currentQuestion < 1 || report.currentQuestion > 8) {
+        throw new Error('無効な問題番号が指定されています');
+      }
     }
 
     // 無効な問題タイプのチェック

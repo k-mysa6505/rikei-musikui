@@ -7,6 +7,7 @@ type PauseModalProps = {
   onRestart: () => void;
   onBackToTitle: () => void;
   onBugReport: () => void;
+  currentQuestion?: number; // 現在の問題番号（オプショナル）
 };
 
 type BugIssue = {
@@ -30,7 +31,8 @@ const PauseModal: React.FC<PauseModalProps> = ({
   onResume,
   onRestart,
   onBackToTitle,
-  onBugReport
+  onBugReport,
+  currentQuestion
 }) => {
   const [showBugForm, setShowBugForm] = useState(false);
   const [selectedIssues, setSelectedIssues] = useState<string[]>([]);
@@ -83,6 +85,7 @@ const PauseModal: React.FC<PauseModalProps> = ({
       const bugReportData = {
         issues: selectedIssues,
         description: bugDescription,
+        currentQuestion: currentQuestion, // 現在の問題番号を追加
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent
       };
