@@ -3,6 +3,7 @@ import { GameResult, Question } from "../types/index";
 import { useMathJax } from "../hooks/useMathJax";
 import RankingModal from "./RankingModal";
 import { saveRankingEntry } from "../utils/rankingDB";
+import "../assets/styles/result.css";
 
 type ResultScreenProps = {
   gameResult: GameResult;
@@ -63,22 +64,34 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
         const isCurrentlyExpanded = expandedQuestions.has(index);
         const isCurrentlyClosing = closingQuestions.has(index);
 
+        console.log(`Click on Question ${index}:`, {
+          isCurrentlyExpanded,
+          isCurrentlyClosing
+        });
+
         // アニメーション中は無視
         if (isCurrentlyClosing) {
+          console.log(`Question ${index}: アニメーション中のため無視`);
           return;
         }
 
         if (isCurrentlyExpanded) {
-          // 閉じる処理：expanded を削除し、closing を追加
-          setExpandedQuestions(prev => {
-            const newExpanded = new Set(prev);
-            newExpanded.delete(index);
-            return newExpanded;
+          console.log(`Question ${index}: 閉じる処理開始`);
+          // 閉じる処理：closing を追加（expanded は保持）
+          setClosingQuestions(prev => {
+            const newSet = new Set(prev).add(index);
+            console.log(`Question ${index}: closingQuestions に追加`, Array.from(newSet));
+            return newSet;
           });
-          setClosingQuestions(prev => new Set(prev).add(index));
 
-          // アニメーション完了後に closing を削除
+          // アニメーション完了後に expanded と closing を削除
           setTimeout(() => {
+            console.log(`Question ${index}: アニメーション完了、状態をクリア`);
+            setExpandedQuestions(prev => {
+              const newExpanded = new Set(prev);
+              newExpanded.delete(index);
+              return newExpanded;
+            });
             setClosingQuestions(prev => {
               const newClosing = new Set(prev);
               newClosing.delete(index);
@@ -86,8 +99,13 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
             });
           }, 400);
         } else {
+          console.log(`Question ${index}: 開く処理開始`);
           // 開く処理：expanded を追加
-          setExpandedQuestions(prev => new Set(prev).add(index));
+          setExpandedQuestions(prev => {
+            const newSet = new Set(prev).add(index);
+            console.log(`Question ${index}: expandedQuestions に追加`, Array.from(newSet));
+            return newSet;
+          });
         }
       }, 50);
     };
@@ -138,6 +156,14 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
             const isExpanded = expandedQuestions.has(index);
             const isClosing = closingQuestions.has(index);
             const shouldShow = isExpanded || isClosing;
+
+            // デバッグログ
+            console.log(`Question ${index}:`, {
+              isExpanded,
+              isClosing,
+              shouldShow,
+              className: isClosing ? 'collapsing' : 'expanding'
+            });
 
             return (
               <div key={index} className="question-result">
