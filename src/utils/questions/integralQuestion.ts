@@ -1,3 +1,6 @@
+// src/utils/questions/integralQuestion.ts
+// 第3問 積分の問題生成
+
 import { Question } from "../../types";
 
 const gcd = (a: number, b: number): number => {

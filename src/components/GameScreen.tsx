@@ -311,6 +311,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onComplete, onRecordResult, onR
           onRestart={handleRestart}
           onBackToTitle={handleBackToTitle}
           onBugReport={handleBugReport}
+          currentQuestion={currentStage}
         />
       </div>
     </div>

@@ -68,16 +68,16 @@ export function useGameLogic() {
     setGameResult(prev => {
       const finalTime = Date.now() - gameStartTime;
       const finalBasicTime = basicEndTime > 0 ? (basicEndTime - gameStartTime) : finalTime;
-      
+
       // 基本ランクを計算（1-7問目のみ）
       const basicCorrectAnswers = Math.min(prev.correctAnswers, 7);
       const basicTotalQuestions = Math.min(prev.totalQuestions, 7);
       const basicRank = calculateBasicRank(basicCorrectAnswers, basicTotalQuestions, finalBasicTime);
-      
+
       // ハイレベル問題の結果を確認
       const highLevelResult = prev.questionResults.find(result => result.stage === 8);
       const hasHighLevelBonus = !!(highLevelResult && highLevelResult.isCorrect);
-      
+
       // 最終ランクを決定
       const finalRank = hasHighLevelBonus ? applyHighLevelBonus(basicRank) : basicRank;
 

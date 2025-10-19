@@ -7,10 +7,10 @@ interface RankCriteria {
 
 const RANK_CRITERIA: Record<Rank, RankCriteria> = {
   [Rank.SS]: { minAccuracy: 100, maxTime: Infinity }, // SSは基本問題では到達不可
-  [Rank.S]: { minAccuracy: 100, maxTime: 60 },
-  [Rank.A]: { minAccuracy: 85, maxTime: 90 },
-  [Rank.B]: { minAccuracy: 70, maxTime: 120 },
-  [Rank.C]: { minAccuracy: 50, maxTime: 180 },
+  [Rank.S]: { minAccuracy: 100, maxTime: 90 },
+  [Rank.A]: { minAccuracy: 70, maxTime: 150 },
+  [Rank.B]: { minAccuracy: 40, maxTime: 240 },
+  [Rank.C]: { minAccuracy: 10, maxTime: 360 },
   [Rank.D]: { minAccuracy: 0, maxTime: Infinity }
 };
 
@@ -69,7 +69,7 @@ export function calculateRank(
 ): Rank {
   // 基本ランクを計算（7問までの時間は概算）
   const basicRank = calculateBasicRank(correctAnswers, totalQuestions, totalTimeMs);
-  
+
   // ハイレベル問題の結果をチェック
   if (questionResults && questionResults.length >= 8) {
     const highLevelResult = questionResults.find(result => result.stage === 8);

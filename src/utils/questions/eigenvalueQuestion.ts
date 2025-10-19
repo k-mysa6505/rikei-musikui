@@ -1,3 +1,6 @@
+// src/utils/questions/eigenvalueQuestion.ts
+// 第5問 固有値の問題生成
+
 import { Question } from "../../types";
 
 export const generateEigenvalueQuestion = (): Question => {
@@ -5,7 +8,7 @@ export const generateEigenvalueQuestion = (): Question => {
     () => {
       const lambda1 = Math.floor(Math.random() * 6) + 1; // 1-6
       const lambda2 = Math.floor(Math.random() * 6) + 1; // 1-6
-      const eigenvalueText = lambda1 === lambda2 ? `${lambda1}` : `${lambda1}, ${lambda2}`;
+      const eigenvalueText = lambda1 === lambda2 ? `${lambda1}\\text{（重複度2）}` : `${lambda1}, ${lambda2}`;
       const positions = [
         {
           formula: `\\[A = \\begin{pmatrix} \\text{□} & 0 \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
@@ -16,11 +19,11 @@ export const generateEigenvalueQuestion = (): Question => {
           answer: lambda2
         },
         {
-          formula: `\\[A = \\begin{pmatrix} ${lambda1} & 0 \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}' : '\\text{□}, ' + lambda2}\\]`,
+          formula: `\\[A = \\begin{pmatrix} ${lambda1} & 0 \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}\\text{（重複度2）}' : '\\text{□}, ' + lambda2}\\]`,
           answer: lambda1
         },
         {
-          formula: `\\[A = \\begin{pmatrix} ${lambda1} & 0 \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}' : lambda1 + ', \\text{□}'}\\]`,
+          formula: `\\[A = \\begin{pmatrix} ${lambda1} & 0 \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}\\text{（重複度2）}' : lambda1 + ', \\text{□}'}\\]`,
           answer: lambda2
         }
       ];
@@ -35,7 +38,7 @@ export const generateEigenvalueQuestion = (): Question => {
       const lambda1 = Math.floor(Math.random() * 5) + 1; // 1-5
       const lambda2 = Math.floor(Math.random() * 5) + 1; // 1-5
       const b = Math.floor(Math.random() * 4) + 1; // 1-4
-      const eigenvalueText = lambda1 === lambda2 ? `${lambda1}` : `${lambda1}, ${lambda2}`;
+      const eigenvalueText = lambda1 === lambda2 ? `${lambda1}\\text{（重複度2）}` : `${lambda1}, ${lambda2}`;
       const positions = [
         {
           formula: `\\[A = \\begin{pmatrix} \\text{□} & ${b} \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
@@ -46,11 +49,11 @@ export const generateEigenvalueQuestion = (): Question => {
           answer: lambda2
         },
         {
-          formula: `\\[A = \\begin{pmatrix} ${lambda1} & ${b} \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}' : '\\text{□}, ' + lambda2}\\]`,
+          formula: `\\[A = \\begin{pmatrix} ${lambda1} & ${b} \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}\\text{（重複度2）}' : '\\text{□}, ' + lambda2}\\]`,
           answer: lambda1
         },
         {
-          formula: `\\[A = \\begin{pmatrix} ${lambda1} & ${b} \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}' : lambda1 + ', \\text{□}'}\\]`,
+          formula: `\\[A = \\begin{pmatrix} ${lambda1} & ${b} \\\\ 0 & ${lambda2} \\end{pmatrix}\\text{の固有値は } ${lambda1 === lambda2 ? '\\text{□}\\text{（重複度2）}' : lambda1 + ', \\text{□}'}\\]`,
           answer: lambda2
         }
       ];
@@ -71,7 +74,7 @@ export const generateEigenvalueQuestion = (): Question => {
         { a: 2, b: 0, c: 0, d: 2, lambda1: 2, lambda2: 2 }
       ];
       const selected = eigenvalues[Math.floor(Math.random() * eigenvalues.length)];
-      const eigenvalueText = selected.lambda1 === selected.lambda2 ? `${selected.lambda1}` : `${selected.lambda1}, ${selected.lambda2}`;
+      const eigenvalueText = selected.lambda1 === selected.lambda2 ? `${selected.lambda1}\\text{（重複度2）}` : `${selected.lambda1}, ${selected.lambda2}`;
       const positions = [
         {
           formula: `\\[A = \\begin{pmatrix} \\text{□} & ${selected.b} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${eigenvalueText}\\]`,
@@ -82,11 +85,11 @@ export const generateEigenvalueQuestion = (): Question => {
           answer: selected.d
         },
         {
-          formula: `\\[A = \\begin{pmatrix} ${selected.a} & ${selected.b} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${selected.lambda1 === selected.lambda2 ? '\\text{□}' : '\\text{□}, ' + selected.lambda2}\\]`,
+          formula: `\\[A = \\begin{pmatrix} ${selected.a} & ${selected.b} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${selected.lambda1 === selected.lambda2 ? '\\text{□}\\text{（重複度2）}' : '\\text{□}, ' + selected.lambda2}\\]`,
           answer: selected.lambda1
         },
         {
-          formula: `\\[A = \\begin{pmatrix} ${selected.a} & ${selected.b} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${selected.lambda1 === selected.lambda2 ? '\\text{□}' : selected.lambda1 + ', \\text{□}'}\\]`,
+          formula: `\\[A = \\begin{pmatrix} ${selected.a} & ${selected.b} \\\\ ${selected.c} & ${selected.d} \\end{pmatrix}\\text{の固有値は } ${selected.lambda1 === selected.lambda2 ? '\\text{□}\\text{（重複度2）}' : selected.lambda1 + ', \\text{□}'}\\]`,
           answer: selected.lambda2
         }
       ];

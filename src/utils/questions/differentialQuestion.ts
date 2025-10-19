@@ -1,3 +1,6 @@
+// src/utils/questions/differentialQuestion.ts
+// 第2問 微分の問題生成
+
 import { Question } from "../../types";
 
 export const generateDifferentialQuestion = (): Question => {

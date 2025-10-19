@@ -1,3 +1,6 @@
+// src/utils/questions/differentialEquationQuestion.ts
+// 第7問 微分方程式の問題生成
+
 import { Question } from "../../types";
 
 const gcd = (a: number, b: number): number => {
@@ -96,11 +99,6 @@ export const generateDifferentialEquationQuestion = (): Question => {
           formula: `\\[\\frac{dy}{dx} = \\text{□}xy\\]`,
           subformula: `\\[y = Ce^{${exponentDisplay}}\\]`,
           answer: k
-        },
-        {
-          formula: `\\[\\frac{dy}{dx} = ${k}xy\\]`,
-          subformula: `\\[y = Ce^{${k % 2 ? `\\frac{${k}}{2}` : `${k / 2}`}x^2}\\]`,
-          answer: k % 2 ? k : k / 2
         }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
@@ -125,12 +123,7 @@ export const generateDifferentialEquationQuestion = (): Question => {
           formula: `\\[\\frac{d^2y}{dx^2} + \\text{□}y = 0\\]`,
           subformula: `\\[y = C_1 \\cos(${rootExpression}x) + C_2 \\sin(${rootExpression}x)\\]`,
           answer: k
-        },
-        {
-          formula: `\\[\\frac{d^2y}{dx^2} + ${k}y = 0\\]`,
-          subformula: `\\[y = C_1 \\cos(\\sqrt{\\text{□}}x) + C_2 \\sin(\\sqrt{\\text{□}}x)\\]`,
-          answer: k
-        },
+        }
       ];
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
       return {
