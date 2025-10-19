@@ -12,7 +12,7 @@ type ResultScreenProps = {
 
 const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTitle }) => {
   const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(new Set());
-  const [animatingQuestions, setAnimatingQuestions] = useState<Set<number>>(new Set());
+  const [closingQuestions, setClosingQuestions] = useState<Set<number>>(new Set());
   const [showRankingModal, setShowRankingModal] = useState(false);
   const [registeredId, setRegisteredId] = useState<string | null>(null);
   const hasRegistered = useRef(false); // 登録済みフラグ
@@ -61,23 +61,32 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
 
       setTimeout(() => {
         const isCurrentlyExpanded = expandedQuestions.has(index);
+        const isCurrentlyClosing = closingQuestions.has(index);
+
+        // アニメーション中は無視
+        if (isCurrentlyClosing) {
+          return;
+        }
 
         if (isCurrentlyExpanded) {
-          setAnimatingQuestions(prev => new Set(prev).add(index));
+          // 閉じる処理：expanded を削除し、closing を追加
+          setExpandedQuestions(prev => {
+            const newExpanded = new Set(prev);
+            newExpanded.delete(index);
+            return newExpanded;
+          });
+          setClosingQuestions(prev => new Set(prev).add(index));
 
+          // アニメーション完了後に closing を削除
           setTimeout(() => {
-            setExpandedQuestions(prev => {
-              const newExpanded = new Set(prev);
-              newExpanded.delete(index);
-              return newExpanded;
-            });
-            setAnimatingQuestions(prev => {
-              const newAnimating = new Set(prev);
-              newAnimating.delete(index);
-              return newAnimating;
+            setClosingQuestions(prev => {
+              const newClosing = new Set(prev);
+              newClosing.delete(index);
+              return newClosing;
             });
           }, 400);
         } else {
+          // 開く処理：expanded を追加
           setExpandedQuestions(prev => new Set(prev).add(index));
         }
       }, 50);
@@ -127,7 +136,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
           {gameResult.questionResults.map((result, index) => {
             const explanationQuestion = explanation(result.question);
             const isExpanded = expandedQuestions.has(index);
-            const isAnimating = animatingQuestions.has(index);
+            const isClosing = closingQuestions.has(index);
+            const shouldShow = isExpanded || isClosing;
 
             return (
               <div key={index} className="question-result">
@@ -152,12 +162,12 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
                     </span>
                   </div>
                   <div className="expand-indicator">
-                    <span className={`arrow ${isExpanded ? 'expanded' : ''}`}>▼</span>
+                    <span className={`arrow ${shouldShow ? 'expanded' : ''}`}>▼</span>
                   </div>
                 </div>
 
-                {(isExpanded || isAnimating) && (
-                  <div className={`question-details ${isExpanded && !isAnimating ? 'expanding' : isAnimating ? 'collapsing' : ''}`}>
+                {shouldShow && (
+                  <div className={`question-details ${isClosing ? 'collapsing' : 'expanding'}`}>
                     <div className="question-container">
                       <div className="question-formula-container">
                         <div className="question-formula math-content">

@@ -203,7 +203,6 @@
 }
 
 .question-details {
-    padding: 0 20px 20px 20px;
     border-top: 1px solid #e0e0e0;
     overflow: hidden;
 }
@@ -398,53 +397,44 @@
 /* ハイレベルボーナス用アニメーション - 現在は未使用 */
 
 @keyframes slideDown {
-    from {
+    0% {
+        grid-template-rows: 0fr;
         opacity: 0;
-        max-height: 0;
-        transform: translateY(-8px);
-        padding-top: 0;
-        padding-bottom: 0;
     }
-    to {
+    100% {
+        grid-template-rows: 1fr;
         opacity: 1;
-        max-height: 800px;
-        transform: translateY(0);
-        padding-top: 0;
-        padding-bottom: 20px;
     }
 }
 
 @keyframes slideUp {
-    from {
+    0% {
+        grid-template-rows: 1fr;
         opacity: 1;
-        max-height: 800px;
-        transform: translateY(0);
-        padding-top: 0;
-        padding-bottom: 20px;
     }
-    to {
+    100% {
+        grid-template-rows: 0fr;
         opacity: 0;
-        max-height: 0;
-        transform: translateY(-8px);
-        padding-top: 0;
-        padding-bottom: 0;
     }
 }
 
 .question-details {
+    display: grid;
     overflow: hidden;
-    animation-duration: 0.3s;
-    animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
-    animation-fill-mode: both;
-    will-change: max-height, opacity, transform;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .question-details.expanding {
-    animation-name: slideDown;
+    animation: slideDown 0.4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
 
 .question-details.collapsing {
-    animation-name: slideUp;
+    animation: slideUp 0.4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.question-details > * {
+    min-height: 0;
+    padding: 0 20px 20px 20px;
 }
 
 /* ランキングボタンのスタイル */
