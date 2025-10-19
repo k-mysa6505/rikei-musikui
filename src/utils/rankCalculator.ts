@@ -8,7 +8,7 @@ interface RankCriteria {
 const RANK_CRITERIA: Record<Rank, RankCriteria> = {
   [Rank.SS]: { minAccuracy: 100, maxTime: Infinity }, // SSは基本問題では到達不可
   [Rank.S]: { minAccuracy: 100, maxTime: 90 },
-  [Rank.A]: { minAccuracy: 70, maxTime: 180 },
+  [Rank.A]: { minAccuracy: 70, maxTime: 150 },
   [Rank.B]: { minAccuracy: 40, maxTime: 240 },
   [Rank.C]: { minAccuracy: 10, maxTime: 360 },
   [Rank.D]: { minAccuracy: 0, maxTime: Infinity }
