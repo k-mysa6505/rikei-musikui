@@ -109,24 +109,38 @@ export const generateLimitQuestion = (): Question => {
         b = Math.floor(Math.random() * 3) + 2;
       } while (a === b);
       const fraction = reduceFraction(a, b);
-      const positions = [
-        {
-          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin \\text{□}x}{\\sin ${b}x} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
-          answer: a
-        },
-        {
-          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin \\text{□}x} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
-          answer: b
-        },
-        {
-          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin ${b}x} = ${fraction.den === 1 ? '\\text{□}' : `\\frac{\\text{□}}{${fraction.den}}`}\\]`,
+      // 分母が1の場合（整数結果）と分数の場合で、異なるpositionを用意
+      const positions = [];
+      
+      // 常に追加: 分子（a）を問う
+      positions.push({
+        formula: `\\[\\lim_{x \\to 0} \\frac{\\sin \\text{□}x}{\\sin ${b}x} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
+        answer: a
+      });
+      
+      // 常に追加: 分母（b）を問う
+      positions.push({
+        formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin \\text{□}x} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
+        answer: b
+      });
+      
+      if (fraction.den === 1) {
+        // 結果が整数の場合: 整数値を問う
+        positions.push({
+          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin ${b}x} = \\text{□}\\]`,
           answer: fraction.num
-        },
-        {
-          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin ${b}x} = ${fraction.den === 1 ? '\\text{□}' : `\\frac{${fraction.num}}{\\text{□}}`}\\]`,
+        });
+      } else {
+        // 結果が分数の場合: 分子または分母を問う
+        positions.push({
+          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin ${b}x} = \\frac{\\text{□}}{${fraction.den}}\\]`,
+          answer: fraction.num
+        });
+        positions.push({
+          formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin ${b}x} = \\frac{${fraction.num}}{\\text{□}}\\]`,
           answer: fraction.den
-        }
-      ];
+        });
+      }
       const selectedPos = positions[Math.floor(Math.random() * positions.length)];
       return {
         formula: selectedPos.formula,
