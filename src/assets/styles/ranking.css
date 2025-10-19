@@ -288,32 +288,32 @@
     width: 95%;
     max-height: 90vh;
   }
-  
+
   .ranking-entry {
     padding: 12px;
   }
-  
+
   .rank-position {
     width: 50px;
   }
-  
+
   .medal {
     font-size: 20px;
   }
-  
+
   .player-name {
     font-size: 16px;
     max-width: 120px;
   }
-  
+
   .score {
     font-size: 16px;
   }
-  
+
   .timestamp {
     display: none;
   }
-  
+
   .player-info {
     margin-left: 8px;
     gap: 8px;
@@ -324,20 +324,20 @@
   .ranking-header h2 {
     font-size: 20px;
   }
-  
+
   .ranking-entry {
     padding: 10px;
   }
-  
+
   .player-name {
     max-width: 100px;
   }
-  
+
   .rank-badge {
     padding: 4px 6px;
     font-size: 10px;
   }
-  
+
   .score-info {
     min-width: 60px;
   }
@@ -520,10 +520,10 @@
 }
 
 @keyframes celebrationGlow {
-  0%, 100% { 
+  0%, 100% {
     box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 30px rgba(76, 175, 80, 0.8), 0 0 40px rgba(76, 175, 80, 0.3);
   }
 }
@@ -546,15 +546,15 @@
     margin: 0 16px;
     padding: 16px;
   }
-  
+
   .rank-in-header h3 {
     font-size: 20px;
   }
-  
+
   .name-input-buttons {
     flex-direction: column;
   }
-  
+
   .name-input-buttons button {
     width: 100%;
   }

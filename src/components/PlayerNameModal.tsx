@@ -14,11 +14,11 @@ const PlayerNameModal: React.FC<PlayerNameModalProps> = ({ isOpen, onClose, onSu
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (isSubmitting) return;
 
     const validation = validatePlayerName(name);
-    
+
     if (!validation.valid) {
       setError(validation.error || 'Invalid name');
       return;
@@ -60,7 +60,7 @@ const PlayerNameModal: React.FC<PlayerNameModalProps> = ({ isOpen, onClose, onSu
           <h3>プレイヤー名を入力</h3>
           <button className="close-button" onClick={handleCancel}>×</button>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="player-name-form">
           <div className="input-group">
             <label htmlFor="playerName">名前</label>
@@ -77,7 +77,7 @@ const PlayerNameModal: React.FC<PlayerNameModalProps> = ({ isOpen, onClose, onSu
             />
             {error && <div className="error-message">{error}</div>}
           </div>
-          
+
           <div className="player-name-buttons">
             <button
               type="button"

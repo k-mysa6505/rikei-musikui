@@ -21,7 +21,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
   useEffect(() => {
     // 既に登録済みの場合は何もしない
     if (hasRegistered.current) return;
-    
+
     const register = async () => {
       hasRegistered.current = true; // 重複実行を防ぐ
       const playerName = `Player${Math.floor(Math.random() * 9999) + 1}`;
@@ -197,7 +197,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
             </span>
           </div>
         </div>
-        
+
         {/* ランキングボタン */}
         <div className="ranking-buttons">
           <button
@@ -223,9 +223,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ gameResult, onReplay, onTit
           タイトルへ戻る
         </button>
       </div>
-      
+
       {/* ランキングモーダル */}
-      <RankingModal 
+      <RankingModal
         isOpen={showRankingModal}
         onClose={() => setShowRankingModal(false)}
         autoRegisteredId={registeredId || undefined}

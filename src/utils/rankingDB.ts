@@ -87,10 +87,10 @@ export function validatePlayerName(name: string): { valid: boolean; error?: stri
   if (!name || name.trim().length === 0) {
     return { valid: false, error: 'プレイヤー名を入力してください' };
   }
-  
+
   if (name.trim().length > 20) {
     return { valid: false, error: 'プレイヤー名は20文字以内で入力してください' };
   }
-  
+
   return { valid: true };
 }

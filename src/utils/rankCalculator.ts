@@ -69,7 +69,7 @@ export function calculateRank(
 ): Rank {
   // 基本ランクを計算（7問までの時間は概算）
   const basicRank = calculateBasicRank(correctAnswers, totalQuestions, totalTimeMs);
-  
+
   // ハイレベル問題の結果をチェック
   if (questionResults && questionResults.length >= 8) {
     const highLevelResult = questionResults.find(result => result.stage === 8);
