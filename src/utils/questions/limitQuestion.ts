@@ -111,19 +111,19 @@ export const generateLimitQuestion = (): Question => {
       const fraction = reduceFraction(a, b);
       // 分母が1の場合（整数結果）と分数の場合で、異なるpositionを用意
       const positions = [];
-      
+
       // 常に追加: 分子（a）を問う
       positions.push({
         formula: `\\[\\lim_{x \\to 0} \\frac{\\sin \\text{□}x}{\\sin ${b}x} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
         answer: a
       });
-      
+
       // 常に追加: 分母（b）を問う
       positions.push({
         formula: `\\[\\lim_{x \\to 0} \\frac{\\sin ${a}x}{\\sin \\text{□}x} = ${fraction.den === 1 ? fraction.num : `\\frac{${fraction.num}}{${fraction.den}}`}\\]`,
         answer: b
       });
-      
+
       if (fraction.den === 1) {
         // 結果が整数の場合: 整数値を問う
         positions.push({

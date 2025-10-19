@@ -43,8 +43,8 @@ export default async function handler(req, res) {
     const formattedIssues = issues.map(issue => `• ${issueLabels[issue] || issue}`).join('\n');
 
     // 充実したメール内容
-    const questionInfo = currentQuestion 
-      ? currentQuestion === 8 
+    const questionInfo = currentQuestion
+      ? currentQuestion === 8
         ? 'ハイレベル問題'
         : `第${currentQuestion}問目`
       : '不明';
